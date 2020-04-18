@@ -9,63 +9,101 @@
     android:layout_gravity="center"
     android:layout_margin="10dp">
 
-    <EditText
-        android:id="@+id/typeEditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Type de transport (metros/rers/tramways/buses/noctiliens)" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/lineEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Numéro de la ligne" />
+        <Button
+            android:id="@+id/btnAllLines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="All lines"/>
 
-    <Button
-        android:id="@+id/buttonSearch1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rechercher"
-        android:backgroundTint="@color/colorPrimary"/>
+        <Button
+            android:id="@+id/btnLineInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:text="Info line"
+            android:backgroundTint="@color/colorPrimary"/>
+        <!---->
+        <Button
+            android:id="@+id/btnSchedules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Schedules" />
 
-    <EditText
-        android:id="@+id/type2EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Type de transport (metros/rers/tramways/buses/noctiliens)" />
+        <Button
+            android:id="@+id/btnStations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stations"
+            android:textSize="10sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"/>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/line2EditText"
+    <TextView
+        android:id="@+id/printRequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Numéro de la ligne" />
-
-    <EditText
-        android:id="@+id/stationEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Nom de la station" />
-
-    <Button
-        android:id="@+id/buttonSearch2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rechercher"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:textColor="@android:color/holo_red_light"/>
 
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        android:hint="Numéro de la ligne"
+        />
+    <!--android:hint="Type de transport (metros/rers/tramways/buses/noctiliens)" -->
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        android:hint="Nom de la station" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:visibility="invisible"
+        android:backgroundTint="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/buttonSearch2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2"
+        android:visibility="invisible"
+        android:backgroundTint="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/buttonSearch3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:visibility="invisible"
+        android:backgroundTint="@color/colorPrimary"/>
 
 </LinearLayout>
