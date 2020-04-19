@@ -3,7 +3,6 @@ package com.example.subline
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.example.subline.service.RATPService
 import kotlinx.android.synthetic.main.activity_appel_api.*
@@ -17,6 +16,10 @@ class AppelApi : AppCompatActivity() {
 
         var resultToPrint = ""
         var request = ""
+
+        lineInput.isVisible = false
+        stationInput.isVisible = false
+        btnSearch.isVisible = false
 
         //print all lines to initialize activity
         val service = retrofit().create(RATPService::class.java)
@@ -34,12 +37,10 @@ class AppelApi : AppCompatActivity() {
         btnAllLines.setOnClickListener() {
             resultToPrint = ""
             request = "getAllLines"
-            printRequest.text = "DEBUG " + request
 
-            editText1.isVisible = false
+            lineInput.isVisible = false
+            stationInput.isVisible = false
             btnSearch.isVisible = false
-            buttonSearch2.isVisible = false
-            buttonSearch3.isVisible = false
             resultTextView.isVisible = true
 
             val service = retrofit().create(RATPService::class.java)
@@ -58,42 +59,33 @@ class AppelApi : AppCompatActivity() {
         btnLineInfo.setOnClickListener {
             resultToPrint = ""
             request = "getLineInfo"
-            printRequest.text = "DEBUG " + request
 
             resultTextView.isVisible = false
-            editText1.isVisible = true
-            editText2.isInvisible = true
-            //editText2.isVisible = false
+            lineInput.isVisible = true
+            //lineInput.isInvisible = true
+            stationInput.isVisible = false
             btnSearch.isVisible = true
-            buttonSearch2.isVisible = false
-            buttonSearch3.isVisible = false
         }
 
         btnSchedules.setOnClickListener {
             resultToPrint = ""
             request = "getSchedules"
-            printRequest.text = "DEBUG " + request
 
             resultTextView.isVisible = false
-            editText1.isVisible = true
-            editText2.isVisible = true
-            btnSearch.isVisible = false
-            buttonSearch2.isVisible = true
-            buttonSearch3.isVisible = false
+            lineInput.isVisible = true
+            stationInput.isVisible = true
+            btnSearch.isVisible = true
         }
 
         btnStations.setOnClickListener {
             resultToPrint = ""
             request = "getStations"
-            printRequest.text = "DEBUG " + request
 
             resultTextView.isVisible = false
-            editText1.isVisible = true
-            editText2.isInvisible = true
-            //editText2.isVisible = false
-            btnSearch.isVisible = false
-            buttonSearch2.isVisible = false
-            buttonSearch3.isVisible = true
+            lineInput.isVisible = true
+            //lineInput.isInvisible = true
+            stationInput.isVisible = false
+            btnSearch.isVisible = true
         }
 
         btnSearch.setOnClickListener() {
@@ -101,60 +93,51 @@ class AppelApi : AppCompatActivity() {
 
             resultTextView.isVisible = true
 
-            val line = editText1.text.toString()
+            val line = lineInput.text.toString()
 
             val service = retrofit().create(RATPService::class.java)
-            runBlocking {
-                val result = service.getLineInfo("metros", line)
-                Log.d("EPF", "test $result")
-                val line = result.result.code
-                val name = result.result.name
-                val directions = result.result.directions
-                resultToPrint += "$line -- $name \n$directions"
-                resultTextView.text = resultToPrint
-                Log.d("EPF", "test $line $name")
-            }
-        }
 
-        buttonSearch2.setOnClickListener() {
-            resultToPrint = ""
-            //val type = editText1.text.toString()
-            val line = editText1.text.toString()
-            val station = editText2.text.toString()
-
-            val service = retrofit().create(RATPService::class.java)
-            runBlocking {
-                val results = service.getSchedules("metros", line, station, "A+R")
-                Log.d("EPF", "test $results")
-                results.result.schedules.map {
-                    val id = it.code
-                    val message = it.message
-                    val destination = it.destination
-                    resultToPrint += "$id -- $message -- Dir $destination \n"
-                    resultTextView.text = resultToPrint
-                    Log.d("EPF", "test $id $message $destination")
+            when(request) {
+                "getLineInfo" -> {
+                    runBlocking {
+                        val result = service.getLineInfo("metros", line)
+                        Log.d("EPF", "test $result")
+                        val line = result.result.code
+                        val name = result.result.name
+                        val directions = result.result.directions
+                        resultToPrint += "$line -- $name \n$directions"
+                        resultTextView.text = resultToPrint
+                        Log.d("EPF", "test $line $name")
+                    }
                 }
-            }
-        }
-
-        buttonSearch3.setOnClickListener() {
-            resultToPrint = ""
-
-            resultTextView.isVisible = true
-
-            //val type = editText1.text.toString()
-            val line = editText1.text.toString()
-
-            val service = retrofit().create(RATPService::class.java)
-            runBlocking {
-                val results = service.getStations("metros", line)
-                Log.d("EPF", "test $results")
-                results.result.stations.map {
-                    val name = it.name
-                    resultToPrint += "$name \n"
-                    resultTextView.text = resultToPrint
-                    Log.d("EPF", "test $name")
+                "getSchedules" -> {
+                    val station = stationInput.text.toString()
+                    runBlocking {
+                        val results = service.getSchedules("metros", line, station, "A+R")
+                        Log.d("EPF", "test $results")
+                        results.result.schedules.map {
+                            val id = it.code
+                            val message = it.message
+                            val destination = it.destination
+                            resultToPrint += "$id -- $message -- Dir $destination \n"
+                            resultTextView.text = resultToPrint
+                            Log.d("EPF", "test $id $message $destination")
+                        }
+                    }
                 }
+                "getStations" -> {
+                    runBlocking {
+                        val results = service.getStations("metros", line)
+                        Log.d("EPF", "test $results")
+                        results.result.stations.map {
+                            val name = it.name
+                            resultToPrint += "$name \n"
+                            resultTextView.text = resultToPrint
+                            Log.d("EPF", "test $name")
+                        }
+                    }
+                }
+                else -> resultTextView.text = "Requete non valide"
             }
         }
 
