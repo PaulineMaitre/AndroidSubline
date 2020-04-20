@@ -20,6 +20,10 @@ interface RATPService {
     @GET("/v4/stations/{type}/{code}")
     suspend fun getStations(@Path("type") type: String, @Path ("code") code: String) : GetStationsResult
 
+    //REQ5 get traffic info for one metro line
+    @GET("/v4/traffic/{type}/{code}")
+    suspend fun getTrafficInfo(@Path("type") type: String, @Path ("code") code: String) : GetTrafficInfoResult
+
 }
 
 data class GetLinesResult(val result: Metros = Metros())
@@ -37,3 +41,6 @@ data class Schedule(val message: String = "", val destination: String = "")
 data class GetStationsResult(val result: Stations = Stations())
 data class Stations(val stations : List<Station> = emptyList())
 data class Station(val name: String = "", val slug: String = "")
+
+data class GetTrafficInfoResult(val result: TrafficInfo = TrafficInfo())
+data class TrafficInfo(val line: String = "", val slug: String = "", val title: String = "", val message: String = "")

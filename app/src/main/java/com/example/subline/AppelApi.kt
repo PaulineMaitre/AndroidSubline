@@ -100,12 +100,16 @@ class AppelApi : AppCompatActivity() {
             when(request) {
                 "getLineInfo" -> {
                     runBlocking {
-                        val result = service.getLineInfo("metros", line)
-                        Log.d("EPF", "test $result")
-                        val line = result.result.code
-                        val name = result.result.name
-                        val directions = result.result.directions
-                        resultToPrint += "$line -- $name \n$directions"
+                        val lineInfoResult = service.getLineInfo("metros", line)
+                        Log.d("EPF", "test $lineInfoResult")
+                        val line = lineInfoResult.result.code
+                        val name = lineInfoResult.result.name
+                        val directions = lineInfoResult.result.directions
+                        val trafficInfoResult = service.getTrafficInfo("metros", line)
+                        val title = trafficInfoResult.result.title
+                        val message = trafficInfoResult.result.message
+                        resultToPrint += "$line -- $name \n$directions\n"
+                        resultToPrint += "Etat du traffic : $title\n$message"
                         resultTextView.text = resultToPrint
                         Log.d("EPF", "test $line $name")
                     }
