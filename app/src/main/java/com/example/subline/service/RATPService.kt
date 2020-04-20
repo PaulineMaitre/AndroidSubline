@@ -32,7 +32,7 @@ data class Line(val code: String = "", val name: String = "", val directions: St
 
 data class GetSchedulesResult(val result: Schedules = Schedules())
 data class Schedules(val schedules : List<Schedule> = emptyList())
-data class Schedule(val code: String = "", val message: String = "", val destination: String = "")
+data class Schedule(val message: String = "", val destination: String = "")
 
 data class GetStationsResult(val result: Stations = Stations())
 data class Stations(val stations : List<Station> = emptyList())

@@ -116,12 +116,11 @@ class AppelApi : AppCompatActivity() {
                         val results = service.getSchedules("metros", line, station, "A+R")
                         Log.d("EPF", "test $results")
                         results.result.schedules.map {
-                            val id = it.code
                             val message = it.message
                             val destination = it.destination
-                            resultToPrint += "$id -- $message -- Dir $destination \n"
+                            resultToPrint += "$message -- Dir $destination \n"
                             resultTextView.text = resultToPrint
-                            Log.d("EPF", "test $id $message $destination")
+                            Log.d("EPF", "test $message $destination")
                         }
                     }
                 }
