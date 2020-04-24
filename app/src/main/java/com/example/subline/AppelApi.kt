@@ -6,8 +6,12 @@ import android.util.Log
 import androidx.core.view.isVisible
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
+import com.pixplicity.sharp.Sharp
 import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.coroutines.runBlocking
+import okhttp3.*
+import java.io.IOException
+import java.io.InputStream
 
 class AppelApi : AppCompatActivity() {
 
@@ -23,8 +27,9 @@ class AppelApi : AppCompatActivity() {
         runBlocking {
             val pictoResult = pictoService.getPictoInfo("M14")
             Log.d("EPF", "test $pictoResult")
-            resultToPrint += "$pictoResult"
-            resultTextView.text = resultToPrint
+            val id = pictoResult.records[0].fields.noms_des_fichiers.id
+//            resultToPrint += id
+//            resultTextView.text = resultToPrint
             /*val fileName = pictoResult.records.fields.noms_des_fichiers.filename
             resultToPrint += "$fileName"
             testPicto.text = resultToPrint
@@ -32,6 +37,19 @@ class AppelApi : AppCompatActivity() {
             //imageView.setImageResource(fileName)
         }
 
+        val req = Request.Builder().url("https://data.ratp.fr/explore/dataset/pictogrammes-des-lignes-de-metro-rer-tramway-bus-et-noctilien/files/0354db93c87c47dd969f3b27d6308de7/download/")
+            .build();
+        OkHttpClient.Builder().build().newCall(req).enqueue(object: Callback {
+            override fun onResponse(call: Call, response: Response) {
+                val stream: InputStream = response.body!!.byteStream()
+                Sharp.loadInputStream(stream).into(imageView)
+                stream.close()
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+
+            }
+        })
 
 
         lineInput.isVisible = false
@@ -39,7 +57,7 @@ class AppelApi : AppCompatActivity() {
         btnSearch.isVisible = false
 
         //print all lines to initialize activity
-        /*val service = retrofit("transport").create(RatpService::class.java)
+        val service = retrofit("transport").create(RatpService::class.java)
         runBlocking {
             val results = service.getAllMetroLines("metros")
             Log.d("EPF", "test $results")
@@ -49,7 +67,7 @@ class AppelApi : AppCompatActivity() {
                 resultToPrint += "$name \n"
                 resultTextView.text = resultToPrint
             }
-        }*/
+        }
 
         // TEST GET ALL LINES (metros, rers, buses, tramways, noctiliens)
         /*val service = retrofit("transport").create(RatpService::class.java)
@@ -63,6 +81,7 @@ class AppelApi : AppCompatActivity() {
             resultToPrint = ""
             request = "getAllLines"
 
+            imageView.isVisible = false
             lineInput.isVisible = false
             stationInput.isVisible = false
             btnSearch.isVisible = false
@@ -85,6 +104,7 @@ class AppelApi : AppCompatActivity() {
             resultToPrint = ""
             request = "getLineInfo"
 
+            imageView.isVisible = false
             resultTextView.isVisible = false
             lineInput.isVisible = true
             //lineInput.isInvisible = true
@@ -96,6 +116,7 @@ class AppelApi : AppCompatActivity() {
             resultToPrint = ""
             request = "getSchedules"
 
+            imageView.isVisible = false
             resultTextView.isVisible = false
             lineInput.isVisible = true
             stationInput.isVisible = true
@@ -106,6 +127,7 @@ class AppelApi : AppCompatActivity() {
             resultToPrint = ""
             request = "getStations"
 
+            imageView.isVisible = false
             resultTextView.isVisible = false
             lineInput.isVisible = true
             //lineInput.isInvisible = true
