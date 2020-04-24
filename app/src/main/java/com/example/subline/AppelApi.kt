@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.core.view.isVisible
-import com.example.subline.service.RATPService
+import com.example.subline.service.RatpPictoService
+import com.example.subline.service.RatpService
 import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.coroutines.runBlocking
 
@@ -17,14 +18,30 @@ class AppelApi : AppCompatActivity() {
         var resultToPrint = ""
         var request = ""
 
+
+        val pictoService = retrofit("picto").create(RatpPictoService::class.java)
+        runBlocking {
+            val pictoResult = pictoService.getPictoInfo("M14")
+            Log.d("EPF", "test $pictoResult")
+            resultToPrint += "$pictoResult"
+            resultTextView.text = resultToPrint
+            /*val fileName = pictoResult.records.fields.noms_des_fichiers.filename
+            resultToPrint += "$fileName"
+            testPicto.text = resultToPrint
+            Log.d("EPF", "test $fileName")*/
+            //imageView.setImageResource(fileName)
+        }
+
+
+
         lineInput.isVisible = false
         stationInput.isVisible = false
         btnSearch.isVisible = false
 
         //print all lines to initialize activity
-        val service = retrofit().create(RATPService::class.java)
+        /*val service = retrofit("transport").create(RatpService::class.java)
         runBlocking {
-            val results = service.getAllLines("metros")
+            val results = service.getAllMetroLines("metros")
             Log.d("EPF", "test $results")
             results.result.metros.map {
                 val name = it.name
@@ -32,7 +49,15 @@ class AppelApi : AppCompatActivity() {
                 resultToPrint += "$name \n"
                 resultTextView.text = resultToPrint
             }
-        }
+        }*/
+
+        // TEST GET ALL LINES (metros, rers, buses, tramways, noctiliens)
+        /*val service = retrofit("transport").create(RatpService::class.java)
+        runBlocking {
+            val results = service.getAllLines()
+            Log.d("EPF", "test $results")
+            resultTextView.text = results.toString()
+        }*/
 
         btnAllLines.setOnClickListener() {
             resultToPrint = ""
@@ -43,9 +68,9 @@ class AppelApi : AppCompatActivity() {
             btnSearch.isVisible = false
             resultTextView.isVisible = true
 
-            val service = retrofit().create(RATPService::class.java)
+            val service = retrofit("transport").create(RatpService::class.java)
             runBlocking {
-                val results = service.getAllLines("metros")
+                val results = service.getAllMetroLines("metros")
                 Log.d("EPF", "test $results")
                 results.result.metros.map {
                     val name = it.name
@@ -95,7 +120,7 @@ class AppelApi : AppCompatActivity() {
 
             val line = lineInput.text.toString()
 
-            val service = retrofit().create(RATPService::class.java)
+            val service = retrofit("transport").create(RatpService::class.java)
 
             when(request) {
                 "getLineInfo" -> {

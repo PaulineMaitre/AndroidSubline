@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-fun AppCompatActivity.retrofit() : Retrofit {
+fun AppCompatActivity.retrofit(request: String) : Retrofit {
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -16,8 +16,14 @@ fun AppCompatActivity.retrofit() : Retrofit {
         .addNetworkInterceptor(StethoInterceptor())
         .build()
 
+    val baseUrl = if(request == "transport") {
+        "https://api-ratp.pierre-grimaud.fr/"
+    } else {
+        "https://data.ratp.fr/"
+    }
+
     return Retrofit.Builder()
-        .baseUrl("https://api-ratp.pierre-grimaud.fr/")
+        .baseUrl(baseUrl)
         .addConverterFactory(MoshiConverterFactory.create())
         .client(client)
         .build()
