@@ -1,4 +1,4 @@
-package com.example.subline
+package com.example.subline.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-fun AppCompatActivity.retrofit(request: String) : Retrofit {
+fun AppCompatActivity.retrofit(baseUrl: String) : Retrofit {
     val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -15,12 +15,6 @@ fun AppCompatActivity.retrofit(request: String) : Retrofit {
         .addInterceptor(httpLoggingInterceptor)
         .addNetworkInterceptor(StethoInterceptor())
         .build()
-
-    val baseUrl = if(request == "transport") {
-        "https://api-ratp.pierre-grimaud.fr/"
-    } else {
-        "https://data.ratp.fr/"
-    }
 
     return Retrofit.Builder()
         .baseUrl(baseUrl)

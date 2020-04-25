@@ -6,11 +6,16 @@ import android.util.Log
 import androidx.core.view.isVisible
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
+import com.example.subline.utils.BASE_URL_PICTO
+import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.retrofit
 import com.pixplicity.sharp.Sharp
 import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.coroutines.runBlocking
-import okhttp3.*
-import java.io.IOException
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.InputStream
 
 class AppelApi : AppCompatActivity() {
@@ -23,41 +28,14 @@ class AppelApi : AppCompatActivity() {
         var request = ""
 
 
-        val pictoService = retrofit("picto").create(RatpPictoService::class.java)
-        runBlocking {
-            val pictoResult = pictoService.getPictoInfo("M14")
-            Log.d("EPF", "test $pictoResult")
-            val id = pictoResult.records[0].fields.noms_des_fichiers.id
-//            resultToPrint += id
-//            resultTextView.text = resultToPrint
-            /*val fileName = pictoResult.records.fields.noms_des_fichiers.filename
-            resultToPrint += "$fileName"
-            testPicto.text = resultToPrint
-            Log.d("EPF", "test $fileName")*/
-            //imageView.setImageResource(fileName)
-        }
-
-        val req = Request.Builder().url("https://data.ratp.fr/explore/dataset/pictogrammes-des-lignes-de-metro-rer-tramway-bus-et-noctilien/files/0354db93c87c47dd969f3b27d6308de7/download/")
-            .build();
-        OkHttpClient.Builder().build().newCall(req).enqueue(object: Callback {
-            override fun onResponse(call: Call, response: Response) {
-                val stream: InputStream = response.body!!.byteStream()
-                Sharp.loadInputStream(stream).into(imageView)
-                stream.close()
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-
-            }
-        })
-
+        getLinePicto("390")
 
         lineInput.isVisible = false
         stationInput.isVisible = false
         btnSearch.isVisible = false
 
-        //print all lines to initialize activity
-        val service = retrofit("transport").create(RatpService::class.java)
+        //print all lines to initialize activity // laisser en com vu que l'api est morte
+       /* val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         runBlocking {
             val results = service.getAllMetroLines("metros")
             Log.d("EPF", "test $results")
@@ -67,10 +45,10 @@ class AppelApi : AppCompatActivity() {
                 resultToPrint += "$name \n"
                 resultTextView.text = resultToPrint
             }
-        }
+        }*/
 
-        // TEST GET ALL LINES (metros, rers, buses, tramways, noctiliens)
-        /*val service = retrofit("transport").create(RatpService::class.java)
+        // TEST GET ALL LINES (metros, rers, buses, tramways, noctiliens) a garder pour après !!
+        /*val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         runBlocking {
             val results = service.getAllLines()
             Log.d("EPF", "test $results")
@@ -87,7 +65,7 @@ class AppelApi : AppCompatActivity() {
             btnSearch.isVisible = false
             resultTextView.isVisible = true
 
-            val service = retrofit("transport").create(RatpService::class.java)
+            val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             runBlocking {
                 val results = service.getAllMetroLines("metros")
                 Log.d("EPF", "test $results")
@@ -141,8 +119,9 @@ class AppelApi : AppCompatActivity() {
             resultTextView.isVisible = true
 
             val line = lineInput.text.toString()
+            getLinePicto(line)
 
-            val service = retrofit("transport").create(RatpService::class.java)
+            val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
             when(request) {
                 "getLineInfo" -> {
@@ -156,7 +135,7 @@ class AppelApi : AppCompatActivity() {
                         val title = trafficInfoResult.result.title
                         val message = trafficInfoResult.result.message
                         resultToPrint += "$line -- $name \n$directions\n"
-                        resultToPrint += "Etat du traffic : $title\n$message"
+                        resultToPrint += "Etat du trafic : $title\n$message"
                         resultTextView.text = resultToPrint
                         Log.d("EPF", "test $line $name")
                     }
@@ -190,6 +169,29 @@ class AppelApi : AppCompatActivity() {
                 else -> resultTextView.text = "Requete non valide"
             }
         }
+    }
 
+    private fun getLinePicto(lineId: String) {
+        val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
+        runBlocking {
+            val pictoResult = pictoService.getPictoInfo(lineId)
+            Log.d("EPF", "test $pictoResult")
+            val id = pictoResult.records[0].fields.noms_des_fichiers.id
+            val result = pictoService.getImage(id)
+            result.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    val stream: InputStream = response.body()!!.byteStream()
+                    Sharp.loadInputStream(stream).into(imageView)
+                    stream.close()
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+            })
+        }
     }
 }

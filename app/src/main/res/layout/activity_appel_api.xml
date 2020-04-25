@@ -51,15 +51,6 @@
             android:backgroundTint="@color/colorPrimary"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/testPicto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <EditText
         android:id="@+id/lineInput"
         android:layout_width="match_parent"
@@ -87,6 +78,11 @@
         android:text="Rechercher"
         android:visibility="invisible"
         android:backgroundTint="@color/colorPrimary"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/resultTextView"
