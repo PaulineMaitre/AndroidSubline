@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.find.FindMetros">
+    tools:context=".ui.find.FindMetros"
+    android:orientation="vertical">
 
       <TextView
+          android:id="@+id/text_metro"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Choisissez une ligne"
+          android:textSize="20dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="30dp"/>
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/find_all_metro_rv"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginTop="15dp"
+          android:layout_marginLeft="5dp"/>
+
+
+
+      <TextView
+        android:id="@+id/text_metro_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="METROS"
         android:textSize="30dp"
         android:gravity="center" />
 
-</FrameLayout>
+</LinearLayout>
