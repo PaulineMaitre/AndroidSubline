@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.example.subline.R
+import com.example.subline.ui.find.bus.FindBus
+import com.example.subline.ui.find.metros.FindMetros
+import com.example.subline.ui.find.nocti.FindNocti
+import com.example.subline.ui.find.rer.FindRER
+import com.example.subline.ui.find.tram.FindTram
 import com.google.android.material.tabs.TabLayout
 
 class FindFragment : Fragment() {

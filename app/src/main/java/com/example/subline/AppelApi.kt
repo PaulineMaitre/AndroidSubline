@@ -28,7 +28,7 @@ class AppelApi : AppCompatActivity() {
         var request = ""
 
 
-        getLinePicto("390")
+        getLinePicto("M4")
 
         lineInput.isVisible = false
         stationInput.isVisible = false

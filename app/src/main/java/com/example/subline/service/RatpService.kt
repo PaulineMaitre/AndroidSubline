@@ -31,7 +31,7 @@ interface RatpService {
 
 data class GetMetroLinesResult(val result: Metros = Metros())
 data class Metros(val metros : List<Metro> = emptyList())
-data class Metro(val name: String = "", val directions: String = "")
+data class Metro(val code : String, val name: String = "", val directions: String = "", val id : String)
 
 data class GetLineInfoResult(val result: Line = Line())
 data class Line(val code: String = "", val name: String = "", val directions: String = "", val id: String = "")

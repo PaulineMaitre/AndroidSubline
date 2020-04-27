@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.find.FindMetros"
+    tools:context=".ui.find.metros.FindMetros"
     android:orientation="vertical">
 
       <TextView
@@ -23,14 +23,23 @@
           android:layout_marginTop="15dp"
           android:layout_marginLeft="5dp"/>
 
-
-
       <TextView
-        android:id="@+id/text_metro_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="METROS"
-        android:textSize="30dp"
-        android:gravity="center" />
+          android:id="@+id/text_metro2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Liste des stations sur cette ligne :"
+          android:textSize="20dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="30dp"/>
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/find_all_stations_rv"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_marginTop="15dp"
+          android:layout_marginLeft="5dp"
+          android:layout_marginBottom="?attr/actionBarSize"/>
+
 
 </LinearLayout>

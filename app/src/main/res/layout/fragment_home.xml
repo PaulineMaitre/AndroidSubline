@@ -13,11 +13,6 @@
         android:text="API"
         android:id="@+id/bt_api" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Recherche"
-        android:id="@+id/bt_find"/>
 
 
 
