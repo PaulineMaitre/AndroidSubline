@@ -1,12 +1,17 @@
 package com.example.subline.ui.find.metros
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.subline.AppelApi
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
 import com.example.subline.utils.BASE_URL_PICTO
@@ -23,7 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllStationsAdapter (val stations : List<String>) : RecyclerView.Adapter<AllStationsAdapter.MetrosViewHolder>() {
+class AllStationsAdapter (val stations : List<String>,val pictoline : Int,val line : String) : RecyclerView.Adapter<AllStationsAdapter.MetrosViewHolder>() {
 
     class MetrosViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
@@ -38,9 +43,21 @@ class AllStationsAdapter (val stations : List<String>) : RecyclerView.Adapter<Al
     override fun getItemCount(): Int = stations.size
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
         var stat = stations[position]
         holder.statView.station_name.text = "$stat"
+
+        holder.statView.setOnClickListener {
+            val intent= Intent(it.context,HoraireMetro::class.java)
+            intent.putExtra("station",stat)
+            intent.putExtra("pictoline",pictoline)
+            intent.putExtra("line",line)
+            intent.putExtra("direct1",stations[0])
+            intent.putExtra("direct2",stations.last())
+            it.context.startActivity(intent)
+            true
+        }
 
     }
 

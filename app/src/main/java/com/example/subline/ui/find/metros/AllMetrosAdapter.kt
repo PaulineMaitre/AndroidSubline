@@ -25,118 +25,102 @@ import java.io.InputStream
 
 class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
 
-    class MetrosViewHolder(val metrosView : View) : RecyclerView.ViewHolder(metrosView)
-    var listmetros = listOf<Int>(R.drawable.m1,
-                                R.drawable.m2,
-                                 R.drawable.m3,
-                                 R.drawable.m3b,
-                                  R.drawable.m4,
-                                  R.drawable.m5,
-                                  R.drawable.m6,
-                                  R.drawable.m7,
-                                   R.drawable.m7b,
-                                   R.drawable.m8,
-                                  R.drawable.m9,
-                                   R.drawable.m10,
-                                    R.drawable.m11,
-                                  R.drawable.m12,
-                                  R.drawable.m13,
-                                  R.drawable.m14,
-                                  R.drawable.orlyval,
-                                   R.drawable.mfun)
+        class MetrosViewHolder(val metrosView : View) : RecyclerView.ViewHolder(metrosView)
+        var listmetros = listOf<Int>(R.drawable.m1,
+            R.drawable.m2,
+            R.drawable.m3,
+            R.drawable.m3b,
+            R.drawable.m4,
+            R.drawable.m5,
+            R.drawable.m6,
+            R.drawable.m7,
+            R.drawable.m7b,
+            R.drawable.m8,
+            R.drawable.m9,
+            R.drawable.m10,
+            R.drawable.m11,
+            R.drawable.m12,
+            R.drawable.m13,
+            R.drawable.m14,
+            R.drawable.orlyval,
+            R.drawable.mfun)
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):MetrosViewHolder {
-        val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent, false)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):MetrosViewHolder {
+            val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
+            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent, false)
 
-        return MetrosViewHolder(view)
-    }
+            return MetrosViewHolder(view)
+        }
 
-    override fun getItemCount(): Int  = metros.size
+        override fun getItemCount(): Int  = metros.size
 
 
-    @SuppressLint("ResourceAsColor")
-    override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
-        var metro = metros[position]
-        holder.metrosView.metro_name.setImageResource(listmetros[position])
-        //Log.d("CRC","$metro")
-        //holder.metrosView.metro_name.text = "$metro"
-        //holder.metrosView.metro_name.setImageResource(metro)
-        //getLinePicto(metro,holder.metrosView.metro_name)
+        @SuppressLint("ResourceAsColor")
+        override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
+            var metro = metros[position]
+            holder.metrosView.metro_name.setImageResource(listmetros[position])
+            //Log.d("CRC","$metro")
+            //holder.metrosView.metro_name.text = "$metro"
+            //holder.metrosView.metro_name.setImageResource(metro)
+            //getLinePicto(metro,holder.metrosView.metro_name)
 
-        holder.metrosView.setOnClickListener {
+            holder.metrosView.setOnClickListener {
 
-            var liststations = afficheliststations(metro)
-            stations.adapter = AllStationsAdapter(liststations)
+                var liststations = afficheliststations(metro)
+                stations.adapter = AllStationsAdapter(liststations,listmetros[position],metro)
 
             }
 
-       }
+        }
 
-    fun afficheliststations(metro: String) : List<String>{
-        var liststations = arrayListOf<String>()
-        val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-        runBlocking {
-            val results = service.getStations("metros",metro)
-            Log.d("EPF", "test $results")
-            results.result.stations.map {
-                liststations.add(it.name)
+        fun afficheliststations(metro: String) : List<String>{
+            var liststations = arrayListOf<String>()
+            val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
+            runBlocking {
+                val results = service.getStations("metros",metro)
+                Log.d("EPF", "test $results")
+                results.result.stations.map {
+                    liststations.add(it.name)
+                }
+            }
+
+            return liststations
+        }
+
+
+
+
+
+
+
+
+
+        private fun getLinePicto(lineId: String, imageview : ImageView) {
+
+            val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
+            runBlocking {
+                val pictoResult = pictoService.getPictoInfo(lineId)
+                Log.d("EPF", "test $pictoResult")
+                val id = pictoResult.records[0].fields.noms_des_fichiers.id
+                val result = pictoService.getImage(id)
+                result.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        val stream: InputStream = response.body()!!.byteStream()
+                        Sharp.loadInputStream(stream).into(imageview)
+                        // stream.close()
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                })
             }
         }
 
-    return liststations
-    }
-
-
-
-
-
-
-
-
-
-    private fun getLinePicto(lineId: String, imageview : ImageView) {
-
-        val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
-        runBlocking {
-            val pictoResult = pictoService.getPictoInfo(lineId)
-            Log.d("EPF", "test $pictoResult")
-            val id = pictoResult.records[0].fields.noms_des_fichiers.id
-            val result = pictoService.getImage(id)
-            result.enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    val stream: InputStream = response.body()!!.byteStream()
-                    Sharp.loadInputStream(stream).into(imageview)
-                   // stream.close()
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-            })
-        }
-    }
-
-
-}
-
-class aa : RecyclerView.OnItemTouchListener {
-    @SuppressLint("ResourceAsColor")
-    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
 
     }
-
-    override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-}

@@ -65,7 +65,7 @@ class FindMetros : Fragment() {
                                   //  R.drawable.orlyval,
                                  //   R.drawable.mfun)
 
-        var listmetros = listOf<String>("1","2","3","3bis","4","5","6","7","7bis","8","9","10","11","12","13","14","Orlyval","fun")
+        var listmetros = listOf<String>("1","2","3","3b","4","5","6","7","7b","8","9","10","11","12","13","14","Orv","Fun")
         rv.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
         rv2.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
         rv.adapter = AllMetrosAdapter(listmetros,rv2)

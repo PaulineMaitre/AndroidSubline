@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.subline">
 
-<uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_subline_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindActivity" android:label="Rechercher"></activity>
-        <activity android:name=".AppelApi" android:label="AppelAPI" />
+        <activity
+            android:name=".ui.find.metros.HoraireMetro"
+            android:label="Horaires" />
+        <activity
+            android:name=".AppelApi"
+            android:label="AppelAPI" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
