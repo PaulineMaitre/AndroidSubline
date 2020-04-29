@@ -1,9 +1,8 @@
-package com.example.subline.ui.find.metros
+package com.example.subline.find.metros
 
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -26,7 +25,7 @@ import java.io.InputStream
 class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
 
         class MetrosViewHolder(val metrosView : View) : RecyclerView.ViewHolder(metrosView)
-        var listmetros = listOf<Int>(R.drawable.m1,
+        var picto_metros = listOf<Int>(R.drawable.m1,
             R.drawable.m2,
             R.drawable.m3,
             R.drawable.m3b,
@@ -60,27 +59,20 @@ class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) 
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
             var metro = metros[position]
-            holder.metrosView.metro_name.setImageResource(listmetros[position])
-            //Log.d("CRC","$metro")
-            //holder.metrosView.metro_name.text = "$metro"
-            //holder.metrosView.metro_name.setImageResource(metro)
-            //getLinePicto(metro,holder.metrosView.metro_name)
+            holder.metrosView.metro_name.setImageResource(picto_metros[position])
 
             holder.metrosView.setOnClickListener {
-
-                var liststations = afficheliststations(metro)
-                stations.adapter = AllStationsAdapter(liststations,listmetros[position],metro)
-
+                var liststations = affiche_list_stations(metro)
+                stations.adapter = AllStationsAdapter(liststations,picto_metros[position],metro)
             }
 
         }
 
-        fun afficheliststations(metro: String) : List<String>{
+        fun affiche_list_stations(metro: String) : List<String>{
             var liststations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             runBlocking {
                 val results = service.getStations("metros",metro)
-                Log.d("EPF", "test $results")
                 results.result.stations.map {
                     liststations.add(it.name)
                 }

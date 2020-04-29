@@ -1,4 +1,4 @@
-package com.example.subline.ui.find
+package com.example.subline.find
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.subline.R
-import com.example.subline.ui.find.bus.FindBus
-import com.example.subline.ui.find.metros.FindMetros
-import com.example.subline.ui.find.nocti.FindNocti
-import com.example.subline.ui.find.rer.FindRER
-import com.example.subline.ui.find.tram.FindTram
+import com.example.subline.find.bus.FindBus
+import com.example.subline.find.metros.FindMetros
+import com.example.subline.find.nocti.FindNocti
+import com.example.subline.find.rer.FindRER
+import com.example.subline.find.tram.FindTram
 import com.google.android.material.tabs.TabLayout
 
 class FindFragment : Fragment() {

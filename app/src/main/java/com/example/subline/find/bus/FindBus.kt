@@ -1,4 +1,4 @@
-package com.example.subline.ui.find.rer
+package com.example.subline.find.bus
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,14 +11,14 @@ import com.example.subline.R
 /**
  * A simple [Fragment] subclass.
  */
-class FindRER : Fragment() {
+class FindBus : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find_rer, container, false)
+        return inflater.inflate(R.layout.fragment_find_bus, container, false)
     }
 
 }

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    tools:context=".home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <Button
         android:layout_width="match_parent"
@@ -13,7 +20,48 @@
         android:text="API"
         android:id="@+id/bt_api" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mes favoris"
+        android:layout_margin="10dp"
+        android:textSize="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/home_favoris"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prochain passage"
+        android:layout_marginTop="20dp"
+        android:id="@+id/tv_horaires"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/home_horaire"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_qrcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="80dp"
+        android:clickable="true"
+        android:elevation="6dp"
+        android:src="@drawable/ic_select_all_black_24dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabSize="auto"/>
 
 
 
-</LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

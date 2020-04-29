@@ -1,4 +1,4 @@
-package com.example.subline.ui.find.tram
+package com.example.subline.find.tram
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

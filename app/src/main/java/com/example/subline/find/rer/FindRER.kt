@@ -1,4 +1,4 @@
-package com.example.subline.ui.find.nocti
+package com.example.subline.find.rer
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,14 +11,14 @@ import com.example.subline.R
 /**
  * A simple [Fragment] subclass.
  */
-class FindNocti : Fragment() {
+class FindRER : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find_nocti, container, false)
+        return inflater.inflate(R.layout.fragment_find_rer, container, false)
     }
 
 }

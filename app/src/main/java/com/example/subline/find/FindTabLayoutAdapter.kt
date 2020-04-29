@@ -1,6 +1,5 @@
-package com.example.subline.ui.find
+package com.example.subline.find
 
-import android.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
