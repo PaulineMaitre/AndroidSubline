@@ -2,7 +2,6 @@ package com.example.subline.find.metros
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +10,7 @@ import com.example.subline.R
 import com.example.subline.data.FavorisDao
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import com.example.tripin.data.AppDatabase
 import kotlinx.android.synthetic.main.activity_horaire_metro.*
@@ -39,19 +39,30 @@ class HoraireMetro : AppCompatActivity() {
         val line = intent.getStringExtra("line")
         val pictoline = intent.getIntExtra("pictoline",0)
         val station_name = intent.getStringExtra("station")
-        val direct1 = intent.getStringExtra("direct1")
-        val direct2 = intent.getStringExtra("direct2")
-        var direction_choisi = direct1
+
         horaire_ligne.setImageResource(pictoline)
         horaire_station.text = "$station_name"
-        radio_direct1.text = "$direct1"
-        radio_direct2.text = "$direct2"
-        var way = "R"
-        var id_direction = 1
 
+        var direct1 = "A"
+        var direct2 = "R"
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-        recherhe_match_stationfav(station_name,line,direct1,"metro")
+        runBlocking {
+            val results = service.getDestinations(TYPE_METRO, line)
+            direct1 = results.result.destinations[0].name
+            direct2 = results.result.destinations[1].name
+        }
 
+        var direction_choisie = direct1
+        if(line == "14") { // fix bug A/R on line 14
+            radio_direct1.text = direct2
+            radio_direct2.text = direct1
+        } else {
+            radio_direct1.text = direct1
+            radio_direct2.text = direct2
+        }
+
+        var way = "A"
+        recherche_match_stationfav(station_name,line,direct1, TYPE_METRO)
 
         recyclerview_horaire(service,station_name,line,way)
 
@@ -59,24 +70,29 @@ class HoraireMetro : AppCompatActivity() {
         radiogroup_direction.setOnCheckedChangeListener { group, checkedId ->
 
             if(radio_direct1.isChecked) {
-                way = "R"
-                direction_choisi = direct1
-                id_direction = 1
+                way = "A"
+                direction_choisie = direct1
 
             }else if (radio_direct2.isChecked){
-                way = "A"
-                direction_choisi = direct2
-                id_direction = 2
+                way = "R"
+                direction_choisie = direct2
+            }
+            if(line == "14") { // fix bug A/R on line 14
+                if(direction_choisie == direct1) {
+                    direction_choisie = direct2
+                } else {
+                    direction_choisie = direct1
+                }
             }
             runBlocking {
-                recherhe_match_stationfav(station_name,line,direction_choisi,"metro")
+                recherche_match_stationfav(station_name,line,direction_choisie,TYPE_METRO)
                 recyclerview_horaire(service,station_name,line,way)
             }
         }
 
 
         fab_fav.setOnClickListener {
-            gestion_btn_favoris(station_name,line,direction_choisi,pictoline,"metro",way)
+            gestion_btn_favoris(station_name,line,direction_choisie,pictoline,TYPE_METRO, way)
         }
 
 
@@ -95,8 +111,8 @@ class HoraireMetro : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    fun gestion_btn_favoris(station_name : String,line : String,direction : String,pictoline : Int,type : String,way : String){
-        val stat : Station = Station(0,station_name,type,line,direction,way,pictoline)
+    fun gestion_btn_favoris(station_name: String, line: String, direction: String, pictoline: Int, type: String, way: String){
+        val stat : Station = Station(0, station_name, type, line, direction, way, pictoline)
         if(favoris == false){
             fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
             Toast.makeText(this, "Le métro a bien été ajouté aux favoris", Toast.LENGTH_SHORT).show()
@@ -110,12 +126,12 @@ class HoraireMetro : AppCompatActivity() {
             Toast.makeText(this, "Le métro a bien été supprimé des favoris", Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
-                favorisDao?.deleteStation(favorisDao?.getStation(station_name,direction,type)!!)
+                favorisDao?.deleteStation(favorisDao?.getStation(station_name, direction, type)!!)
             }
         }
     }
 
-    fun recherhe_match_stationfav(station_name : String,line : String,direction : String,type : String){
+    fun recherche_match_stationfav(station_name: String, line: String, direction: String, type: String){
         runBlocking {
             if (favorisDao?.getStation(station_name, direction, type) == null) {
                 favoris = false
@@ -128,17 +144,17 @@ class HoraireMetro : AppCompatActivity() {
 
     }
 
-    fun recyclerview_horaire(service: RatpService,station_name : String,line : String,way : String){
+    fun recyclerview_horaire(service: RatpService, station_name: String, line: String, way: String){
 
         var time = arrayListOf<String>()
         var destinations = arrayListOf<String>()
 
         runBlocking {
-            val results = service.getSchedules("metros", line, station_name, way)
+            val results = service.getSchedules(TYPE_METRO, line, station_name, way)
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                rv_horaire_station.adapter = HoraireAdapter(time,destinations)
+                rv_horaire_station.adapter = HoraireAdapter(time, destinations)
             }
         }
     }

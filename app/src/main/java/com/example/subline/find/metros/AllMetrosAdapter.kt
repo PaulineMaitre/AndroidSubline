@@ -12,6 +12,7 @@ import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_PICTO
 import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import com.pixplicity.sharp.Sharp
 import kotlinx.android.synthetic.main.list_metro_item.view.*
@@ -22,9 +23,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
+class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
 
-        class MetrosViewHolder(val metrosView : View) : RecyclerView.ViewHolder(metrosView)
+        class MetrosViewHolder(val metrosView: View) : RecyclerView.ViewHolder(metrosView)
         var picto_metros = listOf<Int>(R.drawable.m1,
             R.drawable.m2,
             R.drawable.m3,
@@ -46,14 +47,14 @@ class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) 
 
 
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):MetrosViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetrosViewHolder {
             val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
             val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent, false)
 
             return MetrosViewHolder(view)
         }
 
-        override fun getItemCount(): Int  = metros.size
+        override fun getItemCount(): Int = metros.size
 
 
         @SuppressLint("ResourceAsColor")
@@ -63,7 +64,7 @@ class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) 
 
             holder.metrosView.setOnClickListener {
                 var liststations = affiche_list_stations(metro)
-                stations.adapter = AllStationsAdapter(liststations,picto_metros[position],metro)
+                stations.adapter = AllStationsAdapter(liststations, picto_metros[position], metro)
             }
 
         }
@@ -72,7 +73,7 @@ class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) 
             var liststations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             runBlocking {
-                val results = service.getStations("metros",metro)
+                val results = service.getStations(TYPE_METRO, metro)
                 results.result.stations.map {
                     liststations.add(it.name)
                 }
@@ -85,11 +86,7 @@ class AllMetrosAdapter (val metros : List<String>, var stations : RecyclerView) 
 
 
 
-
-
-
-
-        private fun getLinePicto(lineId: String, imageview : ImageView) {
+        private fun getLinePicto(lineId: String, imageview: ImageView) {
 
             val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
             runBlocking {

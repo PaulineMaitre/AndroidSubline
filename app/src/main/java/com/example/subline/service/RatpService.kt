@@ -12,6 +12,10 @@ interface RatpService {
     @GET("/v4/lines/{type}/{code}")
     suspend fun getLineInfo(@Path("type") type: String, @Path ("code") code: String) : GetLineInfoResult
 
+    //REQ2 get infos for one metro line
+    @GET("/v4/destinations/{type}/{code}")
+    suspend fun getDestinations(@Path("type") type: String, @Path ("code") code: String) : GetDestinationsResult
+
     //REQ3 get schedules for one line in a given station
     @GET("/v4/schedules/{type}/{code}/{station}/{way}")
     suspend fun getSchedules(@Path("type") type: String, @Path("code") code: String, @Path("station") station: String, @Path("way") way: String) : GetSchedulesResult
@@ -28,6 +32,10 @@ interface RatpService {
     @GET("/v4/lines")
     suspend fun getAllLines() : GetLinesResult
 }
+
+data class GetDestinationsResult(val result: Destinations = Destinations())
+data class Destinations(val destinations: List<Destination> = emptyList())
+data class Destination(val name: String = "", val way: String = "")
 
 data class GetMetroLinesResult(val result: Metros = Metros())
 data class Metros(val metros : List<Metro> = emptyList())

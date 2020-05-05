@@ -14,6 +14,7 @@ import com.example.subline.find.metros.Station
 import com.example.subline.service.RatpService
 import com.example.subline.service.Stations
 import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
@@ -37,8 +38,8 @@ class FavorisAdapter (val favoris : List<Station>, val rv : RecyclerView, val tv
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: FavorisViewHolder, position: Int) {
         val favori = favoris[position]
-        holder.favView.favoris_station.text = "${favori.name}"
-        holder.favView.favoris_direction.text = "${favori.direction_name}"
+        holder.favView.favoris_station.text = favori.name
+        holder.favView.favoris_direction.text = favori.direction_name
         holder.favView.metro_name.setImageResource(favori.picto_ligne)
 
         holder.favView.setOnClickListener {
@@ -47,7 +48,7 @@ class FavorisAdapter (val favoris : List<Station>, val rv : RecyclerView, val tv
                 var i = 0
                 val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
                 runBlocking {
-                    val results = service.getSchedules("metros", favori.ligne_name, favori.name, favori.way)
+                    val results = service.getSchedules(TYPE_METRO, favori.ligne_name, favori.name, favori.way)
                     results.result.schedules.map {
                         if(i<2){
                             listhoraire.add(it.message)

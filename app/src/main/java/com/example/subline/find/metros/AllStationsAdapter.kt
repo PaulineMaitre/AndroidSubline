@@ -34,8 +34,8 @@ class AllStationsAdapter (val stations : List<String>,val pictoline : Int,val me
             intent.putExtra("station",stat)
             intent.putExtra("pictoline",pictoline)
             intent.putExtra("line",metro)
-            intent.putExtra("direct1",stations[0])
-            intent.putExtra("direct2",stations.last())
+            //intent.putExtra("direct1",stations[0])
+            //intent.putExtra("direct2",stations.last())
             it.context.startActivity(intent)
             true
         }

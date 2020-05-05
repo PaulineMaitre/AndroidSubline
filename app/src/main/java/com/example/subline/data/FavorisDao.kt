@@ -18,7 +18,7 @@ interface FavorisDao {
     @Delete
     suspend fun deleteStation(station: Station)
 
-    @Query("select * from favoris where name = :station_name AND direction_name =:direct AND type=:type")
-    suspend fun getStation(station_name: String,direct : String,type : String) :Station
+    @Query("select * from favoris where name = :station_name AND direction_name = :direct AND type = :type")
+    suspend fun getStation(station_name: String, direct: String, type: String): Station
 
 }
