@@ -16,9 +16,9 @@ import com.example.tripin.data.AppDatabase
 import kotlinx.android.synthetic.main.activity_horaire_metro.*
 import kotlinx.coroutines.runBlocking
 
-class HoraireMetro : AppCompatActivity() {
+class HoraireMetro: AppCompatActivity() {
 
-    var favoris : Boolean = false
+    var favoris: Boolean = false
     private var favorisDao: FavorisDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +36,12 @@ class HoraireMetro : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val line = intent.getStringExtra("line")
+        val line: String = intent.getStringExtra("line")
         val pictoline = intent.getIntExtra("pictoline",0)
-        val station_name = intent.getStringExtra("station")
+        val stationName: String = intent.getStringExtra("station")
 
         horaire_ligne.setImageResource(pictoline)
-        horaire_station.text = "$station_name"
+        horaire_station.text = stationName
 
         var direct1 = "A"
         var direct2 = "R"
@@ -62,9 +62,9 @@ class HoraireMetro : AppCompatActivity() {
         }
 
         var way = "A"
-        recherche_match_stationfav(station_name,line,direct1, TYPE_METRO)
+        recherche_match_stationfav(stationName, line, direct1, TYPE_METRO)
 
-        recyclerview_horaire(service,station_name,line,way)
+        recyclerview_horaire(service, stationName, line, way)
 
 
         radiogroup_direction.setOnCheckedChangeListener { group, checkedId ->
@@ -85,37 +85,33 @@ class HoraireMetro : AppCompatActivity() {
                 }
             }
             runBlocking {
-                recherche_match_stationfav(station_name,line,direction_choisie,TYPE_METRO)
-                recyclerview_horaire(service,station_name,line,way)
+                recherche_match_stationfav(stationName, line, direction_choisie, TYPE_METRO)
+                recyclerview_horaire(service, stationName, line, way)
             }
         }
 
 
         fab_fav.setOnClickListener {
-            gestion_btn_favoris(station_name,line,direction_choisie,pictoline,TYPE_METRO, way)
+            gestion_btn_favoris(stationName, line, direction_choisie, pictoline, TYPE_METRO, way)
         }
-
-
-
 
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) : Boolean =
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when(item.itemId){
             android.R.id.home -> {
                 finish()
                 true
-
             }
             else -> super.onOptionsItemSelected(item)
         }
 
     fun gestion_btn_favoris(station_name: String, line: String, direction: String, pictoline: Int, type: String, way: String){
         val stat : Station = Station(0, station_name, type, line, direction, way, pictoline)
-        if(favoris == false){
+        if(!favoris){
             fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
-            Toast.makeText(this, "Le métro a bien été ajouté aux favoris", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastMetroAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
@@ -123,7 +119,7 @@ class HoraireMetro : AppCompatActivity() {
 
         }else {
             fab_fav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            Toast.makeText(this, "Le métro a bien été supprimé des favoris", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastMetroDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
                 favorisDao?.deleteStation(favorisDao?.getStation(station_name, direction, type)!!)

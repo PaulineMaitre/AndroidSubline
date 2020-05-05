@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import kotlinx.android.synthetic.main.list_horairem_item.view.*
 
-class HoraireAdapter (val times : List<String>, var destinations : List<String>) : RecyclerView.Adapter<HoraireAdapter.MetrosViewHolder>() {
+class HoraireAdapter(val times: List<String>, var destinations: List<String>): RecyclerView.Adapter<HoraireAdapter.MetrosViewHolder>() {
 
-    class MetrosViewHolder(val horaireView : View) : RecyclerView.ViewHolder(horaireView)
+    class MetrosViewHolder(val horaireView: View): RecyclerView.ViewHolder(horaireView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):MetrosViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -19,7 +19,7 @@ class HoraireAdapter (val times : List<String>, var destinations : List<String>)
         return MetrosViewHolder(view)
     }
 
-    override fun getItemCount(): Int  = times.size
+    override fun getItemCount(): Int = times.size
 
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
@@ -27,8 +27,8 @@ class HoraireAdapter (val times : List<String>, var destinations : List<String>)
         var time = times[position]
         var destination = destinations[position]
 
-        holder.horaireView.horaire_list_time.text = "$time"
-        holder.horaireView.horaire_list_destination.text = "$destination"
+        holder.horaireView.horaire_list_time.text = time
+        holder.horaireView.horaire_list_destination.text = destination
        }
 
     }

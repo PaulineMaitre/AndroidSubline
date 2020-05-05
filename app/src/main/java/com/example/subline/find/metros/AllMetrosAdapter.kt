@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
@@ -42,14 +43,13 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
             R.drawable.m12,
             R.drawable.m13,
             R.drawable.m14,
-            R.drawable.orlyval,
-            R.drawable.mfun)
-
-
+            R.drawable.mfun,
+            R.drawable.orlyval
+            )
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetrosViewHolder {
             val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent, false)
+            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
 
             return MetrosViewHolder(view)
         }

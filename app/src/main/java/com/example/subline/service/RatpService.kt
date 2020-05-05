@@ -6,7 +6,7 @@ import retrofit2.http.Path
 interface RatpService {
     //REQ1 get all metro lines
     @GET("/v4/lines/{type}")
-    suspend fun getAllMetroLines(@Path("type") type: String) : GetMetroLinesResult
+    suspend fun getLinesByType(@Path("type") type: String) : GetMetroLinesResult
 
     //REQ2 get infos for one metro line
     @GET("/v4/lines/{type}/{code}")
