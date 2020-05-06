@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
@@ -24,6 +25,12 @@ class HoraireMetro: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire_metro)
+
+        radio_direct3.isVisible = false
+        radio_direct4.isVisible = false
+        radio_direct5.isVisible = false
+        radio_direct6.isVisible = false
+        radio_direct7.isVisible = false
 
         // ON APPELLE LA BDD
         val database =

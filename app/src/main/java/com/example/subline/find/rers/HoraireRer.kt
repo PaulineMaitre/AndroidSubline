@@ -3,14 +3,13 @@ package com.example.subline.find.rers
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
 import com.example.subline.service.RatpService
-import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_RER
-import com.example.subline.utils.retrofit
+import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
 import kotlinx.android.synthetic.main.activity_horaire_metro.*
 import kotlinx.coroutines.runBlocking
@@ -23,6 +22,13 @@ class HoraireRer: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire_metro)
+
+        radio_direct3.isVisible = false
+        radio_direct4.isVisible = false
+        radio_direct5.isVisible = false
+        radio_direct6.isVisible = false
+        radio_direct7.isVisible = false
+
 
         // ON APPELLE LA BDD
         val database =
@@ -50,17 +56,14 @@ class HoraireRer: AppCompatActivity() {
                 val results = service.getDestinations(TYPE_RER, line)
                 direct1 = results.result.destinations[1].name
                 direct2 = results.result.destinations[0].name
+                radio_direct1.text = direct1
+                radio_direct2.text = direct2
             }
         } else {
-            direct1 = "Bad request. Ambiguous Line"
-            direct2 = "Bad request. Ambiguous Line"
+            specialCasesRerCandD(line)
         }
 
-
         var direction_choisie = direct1
-        radio_direct1.text = direct1
-        radio_direct2.text = direct2
-
 
         var way = "A"
         //recherche_match_stationfav(stationName, line, direct1, TYPE_RER)
@@ -74,7 +77,7 @@ class HoraireRer: AppCompatActivity() {
                 way = "A"
                 direction_choisie = direct1
 
-            }else if (radio_direct2.isChecked){
+            } else if (radio_direct2.isChecked){
                 way = "R"
                 direction_choisie = direct2
             }
@@ -90,6 +93,31 @@ class HoraireRer: AppCompatActivity() {
         }*/
 
 
+    }
+
+    private fun specialCasesRerCandD(line: String) {
+        radio_direct3.isVisible = true
+        radio_direct4.isVisible = true
+        radio_direct5.isVisible = true
+        radio_direct6.isVisible = true
+
+        if(line == "C") {
+            radio_direct7.isVisible = true
+            radio_direct1.text = directC1
+            radio_direct2.text = directC2
+            radio_direct3.text = directC3
+            radio_direct4.text = directC4
+            radio_direct5.text = directC5
+            radio_direct6.text = directC6
+            radio_direct7.text = directC7
+        } else { //if line = "D"
+            radio_direct1.text = directD1
+            radio_direct2.text = directD2
+            radio_direct3.text = directD3
+            radio_direct4.text = directD4
+            radio_direct5.text = directD5
+            radio_direct6.text = directD6
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
@@ -149,13 +177,9 @@ class HoraireRer: AppCompatActivity() {
                 }
             }
         } else {
-            if(line == "C") {
-                destinations.add("Pontoise")
-                destinations.add("Saint-Quentin-en-Yvelines")
-            } else {
-                destinations.add("Schedules unavailable")
-            }
-            time.add("Destination unavailable")
+            destinations.add("Destination unavailable")
+
+            time.add("Schedules unavailable")
             rv_horaire_station.adapter = HoraireRerAdapter(time, destinations)
         }
     }

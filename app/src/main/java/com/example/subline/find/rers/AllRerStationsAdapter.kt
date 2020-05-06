@@ -23,7 +23,6 @@ class AllRerStationsAdapter (val stations: List<String>, val pictoline: Int, val
 
     override fun getItemCount(): Int = stations.size
 
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RersViewHolder, position: Int) {
         var stat = stations[position]
@@ -34,9 +33,7 @@ class AllRerStationsAdapter (val stations: List<String>, val pictoline: Int, val
             intent.putExtra("station", stat)
             intent.putExtra("pictoline", pictoline)
             intent.putExtra("line", rer)
-            //if(rer != "C" && rer != "D") {
-                it.context.startActivity(intent)
-            //}
+            it.context.startActivity(intent)
             true
         }
 

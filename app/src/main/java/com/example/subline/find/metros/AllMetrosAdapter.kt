@@ -26,7 +26,7 @@ import java.io.InputStream
 class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
 
         class MetrosViewHolder(val metrosView: View) : RecyclerView.ViewHolder(metrosView)
-        var picto_metros = listOf<Int>(R.drawable.m1,
+        var pictoMetros = listOf<Int>(R.drawable.m1,
             R.drawable.m2,
             R.drawable.m3,
             R.drawable.m3b,
@@ -59,11 +59,11 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
             var metro = metros[position]
-            holder.metrosView.lineName.setImageResource(picto_metros[position])
+            holder.metrosView.lineName.setImageResource(pictoMetros[position])
 
             holder.metrosView.setOnClickListener {
                 var liststations = affiche_list_stations(metro)
-                stations.adapter = AllMetroStationsAdapter(liststations, picto_metros[position], metro)
+                stations.adapter = AllMetroStationsAdapter(liststations, pictoMetros[position], metro)
             }
 
         }

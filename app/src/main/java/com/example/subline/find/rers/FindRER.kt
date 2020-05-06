@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.subline.R
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
@@ -34,7 +33,9 @@ class FindRER : Fragment() {
         runBlocking {
             val results = service.getLinesByType(TYPE_RER)
             results.result.rers.map {
-                rers.add(it.code)
+                if(!rers.contains(it.code)) {
+                    rers.add(it.code)
+                }
             }
         }
 

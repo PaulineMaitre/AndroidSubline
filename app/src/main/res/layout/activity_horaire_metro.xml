@@ -72,6 +72,41 @@
             android:text="Direct2"
             android:textSize="15dp"
             android:layout_marginLeft="30dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct3"
+            android:text="Direct3"
+            android:textSize="15dp"
+            android:layout_marginLeft="30dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct4"
+            android:text="Direct4"
+            android:textSize="15dp"
+            android:layout_marginLeft="30dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct5"
+            android:text="Direct5"
+            android:textSize="15dp"
+            android:layout_marginLeft="30dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct6"
+            android:text="Direct6"
+            android:textSize="15dp"
+            android:layout_marginLeft="30dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct7"
+            android:text="Direct7"
+            android:textSize="15dp"
+            android:layout_marginLeft="30dp"/>
     </RadioGroup>
 
     <TextView
