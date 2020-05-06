@@ -6,7 +6,7 @@ import retrofit2.http.Path
 interface RatpService {
     //REQ1 get all metro lines
     @GET("/v4/lines/{type}")
-    suspend fun getAllMetroLines(@Path("type") type: String) : GetMetroLinesResult
+    suspend fun getLinesByType(@Path("type") type: String) : GetLinesByTypeResult
 
     //REQ2 get infos for one metro line
     @GET("/v4/lines/{type}/{code}")
@@ -37,9 +37,9 @@ data class GetDestinationsResult(val result: Destinations = Destinations())
 data class Destinations(val destinations: List<Destination> = emptyList())
 data class Destination(val name: String = "", val way: String = "")
 
-data class GetMetroLinesResult(val result: Metros = Metros())
-data class Metros(val metros : List<Metro> = emptyList())
-data class Metro(val code : String, val name: String = "", val directions: String = "", val id : String)
+data class GetLinesByTypeResult(val result: TransportTypes = TransportTypes())
+data class TransportTypes(val metros : List<TransportType> = emptyList(), val rers : List<TransportType> = emptyList())
+data class TransportType(val code : String, val name: String = "", val directions: String = "", val id : String)
 
 data class GetLineInfoResult(val result: Line = Line())
 data class Line(val code: String = "", val name: String = "", val directions: String = "", val id: String = "")

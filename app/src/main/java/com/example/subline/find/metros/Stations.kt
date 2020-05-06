@@ -5,13 +5,13 @@ import androidx.room.PrimaryKey
 import com.example.subline.R
 
 @Entity(tableName = "favoris")
-data class Station (@PrimaryKey(autoGenerate = true) val id:Int,
-                    val name :String,
+data class Station (@PrimaryKey(autoGenerate = true) val id: Int,
+                    val name: String,
                     val type: String,
-                    val ligne_name : String,
-                    val direction_name :String,
-                    val way : String,
-                    val picto_ligne : Int ) {
+                    val ligne_name: String,
+                    val direction_name: String,
+                    val way: String,
+                    val picto_ligne: Int) {
 
 
     companion object { /*  all: même chose que :ListClient<>*/

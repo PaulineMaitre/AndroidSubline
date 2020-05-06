@@ -24,8 +24,6 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/logo_metro"
                 android:id="@+id/horaire_ligne"/>
@@ -33,7 +31,7 @@
                 android:id="@+id/horaire_station"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="La defense"
+                android:text="Nom station"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:textSize="20dp"
@@ -63,7 +61,8 @@
             android:id="@+id/radio_direct1"
             android:text="Direct1"
             android:textSize="15dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"
             android:checked="true"/>
         <RadioButton
             android:layout_width="wrap_content"
@@ -71,7 +70,48 @@
             android:id="@+id/radio_direct2"
             android:text="Direct2"
             android:textSize="15dp"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct3"
+            android:text="Direct3"
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct4"
+            android:text="Direct4"
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct5"
+            android:text="Direct5"
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct6"
+            android:text="Direct6"
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_direct7"
+            android:text="Direct7"
+            android:textSize="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"/>
     </RadioGroup>
 
     <TextView
@@ -89,8 +129,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:orientation="vertical"
         android:id="@+id/rv_horaire_station"/>
 

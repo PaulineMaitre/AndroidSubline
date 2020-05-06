@@ -67,7 +67,7 @@ class AppelApi : AppCompatActivity() {
 
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             runBlocking {
-                val results = service.getAllMetroLines("metros")
+                val results = service.getLinesByType("metros")
                 Log.d("EPF", "test $results")
                 results.result.metros.map {
                     val name = it.name

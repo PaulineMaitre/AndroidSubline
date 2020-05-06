@@ -26,7 +26,7 @@ import java.io.InputStream
 class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
 
         class MetrosViewHolder(val metrosView: View) : RecyclerView.ViewHolder(metrosView)
-        var picto_metros = listOf<Int>(R.drawable.m1,
+        var pictoMetros = listOf<Int>(R.drawable.m1,
             R.drawable.m2,
             R.drawable.m3,
             R.drawable.m3b,
@@ -42,14 +42,13 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
             R.drawable.m12,
             R.drawable.m13,
             R.drawable.m14,
-            R.drawable.orlyval,
-            R.drawable.mfun)
-
-
+            R.drawable.mfun,
+            R.drawable.orlyval
+            )
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetrosViewHolder {
             val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent, false)
+            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
 
             return MetrosViewHolder(view)
         }
@@ -60,11 +59,11 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
             var metro = metros[position]
-            holder.metrosView.metro_name.setImageResource(picto_metros[position])
+            holder.metrosView.lineName.setImageResource(pictoMetros[position])
 
             holder.metrosView.setOnClickListener {
                 var liststations = affiche_list_stations(metro)
-                stations.adapter = AllStationsAdapter(liststations, picto_metros[position], metro)
+                stations.adapter = AllMetroStationsAdapter(liststations, pictoMetros[position], metro)
             }
 
         }

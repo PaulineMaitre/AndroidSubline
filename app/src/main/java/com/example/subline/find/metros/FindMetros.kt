@@ -8,11 +8,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
+import com.example.subline.service.RatpService
+import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.TYPE_METRO
+import com.example.subline.utils.retrofit
+import kotlinx.coroutines.runBlocking
 
 /**
  * A simple [Fragment] subclass.
  */
-class FindMetros : Fragment() {
+class FindMetros: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,14 +25,21 @@ class FindMetros : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_find_metros, container, false)
-        val rv = view.findViewById<RecyclerView>(R.id.find_all_metro_rv)
-        val rv2 = view.findViewById<RecyclerView>(R.id.find_all_stations_rv)
+        val allMetrosRv = view.findViewById<RecyclerView>(R.id.allMetrosRv)
+        val allStationsRv = view.findViewById<RecyclerView>(R.id.allMetroStationsRv)
 
-        var metros = listOf<String>("1","2","3","3b","4","5","6","7","7b","8","9","10","11","12","13","14","Orv","Fun")
+        val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
+        var metros: ArrayList<String> = ArrayList()
+        runBlocking {
+            val results = service.getLinesByType(TYPE_METRO)
+            results.result.metros.map {
+                metros.add(it.code)
+            }
+        }
 
-        rv.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
-        rv2.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        rv.adapter = AllMetrosAdapter(metros,rv2)
+        allMetrosRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+        allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        allMetrosRv.adapter = AllMetrosAdapter(metros, allStationsRv)
         return view
     }
 
