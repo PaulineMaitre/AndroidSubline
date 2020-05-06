@@ -10,7 +10,7 @@ import com.example.subline.R
 import com.example.subline.find.bus.FindBus
 import com.example.subline.find.metros.FindMetros
 import com.example.subline.find.nocti.FindNocti
-import com.example.subline.find.rer.FindRER
+import com.example.subline.find.rers.FindRER
 import com.example.subline.find.tram.FindTram
 import com.google.android.material.tabs.TabLayout
 

@@ -1,4 +1,4 @@
-package com.example.subline.find.rer
+package com.example.subline.find.rers
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -29,14 +29,16 @@ class AllRerStationsAdapter (val stations: List<String>, val pictoline: Int, val
         var stat = stations[position]
         holder.statView.station_name.text = stat
 
-        /*holder.statView.setOnClickListener {
+        holder.statView.setOnClickListener {
             val intent= Intent(it.context, HoraireRer::class.java)
             intent.putExtra("station", stat)
             intent.putExtra("pictoline", pictoline)
             intent.putExtra("line", rer)
-            it.context.startActivity(intent)
+            //if(rer != "C" && rer != "D") {
+                it.context.startActivity(intent)
+            //}
             true
-        }*/
+        }
 
     }
 

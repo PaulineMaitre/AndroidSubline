@@ -1,24 +1,15 @@
-package com.example.subline.find.rer
+package com.example.subline.find.rers
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
-import com.pixplicity.sharp.Sharp
 import kotlinx.android.synthetic.main.list_metro_item.view.*
 import kotlinx.coroutines.runBlocking
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.InputStream
 
 class AllRersAdapter (val rers: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllRersAdapter.RersViewHolder>() {
 

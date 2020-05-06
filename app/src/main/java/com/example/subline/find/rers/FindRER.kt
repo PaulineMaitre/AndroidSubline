@@ -1,4 +1,4 @@
-package com.example.subline.find.rer
+package com.example.subline.find.rers
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

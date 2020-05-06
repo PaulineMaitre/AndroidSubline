@@ -22,6 +22,9 @@
             android:name="com.example.subline.find.metros.HoraireMetro"
             android:label="Horaires" />
         <activity
+            android:name="com.example.subline.find.rers.HoraireRer"
+            android:label="Horaires" />
+        <activity
             android:name=".AppelApi"
             android:label="AppelAPI" />
         <activity
