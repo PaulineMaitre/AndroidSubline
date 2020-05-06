@@ -150,7 +150,7 @@ class HoraireMetro: AppCompatActivity() {
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                rv_horaire_station.adapter = HoraireAdapter(time, destinations)
+                rv_horaire_station.adapter = HoraireMetroAdapter(time, destinations)
             }
         }
     }

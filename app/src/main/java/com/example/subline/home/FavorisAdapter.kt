@@ -1,9 +1,7 @@
 package com.example.subline.home
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -12,11 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.find.metros.Station
 import com.example.subline.service.RatpService
-import com.example.subline.service.Stations
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
-import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
 
@@ -40,7 +36,7 @@ class FavorisAdapter (val favoris : List<Station>, val rv : RecyclerView, val tv
         val favori = favoris[position]
         holder.favView.favoris_station.text = favori.name
         holder.favView.favoris_direction.text = favori.direction_name
-        holder.favView.metro_name.setImageResource(favori.picto_ligne)
+        holder.favView.lineName.setImageResource(favori.picto_ligne)
 
         holder.favView.setOnClickListener {
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import kotlinx.android.synthetic.main.list_station_item.view.*
 
-class AllStationsAdapter (val stations: List<String>, val pictoline: Int, val metro: String): RecyclerView.Adapter<AllStationsAdapter.MetrosViewHolder>() {
+class AllMetroStationsAdapter (val stations: List<String>, val pictoline: Int, val metro: String): RecyclerView.Adapter<AllMetroStationsAdapter.MetrosViewHolder>() {
 
     class MetrosViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
@@ -60,11 +59,11 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
             var metro = metros[position]
-            holder.metrosView.metro_name.setImageResource(picto_metros[position])
+            holder.metrosView.lineName.setImageResource(picto_metros[position])
 
             holder.metrosView.setOnClickListener {
                 var liststations = affiche_list_stations(metro)
-                stations.adapter = AllStationsAdapter(liststations, picto_metros[position], metro)
+                stations.adapter = AllMetroStationsAdapter(liststations, picto_metros[position], metro)
             }
 
         }

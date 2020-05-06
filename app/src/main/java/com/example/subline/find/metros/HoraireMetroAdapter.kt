@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import kotlinx.android.synthetic.main.list_horairem_item.view.*
 
-class HoraireAdapter(val times: List<String>, var destinations: List<String>): RecyclerView.Adapter<HoraireAdapter.MetrosViewHolder>() {
+class HoraireMetroAdapter(val times: List<String>, var destinations: List<String>): RecyclerView.Adapter<HoraireMetroAdapter.MetrosViewHolder>() {
 
     class MetrosViewHolder(val horaireView: View): RecyclerView.ViewHolder(horaireView)
 

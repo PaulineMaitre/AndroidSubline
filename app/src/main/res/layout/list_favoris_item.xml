@@ -14,7 +14,7 @@
         android:padding="3dp">
 
         <ImageView
-            android:id="@+id/metro_name"
+            android:id="@+id/lineName"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginTop="5dp"
