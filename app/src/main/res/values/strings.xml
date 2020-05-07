@@ -4,18 +4,18 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name = "toastMetroAddToFav">Le métro a bien été ajouté aux favoris</string>
-    <string name = "toastMetroDeleteFromFav">Le métro a bien été supprimé des favoris</string>
+    <string name="toastMetroAddToFav">Le métro a bien été ajouté aux favoris</string>
+    <string name="toastMetroDeleteFromFav">Le métro a bien été supprimé des favoris</string>
 
-    <string name = "toastRerAddToFav">Le RER a bien été ajouté aux favoris</string>
-    <string name = "toastRerDeleteFromFav">Le RER a bien été supprimé des favoris</string>
+    <string name="toastRerAddToFav">Le RER a bien été ajouté aux favoris</string>
+    <string name="toastRerDeleteFromFav">Le RER a bien été supprimé des favoris</string>
 
-    <string name = "toastTramAddToFav">Le tram a bien été ajouté aux favoris</string>
-    <string name = "toastTramDeleteFromFav">Le tram a bien été supprimé des favoris</string>
+    <string name="toastTramAddToFav">Le tram a bien été ajouté aux favoris</string>
+    <string name="toastTramDeleteFromFav">Le tram a bien été supprimé des favoris</string>
 
-    <string name = "toastBusAddToFav">Le bus a bien été ajouté aux favoris</string>
-    <string name = "toastBusDeleteFromFav">Le bus a bien été supprimé des favoris</string>
+    <string name="toastBusAddToFav">Le bus a bien été ajouté aux favoris</string>
+    <string name="toastBusDeleteFromFav">Le bus a bien été supprimé des favoris</string>
 
-    <string name = "toastNoctiAddToFav">Le noctilien a bien été ajouté aux favoris</string>
-    <string name = "toastNoctiDeleteFromFav">Le noctilien a bien été supprimé des favoris</string>
+    <string name="toastNoctiAddToFav">Le noctilien a bien été ajouté aux favoris</string>
+    <string name="toastNoctiDeleteFromFav">Le noctilien a bien été supprimé des favoris</string>
 </resources>

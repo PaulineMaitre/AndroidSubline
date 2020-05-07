@@ -2,6 +2,7 @@ package com.example.subline.find.metros
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -45,6 +46,7 @@ class HoraireMetro: AppCompatActivity() {
 
         val line: String = intent.getStringExtra("line")
         val pictoline = intent.getIntExtra("pictoline",0)
+        Log.d("CCC","$pictoline")
         val stationName: String = intent.getStringExtra("station")
 
         horaire_ligne.setImageResource(pictoline)

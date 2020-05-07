@@ -65,15 +65,8 @@ class HomeFragment : Fragment() {
          }
          fab.setOnClickListener {view ->
              Log.d("CCC","YES")
-             AlertDialog.Builder(requireContext()).apply {
-                 setTitle("QRCode")
-                 setMessage("Il y a rien ! ")
-
-                 setPositiveButton(android.R.string.ok) { _, _ ->
-
-                 }
-                 show()
-             }
+             val intent = Intent(this.context, QRCode::class.java)
+             startActivity(intent)
              true
          }
 
