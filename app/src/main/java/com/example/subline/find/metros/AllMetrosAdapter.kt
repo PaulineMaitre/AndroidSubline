@@ -75,6 +75,7 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
                 val results = service.getStations(TYPE_METRO, metro)
                 results.result.stations.map {
                     liststations.add(it.name)
+                    liststations.sort()
                 }
             }
 

@@ -1,4 +1,4 @@
-package com.example.subline.find.tram
+package com.example.subline.find.nocti
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,31 +9,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import kotlinx.android.synthetic.main.list_station_item.view.*
 
-class AllTramStationsAdapter (val stations: List<String>, val pictoline: Int, val tram: String): RecyclerView.Adapter<AllTramStationsAdapter.TramsViewHolder>() {
+class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: Int, val noctilien: String): RecyclerView.Adapter<AllNoctilienStationsAdapter.NoctiliensViewHolder>() {
 
-    class TramsViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
+    class NoctiliensViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TramsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoctiliensViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInfater.inflate(R.layout.list_station_item, parent,false)
 
-        return TramsViewHolder(view)
+        return NoctiliensViewHolder(view)
     }
 
     override fun getItemCount(): Int = stations.size
 
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: TramsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoctiliensViewHolder, position: Int) {
         var stat = stations[position]
         holder.statView.station_name.text = stat
 
         holder.statView.setOnClickListener {
-            val intent= Intent(it.context, HoraireTram::class.java)
+            val intent= Intent(it.context, HoraireNoctilien::class.java)
             intent.putExtra("station", stat)
             intent.putExtra("pictoline", pictoline)
-            intent.putExtra("line", tram)
+            intent.putExtra("line", noctilien)
             it.context.startActivity(intent)
             true
         }

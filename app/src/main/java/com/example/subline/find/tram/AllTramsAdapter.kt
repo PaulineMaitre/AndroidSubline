@@ -64,6 +64,7 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView) : Re
                 val results = service.getStations(TYPE_TRAM, tram)
                 results.result.stations.map {
                     liststations.add(it.name)
+                    liststations.sort()
                 }
             }
             return liststations

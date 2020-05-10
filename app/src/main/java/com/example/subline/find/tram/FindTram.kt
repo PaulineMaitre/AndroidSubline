@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
-import com.example.subline.find.metros.AllMetrosAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.TYPE_TRAM
 import com.example.subline.utils.retrofit
 import kotlinx.coroutines.runBlocking
