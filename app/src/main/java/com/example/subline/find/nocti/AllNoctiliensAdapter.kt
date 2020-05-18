@@ -71,12 +71,10 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
         override fun onBindViewHolder(holder: NoctiliensViewHolder, position: Int) {
             var noctilien = noctiliens[position]
             holder.noctiliensView.lineName.setImageResource(pictoNoctiliens[position])
-            //holder.noctiliensView.lineName.setImageResource(R.drawable.n01)
 
             holder.noctiliensView.setOnClickListener {
                 var listStations = affiche_list_stations(noctilien)
                 stations.adapter = AllNoctilienStationsAdapter(listStations, pictoNoctiliens[position], noctilien)
-                //stations.adapter = AllNoctilienStationsAdapter(listStations, R.drawable.n01, noctilien)
             }
 
         }

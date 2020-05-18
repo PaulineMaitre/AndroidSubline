@@ -40,7 +40,9 @@ class FindTram : Fragment() {
                 }
             }
             Log.d("EPF", "${trams}")
-            trams.sort()
+            val t11 = trams.get(0)
+            trams.removeAt(0)
+            trams.add(t11)
             Log.d("EPF", "${trams}")
         }
 

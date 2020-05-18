@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
@@ -15,6 +17,7 @@ import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import com.pixplicity.sharp.Sharp
+import kotlinx.android.synthetic.main.fragment_find_metros.view.*
 import kotlinx.android.synthetic.main.list_metro_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
@@ -68,7 +71,7 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
 
         }
 
-        fun affiche_list_stations(metro: String) : List<String>{
+        fun affiche_list_stations(metro: String) : List<String> {
             var liststations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             runBlocking {
@@ -78,7 +81,6 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
                     liststations.sort()
                 }
             }
-
             return liststations
         }
 

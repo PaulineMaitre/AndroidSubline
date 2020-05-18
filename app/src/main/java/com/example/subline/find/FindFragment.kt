@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.subline.R
-import com.example.subline.find.bus.FindBus
+import com.example.subline.find.buses.FindBus
 import com.example.subline.find.metros.FindMetros
 import com.example.subline.find.nocti.FindNoctilien
 import com.example.subline.find.rers.FindRER

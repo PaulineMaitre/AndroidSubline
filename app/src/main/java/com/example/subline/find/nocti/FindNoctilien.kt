@@ -34,14 +34,12 @@ class FindNoctilien : Fragment() {
         var noctiliens: ArrayList<String> = ArrayList()
         runBlocking {
             val results = service.getLinesByType(TYPE_NOCTI)
-            Log.d("EPF", "result : ${results}")
             results.result.noctiliens.map {
                 if(!noctiliens.contains(it.code)) {
                     noctiliens.add(it.code)
                 //noctiliens.sort()
                 }
             }
-            Log.d("EPF", "size: ${noctiliens.size} - ${noctiliens}")
             //noctiliens.sort()
             //Log.d("EPF", "${noctiliens}")
         }

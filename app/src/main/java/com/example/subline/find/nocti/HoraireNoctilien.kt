@@ -23,6 +23,7 @@ class HoraireNoctilien: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire)
 
+        radio_direct2.isVisible = false
         radio_direct3.isVisible = false
         radio_direct4.isVisible = false
         radio_direct5.isVisible = false
@@ -54,13 +55,23 @@ class HoraireNoctilien: AppCompatActivity() {
 
         runBlocking {
             val results = service.getDestinations(TYPE_NOCTI, line)
-            direct1 = results.result.destinations[1].name
-            direct2 = results.result.destinations[0].name
-            radio_direct1.text = direct1
-            radio_direct2.text = direct2
+            direct1 = results.result.destinations[0].name
+            //radio_direct1.text = direct1
+            if(results.result.destinations.size > 1) {
+                direct2 = results.result.destinations[1].name
+                radio_direct2.isVisible = true
+                //radio_direct2.text = direct2
+            }
         }
 
         var direction_choisie = direct1
+        if(line == "11" || line == "12" || line == "14" || line == "21" || line == "23" || line == "24" || line == "35" || line == "41" || line == "45" || line == "61" || line == "62" || line == "63" || line == "122") { // fix bug A/R on line 11
+            radio_direct1.text = direct2
+            radio_direct2.text = direct1
+        } else {
+            radio_direct1.text = direct1
+            radio_direct2.text = direct2
+        }
 
         var way = "A"
         //recherche_match_stationfav(stationName, line, direct1, TYPE_NOCTI)

@@ -24,7 +24,6 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView) : Re
 
         class TramsViewHolder(val tramsView: View) : RecyclerView.ViewHolder(tramsView)
         var pictoTrams = listOf<Int>(R.drawable.t1,
-            R.drawable.t11,
             R.drawable.t2,
             R.drawable.t3a,
             R.drawable.t3b,
@@ -32,7 +31,8 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView) : Re
             R.drawable.t5,
             R.drawable.t6,
             R.drawable.t7,
-            R.drawable.t8
+            R.drawable.t8,
+            R.drawable.t11
             )
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TramsViewHolder {

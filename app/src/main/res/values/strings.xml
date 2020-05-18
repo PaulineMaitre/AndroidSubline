@@ -4,6 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="destinationByDefault">Robinson. St-Rémy-lès-chevreuse</string>
+    <string name="scheduleByDefault">Schedule unavailable</string>
+
     <string name = "toastMetroAddToFav">Le métro a bien été ajouté aux favoris</string>
     <string name = "toastMetroDeleteFromFav">Le métro a bien été supprimé des favoris</string>
 
