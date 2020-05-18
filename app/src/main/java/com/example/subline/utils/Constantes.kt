@@ -15,16 +15,22 @@ const val directC4 = "Saint-Quentin-en-Yvelines"
 const val directC5 = "Massy Palaiseau"
 const val directC6 = "Saint-Martin d'Etampes"
 const val directC7 = "Dourdan la Forêt"
-val STATIONSRERC = listOf("Pontoise", "Saint-Ouen l'Aumône-Liesse", "Montigny-Beauchamp", "Franconville - Le Plessis-Bouchard", "Cernay", "Ermont-Eaubonne", "Saint-Gratien",
-    "Epinay-sur-Seine", "Gennevilliers", "Les Grésillons", "Saint-Ouen", "Porte de Clichy", "Pereire-Levallois", "Neuilly-Pore Maillot", "Avenue Foch", "Avenue Henri Martin",
-    "Boulainvilliers", "Avenue du Président-Kennedy", "Saint-Quentin-en-Yvelines - Montigny-le-Bretonneux", "Saint-Cyr", "Versailles-Chantiers", "Versailles-Chateau-Rive-Gauche",
-    "Porchefontaine", "Viroflay-Rive-Gauche", "Chaville - Vélizy", "Meudon-Val-Fleury", "Issy", "Issy - Val de Seine", "Pont du Garigliano", "Javel", "Champ de Mars - Tour Eiffel",
-    "Pont de l'Alma", "Invalides", "Musée d'Orsay", "Saint-Michel - Notre-Dame", "Gare d'Austerlitz", "Bibliothèque François-Mittérand", "Ivry-sur-Seine", "Vitry-sur-Seine",
-    "Les Ardoines", "Petit Jouy - Les Loges", "Jouy-en-Josas", "Vauboven", "Bièvres", "Igny", "Massy - Palaiseau", "Massy - Verrières", "Chemin d'Antony", "Rungis - La Fraternelle",
-    "Pont de Rungis - Aéroport d'Orly", "Orly-Ville", "Les Saules", "Choisy-le-Roi", "Villeneuve-le-Roi", "Ablon", "Athis-Mons", "Juvisy", "Longjumeau", "Chilly-Mazarin", "Gravigny-Balizy",
-    "Petit Vaux", "Savigny-sur-Orge", "Epinay-sur-Orge", "Sainte-Geneviève-des-Bois", "Saint-Michel-sur-Orge", "Brétigny", "La Norville - Saint-Germain-lès-Arpajon", "Arpajon", "Egly",
-    "Breuillet - Bruyères-le-Chatel", "Breuillet - Village", "Saint-Chéron", "Sermaise", "Dourdan", "Dourdan - La Forêt", "Marolles-en-Hurepoix", "Bourray", "Lardy", "Chamarande", "Etrechy",
-    "Etampes", "Saint-Martin-d'Etampes")
+val STATIONSRERC = listOf("Ablon", "Arpajon", "Athis-Mons", "Avenue du Président-Kennedy", "Avenue Foch", "Avenue Henri Martin",
+    "Bibliothèque François-Mittérand", "Bièvres", "Boulainvilliers", "Bourray", "Breuillet - Bruyères-le-Chatel",
+    "Breuillet - Village", "Brétigny", "Cernay", "Chamarande", "Champ de Mars - Tour Eiffel", "Chaville - Vélizy",
+    "Chemin d'Antony", "Chilly-Mazarin", "Choisy-le-Roi", "Dourdan", "Dourdan - La Forêt", "Egly", "Epinay-sur-Seine",
+    "Epinay-sur-Orge", "Ermont-Eaubonne", "Etampes", "Etrechy", "Franconville - Le Plessis-Bouchard",
+    "Gare d'Austerlitz", "Gennevilliers", "Gravigny-Balizy", "Igny", "Invalides", "Issy", "Issy - Val de Seine",
+    "Ivry-sur-Seine", "Javel", "Jouy-en-Josas", "Juvisy", "Lardy", "La Norville - Saint-Germain-lès-Arpajon",
+    "Les Ardoines", "Marolles-en-Hurepoix", "Les Grésillons", "Les Saules", "Longjumeau", "Massy - Palaiseau",
+    "Massy - Verrières", "Meudon-Val-Fleury", "Montigny-Beauchamp", "Musée d'Orsay", "Neuilly-Pore Maillot",
+    "Orly-Ville", "Pereire-Levallois", "Petit Jouy - Les Loges", "Petit Vaux", "Pont de l'Alma",
+    "Pont de Rungis - Aéroport d'Orly", "Pont du Garigliano", "Pontoise", "Porchefontaine", "Porte de Clichy",
+    "Rungis - La Fraternelle", "Saint-Chéron", "Saint-Cyr", "Saint-Gratien", "Saint-Michel - Notre-Dame",
+    "Saint-Michel-sur-Orge", "Saint-Martin-d'Etampes", "Saint-Ouen", "Saint-Ouen l'Aumône-Liesse",
+    "Saint-Quentin-en-Yvelines - Montigny-le-Bretonneux", "Sainte-Geneviève-des-Bois", "Savigny-sur-Orge", "Sermaise",
+    "Vauboven", "Versailles-Chantiers", "Versailles-Chateau-Rive-Gauche", "Villeneuve-le-Roi",
+    "Viroflay-Rive-Gauche", "Vitry-sur-Seine")
 
 const val directD1 = "Creil"
 const val directD2 = "Juvisy"

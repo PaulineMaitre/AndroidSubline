@@ -29,14 +29,14 @@ class AllBusStationsAdapter (val stations: List<String>, val pictoline: Int, val
         var stat = stations[position]
         holder.statView.station_name.text = stat
 
-        /*holder.statView.setOnClickListener {
-            val intent= Intent(it.context, HoraireMetro::class.java)
+        holder.statView.setOnClickListener {
+            val intent= Intent(it.context, HoraireBus::class.java)
             intent.putExtra("station", stat)
             intent.putExtra("pictoline", pictoline)
-            intent.putExtra("line", metro)
+            intent.putExtra("line", bus)
             it.context.startActivity(intent)
             true
-        }*/
+        }
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.subline.find.tram
+package com.example.subline.find.buses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +14,7 @@ import com.example.tripin.data.AppDatabase
 import kotlinx.android.synthetic.main.activity_horaire.*
 import kotlinx.coroutines.runBlocking
 
-class HoraireTram: AppCompatActivity() {
+class HoraireBus: AppCompatActivity() {
 
     var favoris: Boolean = false
     private var favorisDao: FavorisDao? = null
@@ -53,25 +53,19 @@ class HoraireTram: AppCompatActivity() {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
         runBlocking {
-            val results = service.getDestinations(TYPE_TRAM, line)
+            val results = service.getDestinations(TYPE_BUS, line)
             direct1 = results.result.destinations[0].name
             direct2 = results.result.destinations[1].name
-        }
-
-        var direction_choisie = direct1
-        if(line == "2" || line == "5" || line == "7") { // fix bug A/R on line 2, 5 and 7
-            radio_direct1.text = direct2
-            radio_direct2.text = direct1
-        } else {
             radio_direct1.text = direct1
             radio_direct2.text = direct2
         }
 
+        var direction_choisie = direct1
+
         var way = "A"
-        //recherche_match_stationfav(stationName, line, direct1, TYPE_TRAM)
+        //recherche_match_stationfav(stationName, line, direct1, TYPE_BUS)
 
         recyclerview_horaire(service, stationName, line, way)
-
 
         radiogroup_direction.setOnCheckedChangeListener { group, checkedId ->
 
@@ -85,13 +79,13 @@ class HoraireTram: AppCompatActivity() {
             }
 
             runBlocking {
-                //recherche_match_stationfav(stationName, line, direction_choisie, TYPE_TRAM)
+                //recherche_match_stationfav(stationName, line, direction_choisie, TYPE_BUS)
                 recyclerview_horaire(service, stationName, line, way)
             }
         }
 
         /*fab_fav.setOnClickListener {
-            gestion_btn_favoris(stationName, line, direction_choisie, pictoline, TYPE_TRAM, way)
+            gestion_btn_favoris(stationName, line, direction_choisie, pictoline, TYPE_BUS, way)
         }*/
 
 
@@ -110,7 +104,7 @@ class HoraireTram: AppCompatActivity() {
         val stat : Station = Station(0, station_name, type, line, direction, way, pictoline)
         if(!favoris){
             fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
-            Toast.makeText(this, R.string.toastTramAddToFav, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastBusAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
@@ -118,7 +112,7 @@ class HoraireTram: AppCompatActivity() {
 
         }else {
             fab_fav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            Toast.makeText(this, R.string.toastTramDeleteFromFav, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastBusDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
                 favorisDao?.deleteStation(favorisDao?.getStation(station_name, direction, type)!!)
@@ -145,11 +139,11 @@ class HoraireTram: AppCompatActivity() {
         var destinations = arrayListOf<String>()
 
         runBlocking {
-            val results = service.getSchedules(TYPE_TRAM, line, station_name, way)
+            val results = service.getSchedules(TYPE_BUS, line, station_name, way)
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                rv_horaire_station.adapter = HoraireTramAdapter(time, destinations)
+                rv_horaire_station.adapter = HoraireBusAdapter(time, destinations)
             }
         }
 
