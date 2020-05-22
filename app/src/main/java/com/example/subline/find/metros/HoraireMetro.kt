@@ -15,7 +15,7 @@ import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import com.example.tripin.data.AppDatabase
-import kotlinx.android.synthetic.main.activity_horaire_metro.*
+import kotlinx.android.synthetic.main.activity_horaire.*
 import kotlinx.coroutines.runBlocking
 
 class HoraireMetro: AppCompatActivity() {
@@ -25,7 +25,7 @@ class HoraireMetro: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_horaire_metro)
+        setContentView(R.layout.activity_horaire)
 
         radio_direct3.isVisible = false
         radio_direct4.isVisible = false

@@ -1,4 +1,4 @@
-package com.example.subline.find.metros
+package com.example.subline.find.nocti
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -6,18 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
-import com.example.subline.utils.BASE_URL_PICTO
-import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
-import com.example.subline.utils.retrofit
+import com.example.subline.utils.*
 import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.fragment_find_metros.view.*
 import kotlinx.android.synthetic.main.list_metro_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
@@ -26,67 +20,77 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
+class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllNoctiliensAdapter.NoctiliensViewHolder>() {
 
-        class MetrosViewHolder(val metrosView: View) : RecyclerView.ViewHolder(metrosView)
-        var pictoMetros = listOf<Int>(R.drawable.m1,
-            R.drawable.m2,
-            R.drawable.m3,
-            R.drawable.m3b,
-            R.drawable.m4,
-            R.drawable.m5,
-            R.drawable.m6,
-            R.drawable.m7,
-            R.drawable.m7b,
-            R.drawable.m8,
-            R.drawable.m9,
-            R.drawable.m10,
-            R.drawable.m11,
-            R.drawable.m12,
-            R.drawable.m13,
-            R.drawable.m14,
-            R.drawable.mfun,
-            R.drawable.orlyval
+        class NoctiliensViewHolder(val noctiliensView: View) : RecyclerView.ViewHolder(noctiliensView)
+        var pictoNoctiliens = listOf<Int>(R.drawable.n01,
+            R.drawable.n02,
+            R.drawable.n11,
+            R.drawable.n12,
+            R.drawable.n13,
+            R.drawable.n14,
+            R.drawable.n15,
+            R.drawable.n16,
+            R.drawable.n21,
+            R.drawable.n22,
+            R.drawable.n23,
+            R.drawable.n24,
+            R.drawable.n31,
+            R.drawable.n32,
+            R.drawable.n33,
+            R.drawable.n34,
+            R.drawable.n35,
+            R.drawable.n41,
+            R.drawable.n42,
+            R.drawable.n43,
+            R.drawable.n44,
+            R.drawable.n45,
+            R.drawable.n51,
+            R.drawable.n52,
+            R.drawable.n53,
+            R.drawable.n61,
+            R.drawable.n62,
+            R.drawable.n63,
+            R.drawable.n66,
+            R.drawable.n71,
+            R.drawable.n122,
+            R.drawable.n153
             )
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetrosViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoctiliensViewHolder {
             val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
             val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
 
-            return MetrosViewHolder(view)
+            return NoctiliensViewHolder(view)
         }
 
-        override fun getItemCount(): Int = metros.size
+        override fun getItemCount(): Int = noctiliens.size
 
 
         @SuppressLint("ResourceAsColor")
-        override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
-            var metro = metros[position]
-            holder.metrosView.lineName.setImageResource(pictoMetros[position])
+        override fun onBindViewHolder(holder: NoctiliensViewHolder, position: Int) {
+            var noctilien = noctiliens[position]
+            holder.noctiliensView.lineName.setImageResource(pictoNoctiliens[position])
 
-            holder.metrosView.setOnClickListener {
-                var liststations = affiche_list_stations(metro)
-                stations.adapter = AllMetroStationsAdapter(liststations, pictoMetros[position], metro)
+            holder.noctiliensView.setOnClickListener {
+                var listStations = affiche_list_stations(noctilien)
+                stations.adapter = AllNoctilienStationsAdapter(listStations, pictoNoctiliens[position], noctilien)
             }
 
         }
 
-        fun affiche_list_stations(metro: String) : List<String> {
-            var liststations = arrayListOf<String>()
+        fun affiche_list_stations(noctilien: String) : List<String>{
+            var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             runBlocking {
-                val results = service.getStations(TYPE_METRO, metro)
+                val results = service.getStations(TYPE_NOCTI, noctilien)
                 results.result.stations.map {
-                    liststations.add(it.name)
-                    liststations.sort()
+                    listStations.add(it.name)
+                    listStations.sort()
                 }
             }
-            return liststations
+            return listStations
         }
-
-
-
-
 
         private fun getLinePicto(lineId: String, imageview: ImageView) {
 

@@ -61,6 +61,7 @@ class AllRersAdapter (val rers: List<String>, var stations: RecyclerView) : Recy
                 val results = service.getStations(TYPE_RER, rer)
                 results.result.stations.map {
                     listStations.add(it.name)
+                    listStations.sort()
                 }
             }
             return listStations
