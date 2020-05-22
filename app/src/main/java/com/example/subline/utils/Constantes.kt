@@ -8,7 +8,7 @@ const val TYPE_TRAM = "tramways"
 const val TYPE_BUS = "buses"
 const val TYPE_NOCTI = "noctiliens"
 
-const val directC1 = "Pontoise"
+const val directC1 = "Pontois"
 const val directC2 = "Versailles Château Rive Gauche"
 const val directC3 = "Versailles Chantiers"
 const val directC4 = "Saint-Quentin-en-Yvelines"
