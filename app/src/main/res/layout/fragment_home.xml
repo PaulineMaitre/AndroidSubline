@@ -9,44 +9,77 @@
     android:layout_marginRight="10dp"
     tools:context=".home.HomeFragment">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="API"
-        android:id="@+id/bt_api" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mes favoris"
-        android:layout_margin="10dp"
-        android:textSize="20dp"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="API"
+                android:id="@+id/bt_api" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/home_favoris"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mes favoris"
+                android:layout_margin="10dp"
+                android:textSize="20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prochain passage"
-        android:layout_marginTop="20dp"
-        android:id="@+id/tv_horaires"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/home_favoris"
+                android:nestedScrollingEnabled="false"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/home_horaire"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prochain passage"
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_horaires"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/home_horaire"
+                android:nestedScrollingEnabled="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Infos Traffic"
+                android:layout_marginTop="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/rv_home_traffic"
+                android:nestedScrollingEnabled="false"
+                />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_qrcode"
@@ -54,14 +87,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:clickable="true"
         android:elevation="6dp"
         android:src="@drawable/ic_select_all_black_24dp"
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="auto"/>
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

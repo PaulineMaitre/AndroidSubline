@@ -1,5 +1,6 @@
 package com.example.subline.service
 
+import com.example.subline.data.TrafficResult
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -27,6 +28,8 @@ interface RatpService {
     //REQ5 get traffic info for one metro line
     @GET("/v4/traffic/{type}/{code}")
     suspend fun getTrafficInfo(@Path("type") type: String, @Path ("code") code: String) : GetTrafficInfoResult
+    @GET("/v4/traffic")
+    suspend fun getTrafficInfoC() : TrafficResult.Traffic
 
     //REQ6 get all transport lines
     @GET("/v4/lines")
