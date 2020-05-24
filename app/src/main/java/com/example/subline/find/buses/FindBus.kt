@@ -1,13 +1,17 @@
 package com.example.subline.find.buses
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
@@ -46,11 +50,11 @@ class FindBus : Fragment() {
         val adapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1, buses)
         searchBus.threshold = 0
         searchBus.setAdapter(adapter)
-        searchBus.setOnItemClickListener { parent, view, position, id ->
-            //findStationsSelect(parent.getItemAtPosition(position).toString(), lines, view)
-            testLine.text = "Bus ${parent.getItemAtPosition(position).toString()}"
+        searchBus.setOnItemClickListener { parent, viewSearch, position, id ->
+            hideKeyboardFrom(view.context, view)
             val bus = parent.getItemAtPosition(position).toString()
-            var listStations = affiche_list_stations(bus)
+            val listStations = affiche_list_stations(bus)
+            allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
             allStationsRv.adapter = AllBusStationsAdapter(listStations, R.drawable.logo_bus, bus)
         }
         return view
@@ -68,6 +72,11 @@ class FindBus : Fragment() {
             Log.d("EPF", "statBus ${listStations}")
         }
         return listStations
+    }
+
+    fun hideKeyboardFrom(context: Context, view: View) {
+        val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
