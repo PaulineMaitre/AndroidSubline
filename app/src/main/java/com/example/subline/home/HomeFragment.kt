@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val bt_api: Button = root.findViewById(R.id.bt_api)
          val rv : RecyclerView = root.findViewById(R.id.home_favoris)
          val tv : TextView = root.findViewById(R.id.tv_horaires)
          var list_fav : List<Station> = emptyList()
@@ -55,14 +54,7 @@ class HomeFragment : Fragment() {
          rv2.layoutManager =
              LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-         rv.adapter = FavorisAdapter(list_fav,rv2,tv)
-
-         bt_api.setOnClickListener { view ->
-             val intent = Intent(this.context, AppelApi::class.java)
-             startActivity(intent)
-             true
-
-         }
+         rv.adapter = FavorisAdapter(list_fav, rv2, tv)
          fab.setOnClickListener {view ->
              Log.d("CCC","YES")
              val intent = Intent(this.context, QRCode::class.java)
