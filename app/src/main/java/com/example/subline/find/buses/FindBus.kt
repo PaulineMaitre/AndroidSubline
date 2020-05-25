@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -54,11 +55,8 @@ class FindBus : Fragment() {
             hideKeyboardFrom(view.context, view)
             val bus = parent.getItemAtPosition(position).toString()
             val listStations = affiche_list_stations(bus)
-            //val picto: String = "b$bus"
             var pictoInt = resources.getIdentifier("b$bus", "drawable", "com.example.subline")
-            Log.d("EPF", "$pictoInt")
             if(pictoInt == 0) pictoInt = R.drawable.logo_bus
-            Log.d("EPF", "$pictoInt")
             allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
             allStationsRv.adapter = AllBusStationsAdapter(listStations, pictoInt, bus)
         }
@@ -68,13 +66,17 @@ class FindBus : Fragment() {
     fun affiche_list_stations(bus: String) : List<String> {
         var listStations = arrayListOf<String>()
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-        runBlocking {
-            val results = service.getStations(TYPE_BUS, bus)
-            results.result.stations.map {
-                listStations.add(it.name)
-                listStations.sort()
+        try {
+            runBlocking {
+                val results = service.getStations(TYPE_BUS, bus)
+                results.result.stations.map {
+                    listStations.add(it.name)
+                    listStations.sort()
+                }
+                Log.d("EPF", "statBus ${listStations}")
             }
-            Log.d("EPF", "statBus ${listStations}")
+        } catch (e: retrofit2.HttpException) {
+            Log.d("EPF", "catched !! ${e.message}")
         }
         return listStations
     }

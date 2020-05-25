@@ -2,7 +2,10 @@ package com.example.subline.find.buses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -23,6 +26,7 @@ class HoraireBus: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire)
 
+        radio_direct1.isVisible = true
         radio_direct2.isVisible = false
         radio_direct3.isVisible = false
         radio_direct4.isVisible = false
@@ -53,15 +57,22 @@ class HoraireBus: AppCompatActivity() {
         var direct2 = "R"
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
-        runBlocking {
-            val results = service.getDestinations(TYPE_BUS, line)
-            direct1 = results.result.destinations[0].name
-            radio_direct1.text = direct1
-            if(results.result.destinations.size > 1) {
-                direct2 = results.result.destinations[1].name
-                radio_direct2.isVisible = true
-                radio_direct2.text = direct2
+        try {
+            runBlocking {
+                val results = service.getDestinations(TYPE_BUS, line)
+                direct1 = results.result.destinations[0].name
+                radio_direct1.text = direct1
+                if (results.result.destinations.size > 1) {
+                    direct2 = results.result.destinations[1].name
+                    radio_direct2.isVisible = true
+                    radio_direct2.text = direct2
+                }
             }
+        } catch (e: retrofit2.HttpException) {
+            radio_direct1.isVisible = false
+            errorTextView.isVisible = true
+            errorTextView.text = getString(R.string.scheduleError)
+            Log.d("EPF", "catched !! ${e.message}")
         }
 
         var direction_choisie = direct1

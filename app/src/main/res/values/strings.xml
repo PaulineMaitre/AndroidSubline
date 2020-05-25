@@ -21,4 +21,7 @@
 
     <string name="toastNoctiAddToFav">Le noctilien a bien été ajouté aux favoris</string>
     <string name="toastNoctiDeleteFromFav">Le noctilien a bien été supprimé des favoris</string>
+
+    <string name="scheduleError"> Les informations de cette station ne sont pas disponibles actuellement</string>
+    <string name="lineError"> Les informations de cette ligne ne sont pas disponibles actuellement</string>
 </resources>
