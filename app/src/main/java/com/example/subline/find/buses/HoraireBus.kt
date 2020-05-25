@@ -23,6 +23,7 @@ class HoraireBus: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire)
 
+        radio_direct2.isVisible = false
         radio_direct3.isVisible = false
         radio_direct4.isVisible = false
         radio_direct5.isVisible = false
@@ -55,9 +56,12 @@ class HoraireBus: AppCompatActivity() {
         runBlocking {
             val results = service.getDestinations(TYPE_BUS, line)
             direct1 = results.result.destinations[0].name
-            direct2 = results.result.destinations[1].name
             radio_direct1.text = direct1
-            radio_direct2.text = direct2
+            if(results.result.destinations.size > 1) {
+                direct2 = results.result.destinations[1].name
+                radio_direct2.isVisible = true
+                radio_direct2.text = direct2
+            }
         }
 
         var direction_choisie = direct1
@@ -140,6 +144,7 @@ class HoraireBus: AppCompatActivity() {
 
         runBlocking {
             val results = service.getSchedules(TYPE_BUS, line, station_name, way)
+
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
