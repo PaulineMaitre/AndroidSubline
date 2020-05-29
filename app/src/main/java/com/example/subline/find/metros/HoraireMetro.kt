@@ -121,21 +121,21 @@ class HoraireMetro: AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    private fun pushFavButton(stationName: String, line: String, direction: String, pictoLine: Int, type: String, way: String) {
-        val stat = Station(0, stationName, type, line, direction, way, pictoLine)
+    private fun pushFavButton(stationName: String, line: String, direction: String, pictoLine: Int, transportType: String, way: String) {
+        val stat = Station(0, stationName, transportType, line, direction, way, pictoLine)
         if(!favoris) {
             favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
-            Toast.makeText(this, R.string.toastMetroAddToFav, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
             }
         } else {
             favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            Toast.makeText(this, R.string.toastMetroDeleteFromFav, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
-                favorisDao?.deleteStation(favorisDao?.getStation(stationName, direction, type)!!)
+                favorisDao?.deleteStation(favorisDao?.getStation(stationName, direction, transportType)!!)
             }
         }
     }

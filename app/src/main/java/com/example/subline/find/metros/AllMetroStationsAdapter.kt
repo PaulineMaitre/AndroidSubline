@@ -41,8 +41,6 @@ class AllMetroStationsAdapter (val stations: List<String>, val pictoline: Int, v
         holder.statView.setOnClickListener {
             val intent= Intent(it.context, HoraireMetro::class.java)
             val destinations = getDestinations(it.context, metro)
-            Log.d("EPF", "dest1 $destinations")
-            Log.d("EPF", "size=${destinations.size}")
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
                 intent.putExtra("station", stat)
@@ -69,7 +67,7 @@ class AllMetroStationsAdapter (val stations: List<String>, val pictoline: Int, v
                 }
             }
         } catch (e: retrofit2.HttpException) {
-            Toast.makeText(context, R.string.scheduleError, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.scheduleError, Toast.LENGTH_LONG).show()
         }
         return listDestinations
     }

@@ -13,8 +13,8 @@
     <string name="destinationByDefault">Robinson. St-Rémy-lès-chevreuse</string>
     <string name="scheduleByDefault">Schedule unavailable</string>
 
-    <string name = "toastMetroAddToFav">Le métro a bien été ajouté aux favoris</string>
-    <string name = "toastMetroDeleteFromFav">Le métro a bien été supprimé des favoris</string>
+    <string name = "toastAddToFav">La ligne a bien été ajoutée aux favoris</string>
+    <string name = "toastDeleteFromFav">La ligne a bien été supprimée des favoris</string>
 
     <string name="toastRerAddToFav">Le RER a bien été ajouté aux favoris</string>
     <string name="toastRerDeleteFromFav">Le RER a bien été supprimé des favoris</string>

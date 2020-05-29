@@ -43,8 +43,6 @@ class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: In
         holder.statView.setOnClickListener {
             val intent= Intent(it.context, HoraireMetro::class.java)
             val destinations = getDestinations(it.context, noctilien)
-            Log.d("EPF", "dest1 $destinations")
-            Log.d("EPF", "size=${destinations.size}")
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
                 intent.putExtra("station", stat)
@@ -57,7 +55,7 @@ class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: In
         }
     }
 
-    fun getDestinations(context: Context, noctilien: String): ArrayList<String> {
+    private fun getDestinations(context: Context, noctilien: String): ArrayList<String> {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var listDestinations = arrayListOf<String>()
         try {
@@ -71,7 +69,7 @@ class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: In
                 }
             }
         } catch (e: retrofit2.HttpException) {
-            Toast.makeText(context, R.string.scheduleError, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.scheduleError, Toast.LENGTH_LONG).show()
         }
         return listDestinations
     }

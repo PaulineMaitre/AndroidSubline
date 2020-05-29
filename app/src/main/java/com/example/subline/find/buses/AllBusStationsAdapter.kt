@@ -44,8 +44,6 @@ class AllBusStationsAdapter (val stations: List<String>, val pictoline: Int, val
         holder.statView.setOnClickListener {
             val intent= Intent(it.context, HoraireMetro::class.java)
             val destinations = getDestinations(it.context, bus)
-            Log.d("EPF", "dest1 $destinations")
-            Log.d("EPF", "size=${destinations.size}")
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
                 intent.putExtra("station", stat)
@@ -59,7 +57,7 @@ class AllBusStationsAdapter (val stations: List<String>, val pictoline: Int, val
 
     }
 
-    fun getDestinations(context: Context, bus: String): ArrayList<String> {
+    private fun getDestinations(context: Context, bus: String): ArrayList<String> {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var listDestinations = arrayListOf<String>()
         try {
@@ -73,7 +71,7 @@ class AllBusStationsAdapter (val stations: List<String>, val pictoline: Int, val
                 }
             }
         } catch (e: retrofit2.HttpException) {
-            Toast.makeText(context, R.string.scheduleError, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, R.string.scheduleError, Toast.LENGTH_LONG).show()
             Log.d("EPF", "catched !! ${e.message}")
         }
         return listDestinations
