@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-         val rv : RecyclerView = root.findViewById(R.id.home_favoris)
+         val rv : RecyclerView = root.findViewById(R.id.home_favoris_rv)
          val tv : TextView = root.findViewById(R.id.tv_horaires)
          var favList : List<Station> = emptyList()
          tv.isVisible = false
