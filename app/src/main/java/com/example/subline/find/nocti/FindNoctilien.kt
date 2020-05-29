@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,6 +30,7 @@ class FindNoctilien : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_find_nocti, container, false)
         val allNoctisRv = view.findViewById<RecyclerView>(R.id.allNoctisRv)
         val allNoctiStationsRv = view.findViewById<RecyclerView>(R.id.allNoctiStationsRv)
+        val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var noctiliens: ArrayList<String> = ArrayList()
@@ -46,7 +48,7 @@ class FindNoctilien : Fragment() {
 
         allNoctisRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allNoctiStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allNoctisRv.adapter = AllNoctiliensAdapter(noctiliens, allNoctiStationsRv)
+        allNoctisRv.adapter = AllNoctiliensAdapter(noctiliens, allNoctiStationsRv, listStationsTextView)
         return view
     }
 

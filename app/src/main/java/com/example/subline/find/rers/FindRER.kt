@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
@@ -27,6 +28,7 @@ class FindRER : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_find_rers, container, false)
         val allRersRv = view.findViewById<RecyclerView>(R.id.allRersRv)
         val allRerStationsRv = view.findViewById<RecyclerView>(R.id.allRerStationsRv)
+        val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var rers: ArrayList<String> = ArrayList()
@@ -41,7 +43,7 @@ class FindRER : Fragment() {
 
         allRersRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allRerStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allRersRv.adapter = AllRersAdapter(rers, allRerStationsRv)
+        allRersRv.adapter = AllRersAdapter(rers, allRerStationsRv, listStationsTextView)
         return view
     }
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,6 +30,7 @@ class FindTram : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_find_tram, container, false)
         val allTramsRv = view.findViewById<RecyclerView>(R.id.allTramsRv)
         val allTramStationsRv = view.findViewById<RecyclerView>(R.id.allTramStationsRv)
+        val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var trams: ArrayList<String> = ArrayList()
@@ -39,16 +41,14 @@ class FindTram : Fragment() {
                     trams.add(it.code)
                 }
             }
-            Log.d("EPF", "${trams}")
             val t11 = trams.get(0)
             trams.removeAt(0)
             trams.add(t11)
-            Log.d("EPF", "${trams}")
         }
 
         allTramsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allTramStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allTramsRv.adapter = AllTramsAdapter(trams, allTramStationsRv)
+        allTramsRv.adapter = AllTramsAdapter(trams, allTramStationsRv, listStationsTextView)
         return view
     }
 

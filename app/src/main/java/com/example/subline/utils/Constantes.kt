@@ -8,13 +8,6 @@ const val TYPE_TRAM = "tramways"
 const val TYPE_BUS = "buses"
 const val TYPE_NOCTI = "noctiliens"
 
-const val directC1 = "Pontoise"
-const val directC2 = "Versailles Château Rive Gauche"
-const val directC3 = "Versailles Chantiers"
-const val directC4 = "Saint-Quentin-en-Yvelines"
-const val directC5 = "Massy Palaiseau"
-const val directC6 = "Saint-Martin d'Etampes"
-const val directC7 = "Dourdan la Forêt"
 val STATIONSRERC = listOf("Ablon", "Arpajon", "Athis-Mons", "Avenue du Président-Kennedy", "Avenue Foch", "Avenue Henri Martin",
     "Bibliothèque François-Mittérand", "Bièvres", "Boulainvilliers", "Bourray", "Brétigny", "Breuillet - Bruyères-le-Chatel",
     "Breuillet - Village", "Cernay", "Chamarande", "Champ de Mars - Tour Eiffel", "Chaville - Vélizy", "Chemin d'Antony",
@@ -31,12 +24,6 @@ val STATIONSRERC = listOf("Ablon", "Arpajon", "Athis-Mons", "Avenue du Présiden
     "Sainte-Geneviève-des-Bois", "Savigny-sur-Orge", "Sermaise", "Vauboven", "Versailles-Chantiers",
     "Versailles-Chateau-Rive-Gauche", "Villeneuve-le-Roi", "Viroflay-Rive-Gauche", "Vitry-sur-Seine")
 
-const val directD1 = "Creil"
-const val directD2 = "Juvisy"
-const val directD3 = "Viry Châtillon"
-const val directD4 = "Corbeil Essonnes"
-const val directD5 = "Melun"
-const val directD6 = "Malesherbes"
 val STATIONSRERD =  listOf("Ballancourt", "Boigneville", "Boissise-le-Roi", "Boutigny", "Boussy-Saint-Antoine", "Buno - Gironville",
     "Brunoy", "Cesson", "Chantilly - Gouvieux", "Châtelet - Les Halles", "Combs-la-Ville - Quincy", "Corbeilles-Essonnes",
     "Creil", "Créteil-Pompadour", "Essonnes - Robinson", "Evry - Courcouronnes Centre", "Evry-Val-de-Seine", "Gare de Lyon",

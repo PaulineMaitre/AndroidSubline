@@ -2,15 +2,14 @@ package com.example.subline.find.buses
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import androidx.core.view.isInvisible
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
+import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
@@ -26,14 +25,8 @@ class HoraireBus: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire)
 
-        radio_direct1.isVisible = true
-        radio_direct2.isVisible = false
-        radio_direct3.isVisible = false
-        radio_direct4.isVisible = false
-        radio_direct5.isVisible = false
-        radio_direct6.isVisible = false
-        radio_direct7.isVisible = false
-
+        direction1RadioButton.isVisible = true
+        direction2RadioButton.isVisible = false
 
         // ON APPELLE LA BDD
         val database =
@@ -41,67 +34,56 @@ class HoraireBus: AppCompatActivity() {
                 .build()
         favorisDao = database.getFavorisDao()
 
-        rv_horaire_station.layoutManager =
+        scheduleRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val line: String = intent.getStringExtra("line")
+        val line = intent.getStringExtra("line")
         val pictoline = intent.getIntExtra("pictoline",0)
-        val stationName: String = intent.getStringExtra("station")
+        val stationName = intent.getStringExtra("station")
+        val destinations = intent.getStringArrayListExtra("destinations")
 
-        horaire_ligne.setImageResource(pictoline)
-        horaire_station.text = stationName
+        lineImageView.setImageResource(pictoline)
+        stationNameTextView.text = stationName
 
-        var direct1 = "A"
         var direct2 = "R"
+        val direct1 = destinations[0]
+        direction1RadioButton.text = direct1
+        if(destinations.size > 1) {
+            direct2 = destinations[1]
+            direction2RadioButton.isVisible = true
+            direction2RadioButton.text = direct2
+        }
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
-        try {
-            runBlocking {
-                val results = service.getDestinations(TYPE_BUS, line)
-                direct1 = results.result.destinations[0].name
-                radio_direct1.text = direct1
-                if (results.result.destinations.size > 1) {
-                    direct2 = results.result.destinations[1].name
-                    radio_direct2.isVisible = true
-                    radio_direct2.text = direct2
-                }
-            }
-        } catch (e: retrofit2.HttpException) {
-            radio_direct1.isVisible = false
-            errorTextView.isVisible = true
-            errorTextView.text = getString(R.string.scheduleError)
-            Log.d("EPF", "catched !! ${e.message}")
-        }
-
-        var direction_choisie = direct1
+        var favDirection = direct1
 
         var way = "A"
-        //recherche_match_stationfav(stationName, line, direct1, TYPE_BUS)
+        searchMatchFavStation(stationName, line, favDirection, TYPE_BUS)
 
-        recyclerview_horaire(service, stationName, line, way)
+        getLineSchedule(service, stationName, line, way)
 
-        radiogroup_direction.setOnCheckedChangeListener { group, checkedId ->
+        directionRadioGroup.setOnCheckedChangeListener { group, checkedId ->
 
-            if(radio_direct1.isChecked) {
+            if(direction1RadioButton.isChecked) {
                 way = "A"
-                direction_choisie = direct1
+                favDirection = direct1
 
-            } else if (radio_direct2.isChecked){
+            } else if (direction2RadioButton.isChecked){
                 way = "R"
-                direction_choisie = direct2
+                favDirection = direct2
             }
 
             runBlocking {
-                //recherche_match_stationfav(stationName, line, direction_choisie, TYPE_BUS)
-                recyclerview_horaire(service, stationName, line, way)
+                searchMatchFavStation(stationName, line, favDirection, TYPE_BUS)
+                getLineSchedule(service, stationName, line, way)
             }
         }
 
-        /*fab_fav.setOnClickListener {
-            gestion_btn_favoris(stationName, line, direction_choisie, pictoline, TYPE_BUS, way)
-        }*/
+        favButton.setOnClickListener {
+            pushFavButton(stationName, line, favDirection, pictoline, TYPE_BUS, way)
+        }
 
 
     }
@@ -115,18 +97,18 @@ class HoraireBus: AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    /*fun gestion_btn_favoris(station_name: String, line: String, direction: String, pictoline: Int, type: String, way: String){
-        val stat : Station = Station(0, station_name, type, line, direction, way, pictoline)
+    private fun pushFavButton(station_name: String, line: String, direction: String, pictoline: Int, type: String, way: String){
+        val stat = Station(0, station_name, type, line, direction, way, pictoline)
         if(!favoris){
-            fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
+            favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             Toast.makeText(this, R.string.toastBusAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
             }
 
-        }else {
-            fab_fav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+        } else {
+            favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             Toast.makeText(this, R.string.toastBusDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
@@ -135,20 +117,20 @@ class HoraireBus: AppCompatActivity() {
         }
     }
 
-    fun recherche_match_stationfav(station_name: String, line: String, direction: String, type: String){
+    private fun searchMatchFavStation(station_name: String, line: String, direction: String, type: String){
         runBlocking {
             if (favorisDao?.getStation(station_name, direction, type) == null) {
                 favoris = false
-                fab_fav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+                favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             } else {
                 favoris = true
-                fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
+                favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             }
         }
 
-    }*/
+    }
 
-    fun recyclerview_horaire(service: RatpService, station_name: String, line: String, way: String){
+    private fun getLineSchedule(service: RatpService, station_name: String, line: String, way: String){
 
         var time = arrayListOf<String>()
         var destinations = arrayListOf<String>()
@@ -159,7 +141,7 @@ class HoraireBus: AppCompatActivity() {
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                rv_horaire_station.adapter = HoraireBusAdapter(time, destinations)
+                scheduleRecyclerView.adapter = HoraireBusAdapter(time, destinations)
             }
         }
 

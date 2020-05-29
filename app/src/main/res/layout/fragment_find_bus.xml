@@ -20,8 +20,9 @@
         android:id="@+id/listStationsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Liste des stations sur cette ligne :"
+        android:text="@string/listStations"
         android:textSize="18dp"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"/>
 

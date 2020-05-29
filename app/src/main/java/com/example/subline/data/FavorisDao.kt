@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.subline.find.metros.Station
+import com.example.subline.find.Station
 
 @Dao
 interface FavorisDao {

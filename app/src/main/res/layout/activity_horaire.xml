@@ -26,12 +26,12 @@
                 android:layout_marginLeft="20dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/logo_metro"
-                android:id="@+id/horaire_ligne"/>
+                android:id="@+id/lineImageView"/>
             <TextView
-                android:id="@+id/horaire_station"
+                android:id="@+id/stationNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nom station"
+                android:text="@string/stationName"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:textSize="20dp"
@@ -42,36 +42,24 @@
        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Direction : "
+        android:text="@string/direction"
         android:textSize="20dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/errorTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:textColor="@android:color/holo_red_dark"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-
         <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/radiogroup_direction">
+        android:id="@+id/directionRadioGroup">
 
             <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radio_direct1"
-            android:text="Direct1"
+            android:id="@+id/direction1RadioButton"
+            android:text="Dir1"
             android:textSize="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="10dp"
@@ -79,48 +67,8 @@
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radio_direct2"
-            android:text="Direct2"
-            android:textSize="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_direct3"
-            android:text="Direct3"
-            android:textSize="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_direct4"
-            android:text="Direct4"
-            android:textSize="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_direct5"
-            android:text="Direct5"
-            android:textSize="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_direct6"
-            android:text="Direct6"
-            android:textSize="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="10dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radio_direct7"
-            android:text="Direct7"
+            android:id="@+id/direction2RadioButton"
+            android:text="Dir2"
             android:textSize="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="10dp"/>
@@ -129,7 +77,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Prochainement : "
+        android:text="@string/nextDepartures"
         android:textSize="20dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="30dp"
@@ -144,15 +92,12 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:orientation="vertical"
-        android:id="@+id/rv_horaire_station"/>
-
-
-
+        android:id="@+id/scheduleRecyclerView"/>
 
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_fav"
+        android:id="@+id/favButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/horaire_linear"

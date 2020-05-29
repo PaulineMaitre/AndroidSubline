@@ -14,7 +14,7 @@ import android.widget.AutoCompleteTextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import android.widget.Toast
 import com.example.subline.R
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
@@ -54,7 +54,7 @@ class FindBus : Fragment() {
         searchBus.setOnItemClickListener { parent, viewSearch, position, id ->
             hideKeyboardFrom(view.context, view)
             val bus = parent.getItemAtPosition(position).toString()
-            val listStations = affiche_list_stations(bus)
+            val listStations = getListOfStations(view, bus)
             var pictoInt = resources.getIdentifier("b$bus", "drawable", "com.example.subline")
             if(pictoInt == 0) pictoInt = R.drawable.logo_bus
             allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
@@ -63,7 +63,7 @@ class FindBus : Fragment() {
         return view
     }
 
-    fun affiche_list_stations(bus: String) : List<String> {
+    private fun getListOfStations(view: View, bus: String): List<String> {
         var listStations = arrayListOf<String>()
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         try {
@@ -73,15 +73,17 @@ class FindBus : Fragment() {
                     listStations.add(it.name)
                     listStations.sort()
                 }
-                Log.d("EPF", "statBus ${listStations}")
+                Log.d("EPF", "statBus $listStations")
             }
+            listStationsTextView.isVisible = true
         } catch (e: retrofit2.HttpException) {
-            Log.d("EPF", "catched !! ${e.message}")
+            listStationsTextView.isVisible = false
+            Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
         }
         return listStations
     }
 
-    fun hideKeyboardFrom(context: Context, view: View) {
+    private fun hideKeyboardFrom(context: Context, view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }

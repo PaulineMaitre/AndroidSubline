@@ -3,11 +3,13 @@ package com.example.subline.find.nocti
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
+import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
@@ -23,13 +25,8 @@ class HoraireNoctilien: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_horaire)
 
-        radio_direct2.isVisible = false
-        radio_direct3.isVisible = false
-        radio_direct4.isVisible = false
-        radio_direct5.isVisible = false
-        radio_direct6.isVisible = false
-        radio_direct7.isVisible = false
-
+        direction1RadioButton.isVisible = true
+        direction2RadioButton.isVisible = false
 
         // ON APPELLE LA BDD
         val database =
@@ -37,70 +34,71 @@ class HoraireNoctilien: AppCompatActivity() {
                 .build()
         favorisDao = database.getFavorisDao()
 
-        rv_horaire_station.layoutManager =
+        scheduleRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val line: String = intent.getStringExtra("line")
+        val line = intent.getStringExtra("line")
         val pictoline = intent.getIntExtra("pictoline",0)
-        val stationName: String = intent.getStringExtra("station")
+        val stationName = intent.getStringExtra("station")
+        val destinations = intent.getStringArrayListExtra("destinations")
 
-        horaire_ligne.setImageResource(pictoline)
-        horaire_station.text = stationName
-
-        var direct1 = "A"
-        var direct2 = "R"
-        val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-
-        runBlocking {
-            val results = service.getDestinations(TYPE_NOCTI, line)
-            direct1 = results.result.destinations[0].name
-            //radio_direct1.text = direct1
-            if(results.result.destinations.size > 1) {
-                direct2 = results.result.destinations[1].name
-                radio_direct2.isVisible = true
-                //radio_direct2.text = direct2
-            }
-        }
-
-        var direction_choisie = direct1
-        if(line == "11" || line == "12" || line == "14" || line == "21" || line == "23" || line == "24" || line == "35" || line == "41" || line == "45" || line == "61" || line == "62" || line == "63" || line == "122") { // fix bug A/R on line 11
-            radio_direct1.text = direct2
-            radio_direct2.text = direct1
-        } else {
-            radio_direct1.text = direct1
-            radio_direct2.text = direct2
-        }
+        lineImageView.setImageResource(pictoline)
+        stationNameTextView.text = stationName
 
         var way = "A"
-        //recherche_match_stationfav(stationName, line, direct1, TYPE_NOCTI)
+        var direct2 = "R"
+        val direct1 = destinations[0]
+        var favDirection = direct1
+        if(destinations.size > 1) {
+            direct2 = destinations[1]
+            direction2RadioButton.isVisible = true
+        }
+        if(line == "11" || line == "12" || line == "14" || line == "21" || line == "23" || line == "24" || line == "35" ||
+            line == "41" || line == "45" || line == "61" || line == "62" || line == "63" || line == "122") { // fix bug A/R on line 11
+            direction1RadioButton.text = direct2
+            direction2RadioButton.text = direct1
+            favDirection = direct2
+        } else {
+            direction1RadioButton.text = direct1
+            direction2RadioButton.text = direct2
+        }
+        val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
-        recyclerview_horaire(service, stationName, line, way)
+        searchMatchFavStation(stationName, line, favDirection, TYPE_NOCTI)
 
+        getLineSchedule(service, stationName, line, way)
 
-        radiogroup_direction.setOnCheckedChangeListener { group, checkedId ->
+        directionRadioGroup.setOnCheckedChangeListener { group, checkedId ->
 
-            if(radio_direct1.isChecked) {
+            if(direction1RadioButton.isChecked) {
                 way = "A"
-                direction_choisie = direct1
+                favDirection = direct1
 
-            } else if (radio_direct2.isChecked){
+            } else if (direction2RadioButton.isChecked){
                 way = "R"
-                direction_choisie = direct2
+                favDirection = direct2
+            }
+
+            if(line == "11" || line == "12" || line == "14" || line == "21" || line == "23" || line == "24" || line == "35" ||
+                line == "41" || line == "45" || line == "61" || line == "62" || line == "63" || line == "122") { // fix bug A/R
+                favDirection = if(favDirection == direct1) {
+                    direct2
+                } else {
+                    direct1
+                }
             }
 
             runBlocking {
-                //recherche_match_stationfav(stationName, line, direction_choisie, TYPE_NOCTI)
-                recyclerview_horaire(service, stationName, line, way)
+                searchMatchFavStation(stationName, line, favDirection, TYPE_NOCTI)
+                getLineSchedule(service, stationName, line, way)
             }
         }
 
-        /*fab_fav.setOnClickListener {
-            gestion_btn_favoris(stationName, line, direction_choisie, pictoline, TYPE_NOCTI, way)
-        }*/
-
-
+        favButton.setOnClickListener {
+            pushFavButton(stationName, line, favDirection, pictoline, TYPE_NOCTI, way)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
@@ -112,18 +110,18 @@ class HoraireNoctilien: AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    /*fun gestion_btn_favoris(station_name: String, line: String, direction: String, pictoline: Int, type: String, way: String){
-        val stat : Station = Station(0, station_name, type, line, direction, way, pictoline)
+    private fun pushFavButton(station_name: String, line: String, direction: String, pictoLine: Int, type: String, way: String){
+        val stat = Station(0, station_name, type, line, direction, way, pictoLine)
         if(!favoris){
-            fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
+            favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             Toast.makeText(this, R.string.toastNoctiAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
             }
 
-        }else {
-            fab_fav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+        } else {
+            favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             Toast.makeText(this, R.string.toastNoctiDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
@@ -132,20 +130,20 @@ class HoraireNoctilien: AppCompatActivity() {
         }
     }
 
-    fun recherche_match_stationfav(station_name: String, line: String, direction: String, type: String){
+    private fun searchMatchFavStation(station_name: String, line: String, direction: String, type: String){
         runBlocking {
             if (favorisDao?.getStation(station_name, direction, type) == null) {
                 favoris = false
-                fab_fav.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+                favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             } else {
                 favoris = true
-                fab_fav.setImageResource(R.drawable.ic_favorite_black_24dp)
+                favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             }
         }
 
-    }*/
+    }
 
-    fun recyclerview_horaire(service: RatpService, station_name: String, line: String, way: String){
+    private fun getLineSchedule(service: RatpService, station_name: String, line: String, way: String){
 
         var time = arrayListOf<String>()
         var destinations = arrayListOf<String>()
@@ -155,7 +153,7 @@ class HoraireNoctilien: AppCompatActivity() {
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                rv_horaire_station.adapter = HoraireNoctilienAdapter(time, destinations)
+                scheduleRecyclerView.adapter = HoraireNoctilienAdapter(time, destinations)
             }
         }
 

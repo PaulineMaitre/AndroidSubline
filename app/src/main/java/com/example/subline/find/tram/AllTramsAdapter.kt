@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
@@ -20,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllTramsAdapter.TramsViewHolder>() {
+class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllTramsAdapter.TramsViewHolder>() {
 
         class TramsViewHolder(val tramsView: View) : RecyclerView.ViewHolder(tramsView)
         var pictoTrams = listOf<Int>(R.drawable.t1,
@@ -51,23 +54,29 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView) : Re
             holder.tramsView.lineName.setImageResource(pictoTrams[position])
 
             holder.tramsView.setOnClickListener {
-                var liststations = affiche_list_stations(tram)
-                stations.adapter = AllTramStationsAdapter(liststations, pictoTrams[position], tram)
+                var listStations = affiche_list_stations(it, tram)
+                stations.adapter = AllTramStationsAdapter(listStations, pictoTrams[position], tram)
             }
 
         }
 
-        fun affiche_list_stations(tram: String) : List<String>{
-            var liststations = arrayListOf<String>()
+        fun affiche_list_stations(view: View, tram: String) : List<String>{
+            var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-            runBlocking {
-                val results = service.getStations(TYPE_TRAM, tram)
-                results.result.stations.map {
-                    liststations.add(it.name)
-                    liststations.sort()
+            try {
+                runBlocking {
+                    val results = service.getStations(TYPE_TRAM, tram)
+                    results.result.stations.map {
+                        listStations.add(it.name)
+                        listStations.sort()
+                    }
                 }
+                listStationsTextView.isVisible = true
+            } catch (e: retrofit2.HttpException) {
+                listStationsTextView.isVisible = false
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
             }
-            return liststations
+            return listStations
         }
 
         private fun getLinePicto(lineId: String, imageview: ImageView) {
