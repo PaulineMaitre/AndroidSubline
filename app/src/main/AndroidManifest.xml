@@ -30,21 +30,6 @@
             android:name=".find.ScheduleActivity"
             android:label="Horaires" />
         <activity
-            android:name=".find.rers.HoraireRer"
-            android:label="Horaires" />
-        <activity
-            android:name="com.example.subline.find.tram.HoraireTram"
-            android:label="Horaires" />
-        <activity
-            android:name="com.example.subline.find.buses.HoraireBus"
-            android:label="Horaires" />
-        <activity
-            android:name="com.example.subline.find.nocti.HoraireNoctilien"
-            android:label="Horaires" />
-        <activity
-            android:name=".AppelApi"
-            android:label="AppelAPI" />
-        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"/>
     </application>

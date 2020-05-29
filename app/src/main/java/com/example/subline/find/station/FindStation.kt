@@ -1,4 +1,4 @@
-package com.example.subline.find
+package com.example.subline.find.station
 
 import android.app.Activity
 import android.content.Context

@@ -11,6 +11,7 @@ import com.example.subline.find.buses.FindBus
 import com.example.subline.find.metros.FindMetros
 import com.example.subline.find.nocti.FindNoctilien
 import com.example.subline.find.rers.FindRER
+import com.example.subline.find.station.FindStation
 import com.example.subline.find.tram.FindTram
 import com.google.android.material.tabs.TabLayout
 
