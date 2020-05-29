@@ -3,7 +3,6 @@ package com.example.subline.find.buses
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -13,7 +12,7 @@ import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
-import kotlinx.android.synthetic.main.activity_horaire.*
+import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.coroutines.runBlocking
 
 class HoraireBus: AppCompatActivity() {
@@ -23,7 +22,7 @@ class HoraireBus: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_horaire)
+        setContentView(R.layout.activity_schedule)
 
         direction1RadioButton.isVisible = true
         direction2RadioButton.isVisible = false
@@ -101,7 +100,7 @@ class HoraireBus: AppCompatActivity() {
         val stat = Station(0, station_name, type, line, direction, way, pictoline)
         if(!favoris){
             favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
-            Toast.makeText(this, R.string.toastBusAddToFav, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, R.string.toastBusAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
@@ -109,7 +108,7 @@ class HoraireBus: AppCompatActivity() {
 
         } else {
             favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            Toast.makeText(this, R.string.toastBusDeleteFromFav, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, R.string.toastBusDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
                 favorisDao?.deleteStation(favorisDao?.getStation(station_name, direction, type)!!)

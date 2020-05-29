@@ -3,7 +3,6 @@ package com.example.subline.find.rers
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
@@ -12,7 +11,7 @@ import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
-import kotlinx.android.synthetic.main.activity_horaire.*
+import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.coroutines.runBlocking
 
 class HoraireRer: AppCompatActivity() {
@@ -22,7 +21,7 @@ class HoraireRer: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_horaire)
+        setContentView(R.layout.activity_schedule)
 
         //direction1RadioButton.isVisible = true
         //direction2RadioButton.isVisible = false
@@ -97,7 +96,7 @@ class HoraireRer: AppCompatActivity() {
         val stat = Station(0, stationName, type, line, direction, way, pictoLine)
         if(!favoris){
             favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
-            Toast.makeText(this, R.string.toastRerAddToFav, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, R.string.toastRerAddToFav, Toast.LENGTH_SHORT).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
@@ -105,7 +104,7 @@ class HoraireRer: AppCompatActivity() {
 
         } else {
             favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            Toast.makeText(this, R.string.toastRerDeleteFromFav, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, R.string.toastRerDeleteFromFav, Toast.LENGTH_SHORT).show()
             favoris = false
             runBlocking {
                 favorisDao?.deleteStation(favorisDao?.getStation(stationName, direction, type)!!)

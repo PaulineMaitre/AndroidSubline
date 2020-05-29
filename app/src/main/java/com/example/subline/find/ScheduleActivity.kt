@@ -1,4 +1,4 @@
-package com.example.subline.find.metros
+package com.example.subline.find
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,21 +9,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
-import com.example.subline.find.Station
+import com.example.subline.find.metros.HoraireMetroAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
-import kotlinx.android.synthetic.main.activity_horaire.*
+import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.coroutines.runBlocking
 
-class HoraireMetro: AppCompatActivity() {
+class ScheduleActivity: AppCompatActivity() {
 
     var favoris: Boolean = false
     private var favorisDao: FavorisDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_horaire)
+        setContentView(R.layout.activity_schedule)
 
         direction1RadioButton.isVisible = true
         direction2RadioButton.isVisible = false
@@ -43,7 +43,7 @@ class HoraireMetro: AppCompatActivity() {
         val pictoLine = intent.getIntExtra("pictoline",0)
         val stationName = intent.getStringExtra("station")
         val destinations = intent.getStringArrayListExtra("destinations")
-        val transportType: String = intent.getStringExtra("transportType")
+        val transportType = intent.getStringExtra("transportType")
 
         lineImageView.setImageResource(pictoLine)
         stationNameTextView.text = stationName
@@ -75,7 +75,7 @@ class HoraireMetro: AppCompatActivity() {
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
-        searchMathFavStation(stationName, line, favDirection, transportType)
+        searchMathFavStation(stationName, favDirection, transportType)
 
         getLineSchedule(service, transportType, stationName, line, way)
 
@@ -102,7 +102,7 @@ class HoraireMetro: AppCompatActivity() {
                 }
             }
             runBlocking {
-                searchMathFavStation(stationName, line, favDirection, transportType)
+                searchMathFavStation(stationName, favDirection, transportType)
                 getLineSchedule(service, transportType, stationName, line, way)
             }
         }
@@ -140,9 +140,9 @@ class HoraireMetro: AppCompatActivity() {
         }
     }
 
-    private fun searchMathFavStation(station_name: String, line: String, direction: String, type: String){
+    private fun searchMathFavStation(stationName: String, direction: String, type: String){
         runBlocking {
-            if (favorisDao?.getStation(station_name, direction, type) == null) {
+            if (favorisDao?.getStation(stationName, direction, type) == null) {
                 favoris = false
                 favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             } else {
@@ -163,7 +163,11 @@ class HoraireMetro: AppCompatActivity() {
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                scheduleRecyclerView.adapter = HoraireMetroAdapter(time, destinations)
+                scheduleRecyclerView.adapter =
+                    HoraireMetroAdapter(
+                        time,
+                        destinations
+                    )
             }
         }
     }

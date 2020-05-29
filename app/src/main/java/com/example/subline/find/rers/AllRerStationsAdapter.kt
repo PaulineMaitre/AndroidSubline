@@ -3,24 +3,22 @@ package com.example.subline.find.rers
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.HoraireMetro
+import com.example.subline.find.ScheduleActivity
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_NOCTI
 import com.example.subline.utils.TYPE_RER
 import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.list_station_item.view.*
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-class AllRerStationsAdapter (val stations: List<String>, val pictoline: Int, val rer: String): RecyclerView.Adapter<AllRerStationsAdapter.RersViewHolder>() {
+class AllRerStationsAdapter (val stations: List<String>, val pictoLine: Int, val rer: String): RecyclerView.Adapter<AllRerStationsAdapter.RersViewHolder>() {
 
     class RersViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
@@ -40,12 +38,12 @@ class AllRerStationsAdapter (val stations: List<String>, val pictoline: Int, val
         holder.statView.station_name.text = stat
 
         holder.statView.setOnClickListener {
-            val intent= Intent(it.context, HoraireMetro::class.java)
+            val intent= Intent(it.context, ScheduleActivity::class.java)
             val destinations = getDestinations(it.context, rer)
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
                 intent.putExtra("station", stat)
-                intent.putExtra("pictoline", pictoline)
+                intent.putExtra("pictoline", pictoLine)
                 intent.putExtra("line", rer)
                 intent.putExtra("transportType", TYPE_RER)
                 it.context.startActivity(intent)
@@ -54,7 +52,7 @@ class AllRerStationsAdapter (val stations: List<String>, val pictoline: Int, val
         }
     }
 
-    fun getDestinations(context: Context, rer: String): ArrayList<String> {
+    private fun getDestinations(context: Context, rer: String): ArrayList<String> {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var listDestinations = arrayListOf<String>()
         try {

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.subline.find.metros.HoraireMetro
+import com.example.subline.find.ScheduleActivity
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
@@ -52,7 +52,7 @@ class QRCode : AppCompatActivity(), ZXingScannerView.ResultHandler {
            var line = info?.get(0)
            var pictoLine = info?.get(2)?.toInt()
            var stationName = info?.get(1)
-            val intent= Intent(this, HoraireMetro::class.java)
+            val intent= Intent(this, ScheduleActivity::class.java)
             intent.putExtra("station", stationName)
             intent.putExtra("pictoline", pictoLine)
             intent.putExtra("line", line)

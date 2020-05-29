@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".find.metros.HoraireMetro"
+            android:name=".find.ScheduleActivity"
             android:label="Horaires" />
         <activity
             android:name=".find.rers.HoraireRer"

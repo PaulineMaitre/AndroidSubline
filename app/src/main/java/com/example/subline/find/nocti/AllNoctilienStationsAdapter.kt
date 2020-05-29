@@ -3,17 +3,15 @@ package com.example.subline.find.nocti
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.HoraireMetro
+import com.example.subline.find.ScheduleActivity
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.TYPE_NOCTI
 import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.list_station_item.view.*
@@ -41,7 +39,7 @@ class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: In
         holder.statView.station_name.text = stat
 
         holder.statView.setOnClickListener {
-            val intent= Intent(it.context, HoraireMetro::class.java)
+            val intent= Intent(it.context, ScheduleActivity::class.java)
             val destinations = getDestinations(it.context, noctilien)
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
