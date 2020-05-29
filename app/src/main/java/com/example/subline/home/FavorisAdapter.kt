@@ -8,10 +8,9 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.Station
+import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
@@ -38,21 +37,23 @@ class FavorisAdapter (val favoris : List<Station>, val rv : RecyclerView, val tv
         holder.favView.favoris_direction.text = favori.direction_name
         holder.favView.lineName.setImageResource(favori.picto_ligne)
 
+        val transportType = favori.type
+
         holder.favView.setOnClickListener {
 
-                var listhoraire = arrayListOf<String>()
+                var scheduleList = arrayListOf<String>()
                 var i = 0
                 val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
                 runBlocking {
-                    val results = service.getSchedules(TYPE_METRO, favori.ligne_name, favori.name, favori.way)
+                    val results = service.getSchedules(transportType, favori.ligne_name, favori.name, favori.way)
                     results.result.schedules.map {
                         if(i<2){
-                            listhoraire.add(it.message)
+                            scheduleList.add(it.message)
                             i++
                         }
                     }
                     tv.isVisible = true
-                    rv.adapter = HoraireFavAdapter(listhoraire,favori.direction_name)
+                    rv.adapter = HoraireFavAdapter(scheduleList, favori.direction_name)
                 }
 
        }

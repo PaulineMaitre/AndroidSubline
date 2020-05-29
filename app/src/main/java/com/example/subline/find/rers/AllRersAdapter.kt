@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpService
@@ -11,7 +14,7 @@ import com.example.subline.utils.*
 import kotlinx.android.synthetic.main.list_metro_item.view.*
 import kotlinx.coroutines.runBlocking
 
-class AllRersAdapter (val rers: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllRersAdapter.RersViewHolder>() {
+class AllRersAdapter (val rers: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllRersAdapter.RersViewHolder>() {
 
         class RersViewHolder(val rersView: View) : RecyclerView.ViewHolder(rersView)
         val pictoRers = listOf<Int>(
@@ -46,23 +49,28 @@ class AllRersAdapter (val rers: List<String>, var stations: RecyclerView) : Recy
                         listStations = STATIONSRERD
                     }
                 } else {
-                    listStations = affiche_list_stations(rer)
+                    listStations = affiche_list_stations(it, rer)
                 }
-
                 stations.adapter = AllRerStationsAdapter(listStations, pictoRers[position], rer)
             }
 
         }
 
-        fun affiche_list_stations(rer: String) : List<String>{
+        fun affiche_list_stations(view: View, rer: String) : List<String>{
             var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-            runBlocking {
-                val results = service.getStations(TYPE_RER, rer)
-                results.result.stations.map {
-                    listStations.add(it.name)
-                    listStations.sort()
+            try {
+                runBlocking {
+                    val results = service.getStations(TYPE_RER, rer)
+                    results.result.stations.map {
+                        listStations.add(it.name)
+                        listStations.sort()
+                    }
                 }
+                listStationsTextView.isVisible = true
+            } catch (e: retrofit2.HttpException) {
+                listStationsTextView.isVisible = false
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
             }
             return listStations
         }

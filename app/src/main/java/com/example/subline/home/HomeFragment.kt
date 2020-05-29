@@ -6,17 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.subline.AppelApi
 import com.example.subline.R
+import com.example.subline.find.Station
 import com.example.subline.data.TrafficResult
-import com.example.subline.find.metros.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
@@ -34,10 +32,9 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val bt_api = root.findViewById<Button>(R.id.bt_api)
-         val rv_fav : RecyclerView = root.findViewById(R.id.home_favoris)
+         val rv_fav : RecyclerView = root.findViewById(R.id.home_favoris_rv)
          val tv_horaires : TextView = root.findViewById(R.id.tv_horaires)
-         var list_fav : List<Station> = emptyList()
+         var favList : List<Station> = emptyList()
          tv_horaires.isVisible = false
          val rv2 = root.findViewById<RecyclerView>(R.id.home_horaire)
          val fab : FloatingActionButton = root.findViewById(R.id.fab_qrcode)
@@ -51,7 +48,7 @@ class HomeFragment : Fragment() {
          val favorisDao = database.getFavorisDao()
 
          runBlocking {
-              list_fav = favorisDao.getStation()
+              favList = favorisDao.getStation()
          }
 
         rv_fav.layoutManager =
@@ -59,7 +56,7 @@ class HomeFragment : Fragment() {
          rv2.layoutManager =
              LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-         rv_fav.adapter = FavorisAdapter(list_fav,rv2,tv_horaires)
+         rv_fav.adapter = FavorisAdapter(favList.asReversed(), rv2, tv_horaires)
 
          val list_traffic = arrayListOf<TrafficResult.Metro>()
 

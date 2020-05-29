@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.service.RatpPictoService
@@ -20,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllNoctiliensAdapter.NoctiliensViewHolder>() {
+class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllNoctiliensAdapter.NoctiliensViewHolder>() {
 
         class NoctiliensViewHolder(val noctiliensView: View) : RecyclerView.ViewHolder(noctiliensView)
         var pictoNoctiliens = listOf<Int>(R.drawable.n01,
@@ -73,21 +76,27 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
             holder.noctiliensView.lineName.setImageResource(pictoNoctiliens[position])
 
             holder.noctiliensView.setOnClickListener {
-                var listStations = affiche_list_stations(noctilien)
+                var listStations = affiche_list_stations(it, noctilien)
                 stations.adapter = AllNoctilienStationsAdapter(listStations, pictoNoctiliens[position], noctilien)
             }
 
         }
 
-        fun affiche_list_stations(noctilien: String) : List<String>{
+        fun affiche_list_stations(view: View, noctilien: String) : List<String>{
             var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-            runBlocking {
-                val results = service.getStations(TYPE_NOCTI, noctilien)
-                results.result.stations.map {
-                    listStations.add(it.name)
-                    listStations.sort()
+            try {
+                runBlocking {
+                    val results = service.getStations(TYPE_NOCTI, noctilien)
+                    results.result.stations.map {
+                        listStations.add(it.name)
+                        listStations.sort()
+                    }
                 }
+                listStationsTextView.isVisible = true
+            } catch (e: retrofit2.HttpException) {
+                listStationsTextView.isVisible = false
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
             }
             return listStations
         }

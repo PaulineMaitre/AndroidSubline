@@ -4,6 +4,12 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name = "findLine">Choisissez une ligne</string>
+    <string name = "listStations">Liste des stations sur cette ligne :</string>
+    <string name = "direction">Direction :</string>
+    <string name = "nextDepartures">Prochainement :</string>
+    <string name = "stationName">Nom station</string>
+
     <string name="destinationByDefault">Robinson. St-Rémy-lès-chevreuse</string>
     <string name="scheduleByDefault">Schedule unavailable</string>
 
@@ -21,4 +27,7 @@
 
     <string name="toastNoctiAddToFav">Le noctilien a bien été ajouté aux favoris</string>
     <string name="toastNoctiDeleteFromFav">Le noctilien a bien été supprimé des favoris</string>
+
+    <string name="scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
+    <string name="lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
 </resources>

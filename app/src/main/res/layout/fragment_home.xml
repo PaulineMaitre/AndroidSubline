@@ -24,12 +24,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="API"
-                android:id="@+id/bt_api" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/home_favoris"
+                android:id="@+id/home_favoris_rv"
                 android:nestedScrollingEnabled="false"/>
 
             <TextView
@@ -72,9 +66,7 @@
                 android:nestedScrollingEnabled="false"
                 />
 
-        </LinearLayout>
-
-
+      </LinearLayout>
 
     </LinearLayout>
 

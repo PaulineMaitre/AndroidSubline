@@ -36,6 +36,9 @@
             android:name="com.example.subline.find.tram.HoraireTram"
             android:label="Horaires" />
         <activity
+            android:name="com.example.subline.find.buses.HoraireBus"
+            android:label="Horaires" />
+        <activity
             android:name="com.example.subline.find.nocti.HoraireNoctilien"
             android:label="Horaires" />
         <activity

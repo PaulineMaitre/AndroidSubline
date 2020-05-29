@@ -11,19 +11,18 @@
         android:id="@+id/searchBus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:imeOptions="actionSearch"
         android:hint="Numéro de bus" />
-
-    <TextView
-        android:id="@+id/testLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/listStationsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Liste des stations sur cette ligne :"
+        android:text="@string/listStations"
         android:textSize="18dp"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"/>
 

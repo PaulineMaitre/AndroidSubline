@@ -38,8 +38,9 @@ class FindFragment : Fragment() {
         return myfragment
     }
 
-    fun setupViewPager(viewPager : ViewPager){
+    private fun setupViewPager(viewPager : ViewPager){
         var adapter : FindTabLayoutAdapter = FindTabLayoutAdapter(childFragmentManager)
+        adapter.addFragment(FindStation())
         adapter.addFragment(FindMetros())
         adapter.addFragment(FindRER())
         adapter.addFragment(FindTram())
@@ -49,11 +50,12 @@ class FindFragment : Fragment() {
 
     }
 
-    fun setupTabIcons(){
-        tabLayout.getTabAt(0)!!.setIcon(R.drawable.logo_metro)
-        tabLayout.getTabAt(1)!!.setIcon(R.drawable.logo_rer)
-        tabLayout.getTabAt(2)!!.setIcon(R.drawable.logo_tram)
-        tabLayout.getTabAt(3)!!.setIcon(R.drawable.logo_bus)
-        tabLayout.getTabAt(4)!!.setIcon(R.drawable.logo_noctilien)
+    private fun setupTabIcons(){
+        tabLayout.getTabAt(0)!!.setIcon(R.drawable.logo_location_blue)
+        tabLayout.getTabAt(1)!!.setIcon(R.drawable.logo_metro)
+        tabLayout.getTabAt(2)!!.setIcon(R.drawable.logo_rer)
+        tabLayout.getTabAt(3)!!.setIcon(R.drawable.logo_tram)
+        tabLayout.getTabAt(4)!!.setIcon(R.drawable.logo_bus)
+        tabLayout.getTabAt(5)!!.setIcon(R.drawable.logo_noctilien)
     }
 }

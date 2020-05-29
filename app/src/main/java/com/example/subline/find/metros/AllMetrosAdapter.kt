@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
@@ -17,7 +18,6 @@ import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.fragment_find_metros.view.*
 import kotlinx.android.synthetic.main.list_metro_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
@@ -26,7 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
+class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
 
         class MetrosViewHolder(val metrosView: View) : RecyclerView.ViewHolder(metrosView)
         var pictoMetros = listOf<Int>(R.drawable.m1,
@@ -65,23 +65,29 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView) : 
             holder.metrosView.lineName.setImageResource(pictoMetros[position])
 
             holder.metrosView.setOnClickListener {
-                var liststations = affiche_list_stations(metro)
-                stations.adapter = AllMetroStationsAdapter(liststations, pictoMetros[position], metro)
+                var listStations = getListOfStations(it, metro)
+                stations.adapter = AllMetroStationsAdapter(listStations, pictoMetros[position], metro)
             }
 
         }
 
-        fun affiche_list_stations(metro: String) : List<String> {
-            var liststations = arrayListOf<String>()
+        private fun getListOfStations(view: View, metro: String) : List<String> {
+            var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-            runBlocking {
-                val results = service.getStations(TYPE_METRO, metro)
-                results.result.stations.map {
-                    liststations.add(it.name)
-                    liststations.sort()
+            try {
+                runBlocking {
+                    val results = service.getStations(TYPE_METRO, metro)
+                    results.result.stations.map {
+                        listStations.add(it.name)
+                        listStations.sort()
+                    }
                 }
+                listStationsTextView.isVisible = true
+            } catch (e: retrofit2.HttpException) {
+                listStationsTextView.isVisible = false
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
             }
-            return liststations
+            return listStations
         }
 
 

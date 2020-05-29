@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import kotlinx.android.synthetic.main.list_horairem_item.view.*
+import kotlinx.android.synthetic.main.list_horaire_item.view.*
 
 class HoraireNoctilienAdapter(val times: List<String>, var destinations: List<String>): RecyclerView.Adapter<HoraireNoctilienAdapter.NoctiliensViewHolder>() {
 
@@ -14,7 +14,7 @@ class HoraireNoctilienAdapter(val times: List<String>, var destinations: List<St
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoctiliensViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInfater.inflate(R.layout.list_horairem_item, parent, false)
+        val view: View = layoutInfater.inflate(R.layout.list_horaire_item, parent, false)
 
         return NoctiliensViewHolder(view)
     }

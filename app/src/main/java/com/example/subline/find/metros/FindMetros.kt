@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
@@ -13,6 +14,7 @@ import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
+import kotlinx.android.synthetic.main.fragment_find_metros.*
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -28,6 +30,7 @@ class FindMetros: Fragment() {
         val view =  inflater.inflate(R.layout.fragment_find_metros, container, false)
         val allMetrosRv = view.findViewById<RecyclerView>(R.id.allMetrosRv)
         val allStationsRv = view.findViewById<RecyclerView>(R.id.allMetroStationsRv)
+        val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var metros: ArrayList<String> = ArrayList()
@@ -40,7 +43,7 @@ class FindMetros: Fragment() {
 
         allMetrosRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allMetrosRv.adapter = AllMetrosAdapter(metros, allStationsRv)
+        allMetrosRv.adapter = AllMetrosAdapter(metros, allStationsRv, listStationsTextView)
         return view
     }
 

@@ -1,4 +1,4 @@
-package com.example.subline.find.metros
+package com.example.subline.find
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,9 +14,17 @@ data class Station (@PrimaryKey(autoGenerate = true) val id: Int,
                     val picto_ligne: Int) {
 
 
-    companion object { /*  all: même chose que :ListClient<>*/
+    companion object {
         val all = (1..5).map{
-            Station(it,"name$it", "type$it", "ligne_name$it","direct$it","A",  R.drawable.m1)
+            Station(
+                it,
+                "name$it",
+                "type$it",
+                "ligne_name$it",
+                "direct$it",
+                "A",
+                R.drawable.m1
+            )
         }.toMutableList()
 
     }
