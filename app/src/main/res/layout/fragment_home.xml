@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mes favoris"
+                android:text="@string/favTitle"
                 android:layout_margin="10dp"
                 android:textSize="20dp"/>
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/home_favoris_rv"
+                android:id="@+id/favHomeRecyclerView"
                 android:nestedScrollingEnabled="false"/>
 
             <TextView
@@ -43,26 +43,26 @@
                 android:layout_height="wrap_content"
                 android:text="Prochain passage"
                 android:layout_marginTop="20dp"
-                android:id="@+id/tv_horaires"/>
+                android:id="@+id/nextScheduleTitle"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/home_horaire"
+                android:id="@+id/favScheduleRecyclerView"
                 android:nestedScrollingEnabled="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Infos Traffic"
+                android:text="@string/infoTrafifcTitle"
                 android:layout_marginTop="20dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/rv_home_traffic"
+                android:id="@+id/homeTrafficRecyclerView"
                 android:nestedScrollingEnabled="false"
                 />
 
@@ -74,7 +74,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_qrcode"
+        android:id="@+id/fabQRcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

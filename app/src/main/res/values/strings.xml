@@ -30,4 +30,10 @@
 
     <string name="scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
     <string name="lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
+    <string name="favTitle">Mes favoris</string>
+    <string name="infoTrafifcTitle">Info Trafic</string>
+    <string name="lineName">Ligne</string>
+    <string name="trafficStateTitle">Etat : </string>
+    <string name="detailTrafficTitle">Détail : </string>
+    <string name="messageTraffic">message</string>
 </resources>

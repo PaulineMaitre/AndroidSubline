@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import kotlinx.android.synthetic.main.list_horaire_item.view.*
 
-class HoraireFavAdapter (val horaires: List<String>, val direction: String) : RecyclerView.Adapter<HoraireFavAdapter.FavorisViewHolder>() {
+class HoraireFavAdapter (val scheduleList: List<String>, val direction: String) : RecyclerView.Adapter<HoraireFavAdapter.FavorisViewHolder>() {
 
     class FavorisViewHolder(val favView: View) : RecyclerView.ViewHolder(favView)
 
@@ -19,13 +19,13 @@ class HoraireFavAdapter (val horaires: List<String>, val direction: String) : Re
         return FavorisViewHolder(view)
     }
 
-    override fun getItemCount(): Int  = horaires.size
+    override fun getItemCount(): Int  = scheduleList.size
 
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: FavorisViewHolder, position: Int) {
-        val horaire = horaires[position]
-        holder.favView.horaire_list_time.text = horaire
+        val schedule = scheduleList[position]
+        holder.favView.horaire_list_time.text = schedule
         holder.favView.horaire_list_destination.text = direction
 
     }

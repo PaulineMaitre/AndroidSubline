@@ -2,7 +2,6 @@ package com.example.subline.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.example.subline.find.Station
 import com.example.subline.data.TrafficResult
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import com.example.tripin.data.AppDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,13 +30,13 @@ class HomeFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-         val rv_fav : RecyclerView = root.findViewById(R.id.home_favoris_rv)
-         val tv_horaires : TextView = root.findViewById(R.id.tv_horaires)
+         val favListRecyclerView : RecyclerView = root.findViewById(R.id.favHomeRecyclerView)
+         val scheduleTextView : TextView = root.findViewById(R.id.nextScheduleTitle)
          var favList : List<Station> = emptyList()
-         tv_horaires.isVisible = false
-         val rv2 = root.findViewById<RecyclerView>(R.id.home_horaire)
-         val fab : FloatingActionButton = root.findViewById(R.id.fab_qrcode)
-         val rv3 = root.findViewById<RecyclerView>(R.id.rv_home_traffic)
+         scheduleTextView.isVisible = false
+         val favScheduleRecyclerView = root.findViewById<RecyclerView>(R.id.favScheduleRecyclerView)
+         val fabQRCode : FloatingActionButton = root.findViewById(R.id.fabQRcode)
+         val homeTrafficRecyclerView = root.findViewById<RecyclerView>(R.id.homeTrafficRecyclerView)
 
          val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
@@ -51,49 +49,39 @@ class HomeFragment : Fragment() {
               favList = favorisDao.getStation()
          }
 
-        rv_fav.layoutManager =
+        favListRecyclerView.layoutManager =
              LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-         rv2.layoutManager =
+         favScheduleRecyclerView.layoutManager =
              LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-         rv_fav.adapter = FavorisAdapter(favList.asReversed(), rv2, tv_horaires)
+         favListRecyclerView.adapter = FavorisAdapter(favList.asReversed(), favScheduleRecyclerView, scheduleTextView)
 
-         val list_traffic = arrayListOf<TrafficResult.Metro>()
+         val listTraffic = arrayListOf<TrafficResult.Metro>()
 
          runBlocking {
              val results = service.getTrafficInfoC()
              results.result.metros.map {
-                 val metro = TrafficResult.Metro(it.line,it.slug,it.title,it.message)
-                 list_traffic.add(metro)
+                 val metro = TrafficResult.Metro(it.line, it.slug, it.title, it.message)
+                 listTraffic.add(metro)
              }
              results.result.rers.map {
-                 val rer = TrafficResult.Metro(it.line,it.slug,it.title,it.message)
-                 list_traffic.add(rer)
+                 val rer = TrafficResult.Metro(it.line, it.slug, it.title, it.message)
+                 listTraffic.add(rer)
              }
              results.result.tramways.map {
-                 val tram = TrafficResult.Metro(it.line,it.slug,it.title,it.message)
-                 list_traffic.add(tram)
+                 val tram = TrafficResult.Metro(it.line, it.slug, it.title, it.message)
+                 listTraffic.add(tram)
              }
          }
 
-         rv3.layoutManager =  LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-         rv3.adapter = TrafficAdapter(list_traffic)
+         homeTrafficRecyclerView.layoutManager =  LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+         homeTrafficRecyclerView.adapter = TrafficAdapter(listTraffic)
 
-         bt_api.setOnClickListener { view ->
-             val intent = Intent(this.context, AppelApi::class.java)
-             startActivity(intent)
-             true
-
-         }
-         fab.setOnClickListener {view ->
+         fabQRCode.setOnClickListener { view ->
              val intent = Intent(this.context, QRCode::class.java)
              startActivity(intent)
              true
          }
-
-
-
-
          return root
     }
 

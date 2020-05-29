@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.subline.R
 import com.example.subline.find.metros.HoraireMetro
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -18,7 +17,7 @@ class QRCode : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     private val REQUEST_CAMERA = 1
     var  scannerView : ZXingScannerView? = null
-    private var  txtResult : TextView? = null
+    private var txtResult : TextView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,13 +48,13 @@ class QRCode : AppCompatActivity(), ZXingScannerView.ResultHandler {
         Log.d("CCC","$info")
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Result")
-        builder.setPositiveButton("OK") {dialog,which ->
+        builder.setPositiveButton("OK") {dialog, which ->
            var line = info?.get(0)
-           var pictoline = info?.get(2)?.toInt()
-           var station = info?.get(1)
+           var pictoLine = info?.get(2)?.toInt()
+           var stationName = info?.get(1)
             val intent= Intent(this, HoraireMetro::class.java)
-            intent.putExtra("station", station)
-            intent.putExtra("pictoline", pictoline)
+            intent.putExtra("station", stationName)
+            intent.putExtra("pictoline", pictoLine)
             intent.putExtra("line", line)
             startActivity(intent)
             onRestart()

@@ -13,15 +13,15 @@
         android:layout_marginTop="15dp">
 
     <TextView
-        android:id="@+id/tv_ligne_traffic"
+        android:id="@+id/lineTrafficTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type"
+        android:text="@string/lineName"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/iv_logo_traffic"
+        android:id="@+id/logoTrafficImageView"
         android:layout_marginStart="30dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -38,15 +38,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Etat : "
+            android:text="@string/trafficStateTitle"
             android:textSize="17sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/tv_etat_traffic"
+            android:id="@+id/trafficStateResultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="title"
+            android:layout_marginLeft="5dp"
             android:textSize="17sp" />
 
     </LinearLayout>
@@ -59,15 +60,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Détail : "
+            android:text="@string/detailTrafficTitle"
             android:textSize="17sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/tv_message_traffic"
+            android:id="@+id/trafficMessageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="message"
+            android:text="@string/messageTraffic"
+            android:layout_marginLeft="5dp"
             android:textSize="17sp" />
 
     </LinearLayout>

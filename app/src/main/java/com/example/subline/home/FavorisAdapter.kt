@@ -15,7 +15,7 @@ import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
 
-class FavorisAdapter (val favoris : List<Station>, val rv : RecyclerView, val tv : TextView) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
+class FavorisAdapter (val favoris : List<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
 
 
     class FavorisViewHolder(val favView : View) : RecyclerView.ViewHolder(favView)
@@ -52,8 +52,8 @@ class FavorisAdapter (val favoris : List<Station>, val rv : RecyclerView, val tv
                             i++
                         }
                     }
-                    tv.isVisible = true
-                    rv.adapter = HoraireFavAdapter(scheduleList, favori.direction_name)
+                    scheduleTextView.isVisible = true
+                    favScheduleRecyclerView.adapter = HoraireFavAdapter(scheduleList, favori.direction_name)
                 }
 
        }
