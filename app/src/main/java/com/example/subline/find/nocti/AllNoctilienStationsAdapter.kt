@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
+import com.example.subline.find.metros.HoraireMetro
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
@@ -40,7 +41,7 @@ class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: In
         holder.statView.station_name.text = stat
 
         holder.statView.setOnClickListener {
-            val intent= Intent(it.context, HoraireNoctilien::class.java)
+            val intent= Intent(it.context, HoraireMetro::class.java)
             val destinations = getDestinations(it.context, noctilien)
             Log.d("EPF", "dest1 $destinations")
             Log.d("EPF", "size=${destinations.size}")
@@ -49,6 +50,7 @@ class AllNoctilienStationsAdapter (val stations: List<String>, val pictoline: In
                 intent.putExtra("station", stat)
                 intent.putExtra("pictoline", pictoline)
                 intent.putExtra("line", noctilien)
+                intent.putExtra("transportType", TYPE_NOCTI)
                 it.context.startActivity(intent)
                 true
             }

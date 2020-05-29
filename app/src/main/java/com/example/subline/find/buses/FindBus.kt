@@ -52,7 +52,7 @@ class FindBus : Fragment() {
         searchBus.threshold = 0
         searchBus.setAdapter(adapter)
         searchBus.setOnItemClickListener { parent, viewSearch, position, id ->
-            hideKeyboardFrom(view.context, view)
+            hideKeyboard(view.context, view)
             val bus = parent.getItemAtPosition(position).toString()
             val listStations = getListOfStations(view, bus)
             var pictoInt = resources.getIdentifier("b$bus", "drawable", "com.example.subline")
@@ -83,7 +83,7 @@ class FindBus : Fragment() {
         return listStations
     }
 
-    private fun hideKeyboardFrom(context: Context, view: View) {
+    private fun hideKeyboard(context: Context, view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }

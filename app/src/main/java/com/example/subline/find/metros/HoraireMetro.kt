@@ -11,8 +11,7 @@ import com.example.subline.R
 import com.example.subline.data.FavorisDao
 import com.example.subline.find.Station
 import com.example.subline.service.RatpService
-import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.retrofit
+import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
 import kotlinx.android.synthetic.main.activity_horaire.*
 import kotlinx.coroutines.runBlocking
@@ -57,7 +56,15 @@ class HoraireMetro: AppCompatActivity() {
             direct2 = destinations[1]
             direction2RadioButton.isVisible = true
         }
-        if(line == "14") { // fix bug A/R on line 14
+        if(transportType == TYPE_RER) {
+            direct1 = destinations[1]
+            direct2 = destinations[0]
+        }
+        if((transportType == TYPE_METRO && line == "14")
+            || (transportType == TYPE_TRAM && (line == "2" || line == "5" || line == "7"))
+            || (transportType == TYPE_NOCTI) && (line == "11" || line == "12" || line == "14" || line == "21"
+                    || line == "23" || line == "24" || line == "35" || line == "41" || line == "45"
+                    || line == "61" || line == "62" || line == "63" || line == "122")) { // fix bug A/R
             direction1RadioButton.text = direct2
             direction2RadioButton.text = direct1
             favDirection = direct2
@@ -83,7 +90,11 @@ class HoraireMetro: AppCompatActivity() {
                 way = "R"
                 favDirection = direct2
             }
-            if(line == "14") { // fix bug A/R on line 14
+            if((transportType == TYPE_METRO && line == "14")
+                || (transportType == TYPE_TRAM && (line == "2" || line == "5" || line == "7"))
+                || (transportType == TYPE_NOCTI) && (line == "11" || line == "12" || line == "14" || line == "21"
+                        || line == "23" || line == "24" || line == "35" || line == "41" || line == "45"
+                        || line == "61" || line == "62" || line == "63" || line == "122")) { // fix bug A/R
                 favDirection = if(favDirection == direct1) {
                     direct2
                 } else {

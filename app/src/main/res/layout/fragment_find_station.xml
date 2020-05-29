@@ -13,6 +13,11 @@
           android:layout_marginTop="10dp"
           android:inputType="text"
           android:imeOptions="actionSearch"
-          android:hint="Rechercher une station" />
+          android:hint="@string/searchStation" />
+
+      <TextView
+          android:id="@+id/testTV"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
 
 </LinearLayout>

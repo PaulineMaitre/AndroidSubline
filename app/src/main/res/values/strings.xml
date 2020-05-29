@@ -36,4 +36,5 @@
     <string name="trafficStateTitle">Etat : </string>
     <string name="detailTrafficTitle">Détail : </string>
     <string name="messageTraffic">message</string>
+    <string name="searchStation">Rechercher une station</string>
 </resources>

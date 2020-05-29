@@ -55,7 +55,7 @@ class AllMetroStationsAdapter (val stations: List<String>, val pictoline: Int, v
         }
     }
 
-    fun getDestinations(context: Context, metro: String): ArrayList<String> {
+    private fun getDestinations(context: Context, metro: String): ArrayList<String> {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var listDestinations = arrayListOf<String>()
         try {
