@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
-import com.example.subline.find.metros.HoraireMetroAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
@@ -164,7 +163,7 @@ class ScheduleActivity: AppCompatActivity() {
                 time.add(it.message)
                 destinations.add(it.destination)
                 scheduleRecyclerView.adapter =
-                    HoraireMetroAdapter(
+                    ScheduleAdapter(
                         time,
                         destinations
                     )
