@@ -59,12 +59,7 @@ class FindBus : Fragment() {
             var pictoInt = resources.getIdentifier("b$bus", "drawable", "com.example.subline")
             if(pictoInt == 0) pictoInt = R.drawable.logo_bus
             allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-            allStationsRv.adapter = AllStationsAdapter(
-                listStations,
-                pictoInt,
-                bus,
-                TYPE_BUS
-            )
+            allStationsRv.adapter = AllStationsAdapter(listStations, pictoInt, bus, TYPE_BUS)
         }
         return view
     }

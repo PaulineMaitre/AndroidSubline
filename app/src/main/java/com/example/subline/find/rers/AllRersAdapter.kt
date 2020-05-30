@@ -12,23 +12,23 @@ import com.example.subline.R
 import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
-import kotlinx.android.synthetic.main.list_metro_item.view.*
+import kotlinx.android.synthetic.main.list_line_item.view.*
 import kotlinx.coroutines.runBlocking
 
-class AllRersAdapter (val rers: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllRersAdapter.RersViewHolder>() {
+class AllRersAdapter (val rers: List<String>, var stations: RecyclerView, val listStationsTextView: TextView, val transportType: String, val pictoLine: List<Int>) : RecyclerView.Adapter<AllRersAdapter.RersViewHolder>() {
 
         class RersViewHolder(val rersView: View) : RecyclerView.ViewHolder(rersView)
-        val pictoRers = listOf<Int>(
+        /*val pictoRers = listOf<Int>(
             R.drawable.rera,
             R.drawable.rerb,
             R.drawable.rerc,
             R.drawable.rerd,
             R.drawable.rere
-        )
+        )*/
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RersViewHolder {
             val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
+            val view: View = layoutInfater.inflate(R.layout.list_line_item, parent,false)
 
             return RersViewHolder(view)
         }
@@ -38,26 +38,23 @@ class AllRersAdapter (val rers: List<String>, var stations: RecyclerView, val li
 
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: RersViewHolder, position: Int) {
+
             var rer = rers[position]
-            holder.rersView.lineName.setImageResource(pictoRers[position])
+
+            holder.rersView.lineIcon.setImageResource(pictoLine[position])
 
             holder.rersView.setOnClickListener {
                 var listStations: List<String> = emptyList()
-                if(rer == "C" || rer == "D") {
+                listStations = if(rer == "C" || rer == "D") {
                     if(rer == "C"){
-                        listStations = STATIONSRERC
+                        STATIONSRERC
                     } else {
-                        listStations = STATIONSRERD
+                        STATIONSRERD
                     }
                 } else {
-                    listStations = getListOfStations(it, rer)
+                    getListOfStations(it, rer)
                 }
-                stations.adapter = AllStationsAdapter(
-                    listStations,
-                    pictoRers[position],
-                    rer,
-                    TYPE_RER
-                )
+                stations.adapter = AllStationsAdapter(listStations, pictoLine[position], rer, transportType)
             }
 
         }
@@ -67,7 +64,7 @@ class AllRersAdapter (val rers: List<String>, var stations: RecyclerView, val li
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             try {
                 runBlocking {
-                    val results = service.getStations(TYPE_RER, rer)
+                    val results = service.getStations(transportType, rer)
                     results.result.stations.map {
                         listStations.add(it.name)
                         listStations.sort()

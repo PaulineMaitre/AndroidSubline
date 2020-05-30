@@ -16,7 +16,7 @@ import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.list_metro_item.view.*
+import kotlinx.android.synthetic.main.list_line_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -24,10 +24,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllNoctiliensAdapter.NoctiliensViewHolder>() {
+class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: RecyclerView, val listStationsTextView: TextView, val transportType: String, val pictoLine: List<Int>) : RecyclerView.Adapter<AllNoctiliensAdapter.NoctiliensViewHolder>() {
 
         class NoctiliensViewHolder(val noctiliensView: View) : RecyclerView.ViewHolder(noctiliensView)
-        var pictoNoctiliens = listOf<Int>(R.drawable.n01,
+        /*var pictoNoctiliens = listOf<Int>(R.drawable.n01,
             R.drawable.n02,
             R.drawable.n11,
             R.drawable.n12,
@@ -59,11 +59,11 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
             R.drawable.n71,
             R.drawable.n122,
             R.drawable.n153
-            )
+            )*/
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoctiliensViewHolder {
             val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
+            val view: View = layoutInfater.inflate(R.layout.list_line_item, parent,false)
 
             return NoctiliensViewHolder(view)
         }
@@ -74,15 +74,15 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: NoctiliensViewHolder, position: Int) {
             var noctilien = noctiliens[position]
-            holder.noctiliensView.lineName.setImageResource(pictoNoctiliens[position])
+            holder.noctiliensView.lineIcon.setImageResource(pictoLine[position])
 
             holder.noctiliensView.setOnClickListener {
                 var listStations = getListOfStations(it, noctilien)
                 stations.adapter = AllStationsAdapter(
                     listStations,
-                    pictoNoctiliens[position],
+                    pictoLine[position],
                     noctilien,
-                    TYPE_NOCTI
+                    transportType
                 )
             }
 
@@ -93,7 +93,7 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             try {
                 runBlocking {
-                    val results = service.getStations(TYPE_NOCTI, noctilien)
+                    val results = service.getStations(transportType, noctilien)
                     results.result.stations.map {
                         listStations.add(it.name)
                         listStations.sort()

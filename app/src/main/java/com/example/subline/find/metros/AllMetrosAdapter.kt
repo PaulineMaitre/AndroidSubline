@@ -14,12 +14,9 @@ import com.example.subline.R
 import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
-import com.example.subline.utils.BASE_URL_PICTO
-import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
-import com.example.subline.utils.retrofit
+import com.example.subline.utils.*
 import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.list_metro_item.view.*
+import kotlinx.android.synthetic.main.list_line_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -27,62 +24,36 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllMetrosAdapter.MetrosViewHolder>() {
+class AllMetrosAdapter (val lineCodes: List<String>, var stations: RecyclerView, val listStationsTextView: TextView, val transportType: String, val pictoLine: List<Int>) : RecyclerView.Adapter<AllMetrosAdapter.LineViewHolder>() {
 
-        class MetrosViewHolder(val metrosView: View) : RecyclerView.ViewHolder(metrosView)
-        var pictoMetros = listOf<Int>(R.drawable.m1,
-            R.drawable.m2,
-            R.drawable.m3,
-            R.drawable.m3b,
-            R.drawable.m4,
-            R.drawable.m5,
-            R.drawable.m6,
-            R.drawable.m7,
-            R.drawable.m7b,
-            R.drawable.m8,
-            R.drawable.m9,
-            R.drawable.m10,
-            R.drawable.m11,
-            R.drawable.m12,
-            R.drawable.m13,
-            R.drawable.m14,
-            R.drawable.mfun,
-            R.drawable.orlyval
-            )
+        class LineViewHolder(val lineView: View) : RecyclerView.ViewHolder(lineView)
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetrosViewHolder {
-            val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
+            val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+            val view: View = layoutInflater.inflate(R.layout.list_line_item, parent,false)
 
-            return MetrosViewHolder(view)
+            return LineViewHolder(view)
         }
 
-        override fun getItemCount(): Int = metros.size
-
+        override fun getItemCount(): Int = lineCodes.size
 
         @SuppressLint("ResourceAsColor")
-        override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
-            var metro = metros[position]
-            holder.metrosView.lineName.setImageResource(pictoMetros[position])
+        override fun onBindViewHolder(holder: LineViewHolder, position: Int) {
+            var lineCode = lineCodes[position]
+            holder.lineView.lineIcon.setImageResource(pictoLine[position])
 
-            holder.metrosView.setOnClickListener {
-                var listStations = getListOfStations(it, metro)
-                stations.adapter = AllStationsAdapter(
-                    listStations,
-                    pictoMetros[position],
-                    metro,
-                    TYPE_METRO
-                )
+            holder.lineView.setOnClickListener {
+                var listStations = getListOfStations(it, lineCode)
+                stations.adapter = AllStationsAdapter(listStations, pictoLine[position], lineCode, transportType)
             }
-
         }
 
-        private fun getListOfStations(view: View, metro: String) : List<String> {
+        private fun getListOfStations(view: View, lineCode: String) : List<String> {
             var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             try {
                 runBlocking {
-                    val results = service.getStations(TYPE_METRO, metro)
+                    val results = service.getStations(transportType, lineCode)
                     results.result.stations.map {
                         listStations.add(it.name)
                         listStations.sort()
@@ -95,8 +66,6 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView, va
             }
             return listStations
         }
-
-
 
 
 

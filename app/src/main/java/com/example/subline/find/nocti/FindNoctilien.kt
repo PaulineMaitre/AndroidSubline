@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
+import com.example.subline.find.metros.AllMetrosAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.PICTO_NOCTI
 import com.example.subline.utils.TYPE_NOCTI
 import com.example.subline.utils.retrofit
 import kotlinx.coroutines.runBlocking
@@ -39,16 +41,13 @@ class FindNoctilien : Fragment() {
             results.result.noctiliens.map {
                 if(!noctiliens.contains(it.code)) {
                     noctiliens.add(it.code)
-                //noctiliens.sort()
                 }
             }
-            //noctiliens.sort()
-            //Log.d("EPF", "${noctiliens}")
         }
 
         allNoctisRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allNoctiStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allNoctisRv.adapter = AllNoctiliensAdapter(noctiliens, allNoctiStationsRv, listStationsTextView)
+        allNoctisRv.adapter = AllMetrosAdapter(noctiliens, allNoctiStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
         return view
     }
 

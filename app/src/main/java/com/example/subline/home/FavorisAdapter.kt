@@ -35,7 +35,7 @@ class FavorisAdapter (val favoris : List<Station>, val favScheduleRecyclerView :
         val favori = favoris[position]
         holder.favView.favoris_station.text = favori.name
         holder.favView.favoris_direction.text = favori.direction_name
-        holder.favView.lineName.setImageResource(favori.picto_ligne)
+        holder.favView.lineIcon.setImageResource(favori.picto_ligne)
 
         val transportType = favori.type
 
