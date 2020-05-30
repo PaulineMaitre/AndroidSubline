@@ -1,4 +1,4 @@
-package com.example.subline.find.metros
+package com.example.subline.find.findTransport
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.AllLinesAdapter
+import com.example.subline.find.findResults.AllLinesAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_METRO

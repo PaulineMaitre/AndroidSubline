@@ -1,4 +1,4 @@
-package com.example.subline.find
+package com.example.subline.find.findResults
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -31,7 +31,9 @@ class AllLinesAdapter (val lineCodes: List<String>, var stations: RecyclerView, 
             val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
             val view: View = layoutInflater.inflate(R.layout.list_line_item, parent,false)
 
-            return LineViewHolder(view)
+            return LineViewHolder(
+                view
+            )
         }
 
         override fun getItemCount(): Int = lineCodes.size
@@ -42,7 +44,16 @@ class AllLinesAdapter (val lineCodes: List<String>, var stations: RecyclerView, 
             holder.lineView.lineIcon.setImageResource(pictoLine[position])
 
             holder.lineView.setOnClickListener {
-                var listStations = getListOfStations(it, lineCode)
+
+                var listStations = if(lineCode == "C" || lineCode == "D") {
+                    if(lineCode == "C"){
+                        STATIONS_RER_C
+                    } else {
+                        STATIONS_RER_D
+                    }
+                } else {
+                    getListOfStations(it, lineCode)
+                }
                 stations.adapter = AllStationsAdapter(listStations, pictoLine[position], lineCode, transportType)
             }
         }

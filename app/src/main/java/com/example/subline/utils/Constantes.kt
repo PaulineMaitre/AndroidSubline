@@ -27,7 +27,7 @@ var PICTO_NOCTI = listOf(R.drawable.n01, R.drawable.n02, R.drawable.n11, R.drawa
     R.drawable.n51, R.drawable.n52, R.drawable.n53, R.drawable.n61, R.drawable.n62, R.drawable.n63,
     R.drawable.n66, R.drawable.n71, R.drawable.n122, R.drawable.n153)
 
-val STATIONSRERC = listOf("Ablon", "Arpajon", "Athis-Mons", "Avenue du Président-Kennedy", "Avenue Foch", "Avenue Henri Martin",
+val STATIONS_RER_C = listOf("Ablon", "Arpajon", "Athis-Mons", "Avenue du Président-Kennedy", "Avenue Foch", "Avenue Henri Martin",
     "Bibliothèque François-Mittérand", "Bièvres", "Boulainvilliers", "Bourray", "Brétigny", "Breuillet - Bruyères-le-Chatel",
     "Breuillet - Village", "Cernay", "Chamarande", "Champ de Mars - Tour Eiffel", "Chaville - Vélizy", "Chemin d'Antony",
     "Chilly-Mazarin", "Choisy-le-Roi", "Dourdan", "Dourdan - La Forêt", "Egly", "Epinay-sur-Orge", "Epinay-sur-Seine",
@@ -43,7 +43,7 @@ val STATIONSRERC = listOf("Ablon", "Arpajon", "Athis-Mons", "Avenue du Présiden
     "Sainte-Geneviève-des-Bois", "Savigny-sur-Orge", "Sermaise", "Vauboven", "Versailles-Chantiers",
     "Versailles-Chateau-Rive-Gauche", "Villeneuve-le-Roi", "Viroflay-Rive-Gauche", "Vitry-sur-Seine")
 
-val STATIONSRERD =  listOf("Ballancourt", "Boigneville", "Boissise-le-Roi", "Boutigny", "Boussy-Saint-Antoine", "Buno - Gironville",
+val STATIONS_RER_D =  listOf("Ballancourt", "Boigneville", "Boissise-le-Roi", "Boutigny", "Boussy-Saint-Antoine", "Buno - Gironville",
     "Brunoy", "Cesson", "Chantilly - Gouvieux", "Châtelet - Les Halles", "Combs-la-Ville - Quincy", "Corbeilles-Essonnes",
     "Creil", "Créteil-Pompadour", "Essonnes - Robinson", "Evry - Courcouronnes Centre", "Evry-Val-de-Seine", "Gare de Lyon",
     "Gare du Nord", "Garges - Sarcelles", "Goussainville", "Grand Bourg", "Grigny-Centre", "Juvisy", "La Borne Blanche",

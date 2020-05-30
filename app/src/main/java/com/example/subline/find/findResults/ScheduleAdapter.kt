@@ -1,4 +1,4 @@
-package com.example.subline.find
+package com.example.subline.find.findResults
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -16,7 +16,9 @@ class ScheduleAdapter(val times: List<String>, var destinations: List<String>): 
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInfater.inflate(R.layout.list_horaire_item, parent, false)
 
-        return ScheduleViewHolder(view)
+        return ScheduleViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int = times.size

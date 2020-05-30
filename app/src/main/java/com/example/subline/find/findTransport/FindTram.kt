@@ -1,4 +1,4 @@
-package com.example.subline.find.tram
+package com.example.subline.find.findTransport
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
-import com.example.subline.find.AllLinesAdapter
+import com.example.subline.find.findResults.AllLinesAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_TRAM
@@ -49,13 +49,7 @@ class FindTram : Fragment() {
 
         allTramsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allTramStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allTramsRv.adapter = AllLinesAdapter(
-            tramways,
-            allTramStationsRv,
-            listStationsTextView,
-            TYPE_TRAM,
-            PICTO_TRAM
-        )
+        allTramsRv.adapter = AllLinesAdapter(tramways, allTramStationsRv, listStationsTextView, TYPE_TRAM, PICTO_TRAM)
         return view
     }
 

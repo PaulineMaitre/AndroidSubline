@@ -1,4 +1,4 @@
-package com.example.subline.find.station
+package com.example.subline.find.findTransport
 
 import android.app.Activity
 import android.content.Context

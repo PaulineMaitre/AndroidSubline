@@ -1,4 +1,4 @@
-package com.example.subline.find
+package com.example.subline.find.findResults
 
 import android.annotation.SuppressLint
 import android.content.Context

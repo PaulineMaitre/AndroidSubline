@@ -1,4 +1,4 @@
-package com.example.subline.find.buses
+package com.example.subline.find.findTransport
 
 import android.app.Activity
 import android.content.Context
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
 import com.example.subline.R
-import com.example.subline.find.AllStationsAdapter
+import com.example.subline.find.findResults.AllStationsAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_BUS

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.subline.find.ScheduleActivity
+import com.example.subline.find.findResults.ScheduleActivity
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 

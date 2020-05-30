@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".find.ScheduleActivity"
+            android:name=".find.findResults.ScheduleActivity"
             android:label="Horaires" />
         <activity
             android:name=".MainActivity"
