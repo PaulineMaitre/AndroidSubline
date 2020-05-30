@@ -1,4 +1,4 @@
-package com.example.subline.find.buses
+package com.example.subline.find
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,57 +9,56 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.ScheduleActivity
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_BUS
 import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.list_station_item.view.*
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-class AllBusStationsAdapter (val stations: List<String>, val pictoline: Int, val bus: String): RecyclerView.Adapter<AllBusStationsAdapter.BusViewHolder>() {
+class AllStationsAdapter (val listStations: List<String>, val pictoLine: Int, val lineCode: String, val transportType: String): RecyclerView.Adapter<AllStationsAdapter.StationsViewHolder>() {
 
-    class BusViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
+    class StationsViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StationsViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInfater.inflate(R.layout.list_station_item, parent,false)
 
-        return BusViewHolder(view)
+        return StationsViewHolder(
+            view
+        )
     }
 
-    override fun getItemCount(): Int = stations.size
+    override fun getItemCount(): Int = listStations.size
 
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: BusViewHolder, position: Int) {
-        var stat = stations[position]
+    override fun onBindViewHolder(holder: StationsViewHolder, position: Int) {
+        var stat = listStations[position]
         holder.statView.station_name.text = stat
 
         holder.statView.setOnClickListener {
             val intent= Intent(it.context, ScheduleActivity::class.java)
-            val destinations = getDestinations(it.context, bus)
+            val destinations = getDestinations(it.context, lineCode)
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
                 intent.putExtra("station", stat)
-                intent.putExtra("pictoline", pictoline)
-                intent.putExtra("line", bus)
-                intent.putExtra("transportType", TYPE_BUS)
+                intent.putExtra("pictoline", pictoLine)
+                intent.putExtra("line", lineCode)
+                intent.putExtra("transportType", transportType)
                 it.context.startActivity(intent)
                 true
             }
         }
-
     }
 
-    private fun getDestinations(context: Context, bus: String): ArrayList<String> {
+    private fun getDestinations(context: Context, lineCode: String): ArrayList<String> {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var listDestinations = arrayListOf<String>()
         try {
             runBlocking {
-                val results = service.getDestinations(TYPE_BUS, bus)
+                val results = service.getDestinations(transportType, lineCode)
                 val direct1 = results.result.destinations[0].name
                 listDestinations.add(direct1)
                 if (results.result.destinations.size > 1) {

@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.AllStationsAdapter
+import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
@@ -78,7 +78,12 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
 
             holder.noctiliensView.setOnClickListener {
                 var listStations = getListOfStations(it, noctilien)
-                stations.adapter = AllStationsAdapter(listStations, pictoNoctiliens[position], noctilien, TYPE_NOCTI)
+                stations.adapter = AllStationsAdapter(
+                    listStations,
+                    pictoNoctiliens[position],
+                    noctilien,
+                    TYPE_NOCTI
+                )
             }
 
         }

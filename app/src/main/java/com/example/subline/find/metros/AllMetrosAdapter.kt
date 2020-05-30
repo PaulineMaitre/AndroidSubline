@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
+import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_PICTO
@@ -66,7 +67,12 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView, va
 
             holder.metrosView.setOnClickListener {
                 var listStations = getListOfStations(it, metro)
-                stations.adapter = AllStationsAdapter(listStations, pictoMetros[position], metro, TYPE_METRO)
+                stations.adapter = AllStationsAdapter(
+                    listStations,
+                    pictoMetros[position],
+                    metro,
+                    TYPE_METRO
+                )
             }
 
         }

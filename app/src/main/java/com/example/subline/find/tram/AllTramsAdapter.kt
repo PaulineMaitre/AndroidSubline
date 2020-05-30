@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.AllStationsAdapter
+import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
@@ -56,7 +56,12 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView, val 
 
             holder.tramsView.setOnClickListener {
                 var listStations = getListOfStations(it, tram)
-                stations.adapter = AllStationsAdapter(listStations, pictoTrams[position], tram, TYPE_TRAM)
+                stations.adapter = AllStationsAdapter(
+                    listStations,
+                    pictoTrams[position],
+                    tram,
+                    TYPE_TRAM
+                )
             }
 
         }

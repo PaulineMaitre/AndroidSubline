@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.AllStationsAdapter
+import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import kotlinx.android.synthetic.main.list_metro_item.view.*
@@ -52,7 +52,12 @@ class AllRersAdapter (val rers: List<String>, var stations: RecyclerView, val li
                 } else {
                     listStations = getListOfStations(it, rer)
                 }
-                stations.adapter = AllStationsAdapter(listStations, pictoRers[position], rer, TYPE_RER)
+                stations.adapter = AllStationsAdapter(
+                    listStations,
+                    pictoRers[position],
+                    rer,
+                    TYPE_RER
+                )
             }
 
         }
