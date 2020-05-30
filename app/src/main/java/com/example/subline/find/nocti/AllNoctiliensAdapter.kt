@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
+import com.example.subline.find.metros.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
@@ -76,13 +77,13 @@ class AllNoctiliensAdapter (val noctiliens: List<String>, var stations: Recycler
             holder.noctiliensView.lineName.setImageResource(pictoNoctiliens[position])
 
             holder.noctiliensView.setOnClickListener {
-                var listStations = affiche_list_stations(it, noctilien)
-                stations.adapter = AllNoctilienStationsAdapter(listStations, pictoNoctiliens[position], noctilien)
+                var listStations = getListOfStations(it, noctilien)
+                stations.adapter = AllStationsAdapter(listStations, pictoNoctiliens[position], noctilien, TYPE_NOCTI)
             }
 
         }
 
-        fun affiche_list_stations(view: View, noctilien: String) : List<String>{
+        private fun getListOfStations(view: View, noctilien: String) : List<String>{
             var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             try {

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
+import com.example.subline.find.metros.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
@@ -54,13 +55,13 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView, val 
             holder.tramsView.lineName.setImageResource(pictoTrams[position])
 
             holder.tramsView.setOnClickListener {
-                var listStations = affiche_list_stations(it, tram)
-                stations.adapter = AllTramStationsAdapter(listStations, pictoTrams[position], tram)
+                var listStations = getListOfStations(it, tram)
+                stations.adapter = AllStationsAdapter(listStations, pictoTrams[position], tram, TYPE_TRAM)
             }
 
         }
 
-        fun affiche_list_stations(view: View, tram: String) : List<String>{
+        private fun getListOfStations(view: View, tram: String) : List<String>{
             var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             try {
@@ -74,7 +75,7 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView, val 
                 listStationsTextView.isVisible = true
             } catch (e: retrofit2.HttpException) {
                 listStationsTextView.isVisible = false
-                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_LONG).show()
             }
             return listStations
         }

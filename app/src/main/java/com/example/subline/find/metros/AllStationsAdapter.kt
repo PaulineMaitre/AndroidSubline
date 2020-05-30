@@ -12,53 +12,52 @@ import com.example.subline.R
 import com.example.subline.find.ScheduleActivity
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
 import kotlinx.android.synthetic.main.list_station_item.view.*
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-class AllMetroStationsAdapter (val stations: List<String>, val pictoline: Int, val metro: String): RecyclerView.Adapter<AllMetroStationsAdapter.MetrosViewHolder>() {
+class AllStationsAdapter (val listStations: List<String>, val pictoLine: Int, val lineCode: String, val transportType: String): RecyclerView.Adapter<AllStationsAdapter.StationsViewHolder>() {
 
-    class MetrosViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
+    class StationsViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MetrosViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StationsViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInfater.inflate(R.layout.list_station_item, parent,false)
 
-        return MetrosViewHolder(view)
+        return StationsViewHolder(view)
     }
 
-    override fun getItemCount(): Int = stations.size
+    override fun getItemCount(): Int = listStations.size
 
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: MetrosViewHolder, position: Int) {
-        var stat = stations[position]
+    override fun onBindViewHolder(holder: StationsViewHolder, position: Int) {
+        var stat = listStations[position]
         holder.statView.station_name.text = stat
 
         holder.statView.setOnClickListener {
             val intent= Intent(it.context, ScheduleActivity::class.java)
-            val destinations = getDestinations(it.context, metro)
+            val destinations = getDestinations(it.context, lineCode)
             if(destinations.size != 0) {
                 intent.putStringArrayListExtra("destinations", destinations)
                 intent.putExtra("station", stat)
-                intent.putExtra("pictoline", pictoline)
-                intent.putExtra("line", metro)
-                intent.putExtra("transportType", TYPE_METRO)
+                intent.putExtra("pictoline", pictoLine)
+                intent.putExtra("line", lineCode)
+                intent.putExtra("transportType", transportType)
                 it.context.startActivity(intent)
                 true
             }
         }
     }
 
-    private fun getDestinations(context: Context, metro: String): ArrayList<String> {
+    private fun getDestinations(context: Context, lineCode: String): ArrayList<String> {
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
         var listDestinations = arrayListOf<String>()
         try {
             runBlocking {
-                val results = service.getDestinations(TYPE_METRO, metro)
+                val results = service.getDestinations(transportType, lineCode)
                 val direct1 = results.result.destinations[0].name
                 listDestinations.add(direct1)
                 if (results.result.destinations.size > 1) {

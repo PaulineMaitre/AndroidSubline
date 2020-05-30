@@ -66,7 +66,7 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView, va
 
             holder.metrosView.setOnClickListener {
                 var listStations = getListOfStations(it, metro)
-                stations.adapter = AllMetroStationsAdapter(listStations, pictoMetros[position], metro)
+                stations.adapter = AllStationsAdapter(listStations, pictoMetros[position], metro, TYPE_METRO)
             }
 
         }
@@ -85,7 +85,7 @@ class AllMetrosAdapter (val metros: List<String>, var stations: RecyclerView, va
                 listStationsTextView.isVisible = true
             } catch (e: retrofit2.HttpException) {
                 listStationsTextView.isVisible = false
-                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_LONG).show()
             }
             return listStations
         }

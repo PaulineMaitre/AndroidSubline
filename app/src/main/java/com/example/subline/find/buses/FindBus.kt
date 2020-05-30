@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
 import com.example.subline.R
+import com.example.subline.find.metros.AllStationsAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_BUS
@@ -58,7 +59,7 @@ class FindBus : Fragment() {
             var pictoInt = resources.getIdentifier("b$bus", "drawable", "com.example.subline")
             if(pictoInt == 0) pictoInt = R.drawable.logo_bus
             allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-            allStationsRv.adapter = AllBusStationsAdapter(listStations, pictoInt, bus)
+            allStationsRv.adapter = AllStationsAdapter(listStations, pictoInt, bus, TYPE_BUS)
         }
         return view
     }
@@ -78,7 +79,7 @@ class FindBus : Fragment() {
             listStationsTextView.isVisible = true
         } catch (e: retrofit2.HttpException) {
             listStationsTextView.isVisible = false
-            Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_LONG).show()
         }
         return listStations
     }
