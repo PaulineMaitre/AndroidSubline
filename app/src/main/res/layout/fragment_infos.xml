@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".infos.InfosFragment"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cat_metro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Métro"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/Blank"
+                />
+
+            <Button
+                android:id="@+id/cat_rer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="RER"
+                android:backgroundTint="@color/Blank"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_tram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Tramway"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/Blank"
+                android:backgroundTintMode="src_in"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:id="@+id/homeTrafficRecyclerView"
+        android:nestedScrollingEnabled="false"
+        />
+
+
+</LinearLayout>

@@ -9,15 +9,19 @@
     android:layout_marginRight="10dp"
     tools:context=".home.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="70dp">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="30dp"
+
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,39 +56,15 @@
                 android:id="@+id/favScheduleRecyclerView"
                 android:nestedScrollingEnabled="false"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/infoTrafifcTitle"
-                android:layout_marginTop="20dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/homeTrafficRecyclerView"
-                android:nestedScrollingEnabled="false"
-                />
+
 
       </LinearLayout>
 
     </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabQRcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="60dp"
-        android:clickable="true"
-        android:elevation="6dp"
-        android:src="@drawable/ic_select_all_black_24dp"
-        app:backgroundTint="@color/colorPrimary"
-        app:fabSize="auto"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

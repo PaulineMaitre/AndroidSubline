@@ -17,5 +17,11 @@
         android:label="Find"
         tools:layout="@layout/fragment_find" />
 
+    <fragment
+        android:id="@+id/navigation_infos"
+        android:name="com.example.subline.infos.InfosFragment"
+        android:label="Infos"
+        tools:layout="@layout/fragment_infos" />
+
 
 </navigation>

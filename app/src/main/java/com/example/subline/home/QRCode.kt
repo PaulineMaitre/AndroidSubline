@@ -45,7 +45,6 @@ class QRCode : AppCompatActivity(), ZXingScannerView.ResultHandler {
     override fun handleResult(p0: Result?) {
         val result =  p0?.text
         var info = result?.split("-")
-        Log.d("CCC","$info")
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Result")
         builder.setPositiveButton("OK") {dialog, which ->

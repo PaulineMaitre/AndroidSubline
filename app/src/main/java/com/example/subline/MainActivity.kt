@@ -27,32 +27,11 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_find
+                R.id.navigation_home, R.id.navigation_find,R.id.navigation_infos
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) =
-        when (item.itemId) {
-            R.id.ic_infos_trafic -> {
-                AlertDialog.Builder(this).apply {
-                    setTitle("Infos Trafic")
-                    setMessage("blablabla")
-
-                    setPositiveButton(android.R.string.ok) { _, _ ->
-
-                    }
-                    show()
-                }
-                true
-            }
-            else -> true
-        }
 }

@@ -1,5 +1,6 @@
 package com.example.subline.find
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,15 @@ import com.example.subline.find.metros.FindMetros
 import com.example.subline.find.nocti.FindNoctilien
 import com.example.subline.find.rers.FindRER
 import com.example.subline.find.tram.FindTram
+import com.example.subline.home.QRCode
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 
 class FindFragment : Fragment() {
 
     private lateinit var viewpager : ViewPager
     private lateinit var tabLayout: TabLayout
-    private lateinit var myfragment : View
+
 
 
     override fun onCreateView(
@@ -27,15 +30,21 @@ class FindFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        myfragment = inflater.inflate(R.layout.fragment_find, container, false)
-
-        viewpager = myfragment.findViewById(R.id.fragment_rechercheinterne)
+        val view = inflater.inflate(R.layout.fragment_find, container, false)
+        val fabQRCode : FloatingActionButton = view.findViewById(R.id.fabQRcode)
+        viewpager = view.findViewById(R.id.fragment_rechercheinterne)
         setupViewPager(viewpager);
-        tabLayout = myfragment.findViewById(R.id.tablayout_find)
+        tabLayout = view.findViewById(R.id.tablayout_find)
         tabLayout.setupWithViewPager(viewpager)
         setupTabIcons()
 
-        return myfragment
+        fabQRCode.setOnClickListener { view ->
+            val intent = Intent(this.context, QRCode::class.java)
+            startActivity(intent)
+            true
+        }
+
+        return view
     }
 
     private fun setupViewPager(viewPager : ViewPager){

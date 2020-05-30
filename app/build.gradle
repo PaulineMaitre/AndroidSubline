@@ -71,5 +71,8 @@ dependencies {
     implementation 'com.pixplicity.sharp:library:1.1.0'
 
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.libraries.places:places:2.3.0'
+
 
 }

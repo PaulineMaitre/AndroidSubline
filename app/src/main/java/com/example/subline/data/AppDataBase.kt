@@ -11,5 +11,4 @@ import com.example.subline.find.Station
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getFavorisDao() : FavorisDao
-
 }

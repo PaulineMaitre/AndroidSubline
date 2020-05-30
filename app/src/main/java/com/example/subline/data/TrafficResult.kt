@@ -7,16 +7,18 @@ object TrafficResult {
     )
 
     data class Result (
-        val metros: List<Metro>,
-        val rers: List<Metro>,
-        val tramways: List<Metro>
+        val metros: List<Transport>,
+        val rers: List<Transport>,
+        val tramways: List<Transport>
     )
 
-    data class Metro (
+    data class Transport (
+        val type : String,
         val line: String,
         val slug: String,
         val title: String,
-        val message: String
+        val message: String,
+        val picto : Int
     )
 
 }

@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#0BCA84</color>
     <color name="colorAccent">#000</color>
     <color name="Blank">#FFF</color>
+    <color name="butn_pressed">#C4C1C1</color>
 </resources>

@@ -9,7 +9,12 @@
     <item
         android:id="@+id/navigation_find"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="Find" />
+        android:title="@string/find" />
+
+    <item
+        android:id="@+id/navigation_infos"
+        android:icon="@drawable/ic_info"
+        android:title="@string/infos" />
 
 
 </menu>

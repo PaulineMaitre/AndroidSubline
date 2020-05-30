@@ -1,28 +1,42 @@
 package com.example.subline.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.subline.R
+import com.example.subline.data.FavorisDao
 import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
+import com.example.tripin.data.AppDatabase
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
 
-class FavorisAdapter (val favoris : List<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
+class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
 
+    private var favDao : FavorisDao? = null
+    private lateinit var context: Context
 
     class FavorisViewHolder(val favView : View) : RecyclerView.ViewHolder(favView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):FavorisViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInfater.inflate(R.layout.list_favoris_item, parent, false)
+
+        val databasesaved =
+            Room.databaseBuilder(parent.context, AppDatabase::class.java, "favoris")
+                .build()
+
+         favDao = databasesaved.getFavorisDao()
+
+        context = parent.context
 
         return FavorisViewHolder(view)
     }
@@ -36,8 +50,16 @@ class FavorisAdapter (val favoris : List<Station>, val favScheduleRecyclerView :
         holder.favView.favoris_station.text = favori.name
         holder.favView.favoris_direction.text = favori.direction_name
         holder.favView.lineName.setImageResource(favori.picto_ligne)
-
         val transportType = favori.type
+
+        holder.favView.bt_delete.setOnClickListener {
+            favoris.removeAt(position)
+            runBlocking {
+                favDao!!.deleteStation(favori)
+            }
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position,favoris.size)
+        }
 
         holder.favView.setOnClickListener {
 
