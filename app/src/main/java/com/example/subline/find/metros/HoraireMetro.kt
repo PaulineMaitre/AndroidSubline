@@ -2,6 +2,7 @@ package com.example.subline.find.metros
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -10,7 +11,9 @@ import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
 import com.example.subline.find.Station
+import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
+import com.example.subline.utils.BASE_URL_PICTO
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
 import com.example.tripin.data.AppDatabase
@@ -44,7 +47,7 @@ class HoraireMetro: AppCompatActivity() {
         val pictoLine = intent.getIntExtra("pictoline",0)
         val stationName = intent.getStringExtra("station")
         val destinations = intent.getStringArrayListExtra("destinations")
-        val transportType: String = intent.getStringExtra("transportType")
+        val transportType = intent.getStringExtra("transportType")
 
         lineImageView.setImageResource(pictoLine)
         stationNameTextView.text = stationName
@@ -111,7 +114,16 @@ class HoraireMetro: AppCompatActivity() {
         }
 
     private fun pushFavButton(stationName: String, line: String, direction: String, pictoLine: Int, type: String, way: String) {
-        val stat = Station(0, stationName, type, line, direction, way, pictoLine)
+        val locStat = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
+        var lat = 0.0
+        var long = 0.0
+        runBlocking {
+            val result = locStat.getLoc(stationName)
+            lat = result.records[0].fields.stop_coordinates[0]
+            long = result.records[0].fields.stop_coordinates[1]
+        }
+        val stat = Station(0, stationName, type, line, direction, way, pictoLine,lat,long)
+
         if(!favoris) {
             favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             Toast.makeText(this, R.string.toastMetroAddToFav, Toast.LENGTH_SHORT).show()

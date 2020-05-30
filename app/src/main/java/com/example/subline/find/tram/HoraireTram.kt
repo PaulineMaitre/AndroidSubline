@@ -10,6 +10,7 @@ import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.data.FavorisDao
 import com.example.subline.find.Station
+import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.example.tripin.data.AppDatabase
@@ -112,7 +113,15 @@ class HoraireTram: AppCompatActivity() {
         }
 
     private fun pushFavButton(station_name: String, line: String, direction: String, pictoLine: Int, type: String, way: String){
-        val stat : Station = Station(0, station_name, type, line, direction, way, pictoLine)
+        val locStat = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
+        var lat = 0.0
+        var long = 0.0
+        runBlocking {
+            val result = locStat.getLoc(station_name)
+            lat = result.records[0].fields.stop_coordinates[0]
+            long = result.records[0].fields.stop_coordinates[1]
+        }
+        val stat = Station(0, station_name, type, line, direction, way, pictoLine,lat,long)
         if(!favoris){
             favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
             Toast.makeText(this, R.string.toastTramAddToFav, Toast.LENGTH_SHORT).show()

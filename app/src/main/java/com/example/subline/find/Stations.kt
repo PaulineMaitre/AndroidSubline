@@ -11,21 +11,8 @@ data class Station (@PrimaryKey(autoGenerate = true) val id: Int,
                     val ligne_name: String,
                     val direction_name: String,
                     val way: String,
-                    val picto_ligne: Int) {
+                    val picto_ligne: Int,
+                    val latitude : Double,
+                    val longitude : Double) {
 
-
-    companion object {
-        val all = (1..5).map{
-            Station(
-                it,
-                "name$it",
-                "type$it",
-                "ligne_name$it",
-                "direct$it",
-                "A",
-                R.drawable.m1
-            )
-        }.toMutableList()
-
-    }
 }

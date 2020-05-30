@@ -3,6 +3,7 @@ package com.example.subline.home
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.runBlocking
@@ -36,7 +38,7 @@ class HomeFragment : Fragment() {
         lateinit var mapFragment: SupportMapFragment
         lateinit var map: GoogleMap
         lateinit var fusedLocationClient: FusedLocationProviderClient
-         lateinit var lastLocation: LatLng
+        lateinit var lastLocation: LatLng
 
      override fun onCreateView(
             inflater: LayoutInflater,
@@ -44,20 +46,13 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+         val root = inflater.inflate(R.layout.fragment_home, container, false)
          val favListRecyclerView : RecyclerView = root.findViewById(R.id.favHomeRecyclerView)
          val scheduleTextView : TextView = root.findViewById(R.id.nextScheduleTitle)
          var favList : List<Station> = emptyList()
          scheduleTextView.isVisible = false
          val favScheduleRecyclerView = root.findViewById<RecyclerView>(R.id.favScheduleRecyclerView)
-         val homeTrafficRecyclerView = root.findViewById<RecyclerView>(R.id.homeTrafficRecyclerView)
 
-         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-         setUpMap()
-
-
-         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
          val database =
              Room.databaseBuilder(activity!!.baseContext, AppDatabase::class.java, "favoris")
@@ -67,13 +62,20 @@ class HomeFragment : Fragment() {
          runBlocking {
               favList = favorisDao.getStation()
          }
+         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+         val listMarker = setUpMap(favList)
 
         favListRecyclerView.layoutManager =
              LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
          favScheduleRecyclerView.layoutManager =
              LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-         favListRecyclerView.adapter = FavorisAdapter(favList.toMutableList(), favScheduleRecyclerView, scheduleTextView)
+         favListRecyclerView.adapter = FavorisAdapter(favList.toMutableList(), favScheduleRecyclerView, scheduleTextView,listMarker)
+
+
+
+
 
 
 
@@ -84,35 +86,35 @@ class HomeFragment : Fragment() {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 
-    private fun setUpMap() {
+    private fun setUpMap(favList : List<Station>) : ArrayList<Marker>{
+        var listMarker = arrayListOf<Marker>()
         if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(),
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-            return
+            return listMarker
         }
         mapFragment.getMapAsync {
             map = it
-
             fusedLocationClient.lastLocation.addOnSuccessListener(requireActivity()) { location ->
-                // Got last known location. In some rare situations this can be null.
-                // 3
                 if (location != null) {
-                    /*lastLocation = location*/
                     lastLocation = LatLng(location.latitude, location.longitude)
                     map.addMarker(
                         MarkerOptions()
                             .position(lastLocation)
-                            .title("Location"))
-                        .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLocation,10f))
+                            .title("Vous êtes ici"))
+                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+
                 }
+
+                favList.map {
+                    val marker : Marker = map.addMarker(MarkerOptions()
+                        .position(LatLng(it.latitude, it.longitude))
+                        .title(it.name))
+                    listMarker.add(marker)
+                }
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(48.85830005598138, 2.347865087577108),10f))
             }
-            //val location = LatLng(48.8609898,2.2949864)
-
-
         }
-
+        return listMarker
     }
-
-
 }

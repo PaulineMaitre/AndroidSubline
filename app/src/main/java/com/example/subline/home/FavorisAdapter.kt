@@ -16,10 +16,12 @@ import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
 import com.example.tripin.data.AppDatabase
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
 
-class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
+class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView, val listMarker : ArrayList<Marker>) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
 
     private var favDao : FavorisDao? = null
     private lateinit var context: Context
@@ -59,6 +61,9 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
             }
             notifyItemRemoved(position)
             notifyItemRangeChanged(position,favoris.size)
+
+            val marker = listMarker[position]
+            marker.remove()
         }
 
         holder.favView.setOnClickListener {
