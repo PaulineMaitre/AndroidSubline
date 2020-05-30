@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tablayout_find"
-        android:id="@+id/fragment_rechercheinterne"
+        android:id="@+id/searchViewPager"
         android:layout_alignParentBottom="true" />
 
 

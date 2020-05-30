@@ -1,7 +1,6 @@
 package com.example.subline.find.nocti
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
-import com.example.subline.find.metros.AllMetrosAdapter
+import com.example.subline.find.AllLinesAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_NOCTI
@@ -47,7 +46,7 @@ class FindNoctilien : Fragment() {
 
         allNoctisRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allNoctiStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allNoctisRv.adapter = AllMetrosAdapter(noctiliens, allNoctiStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
+        allNoctisRv.adapter = AllLinesAdapter(noctiliens, allNoctiStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
         return view
     }
 

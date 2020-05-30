@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
+import com.example.subline.find.AllLinesAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_METRO
@@ -42,7 +43,7 @@ class FindMetros: Fragment() {
 
         allMetrosRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allMetrosRv.adapter = AllMetrosAdapter(metros, allStationsRv, listStationsTextView, TYPE_METRO, PICTO_METRO)
+        allMetrosRv.adapter = AllLinesAdapter(metros, allStationsRv, listStationsTextView, TYPE_METRO, PICTO_METRO)
         return view
     }
 

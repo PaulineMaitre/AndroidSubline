@@ -30,7 +30,7 @@ class FindFragment : Fragment() {
 
         myfragment = inflater.inflate(R.layout.fragment_find, container, false)
 
-        viewpager = myfragment.findViewById(R.id.fragment_rechercheinterne)
+        viewpager = myfragment.findViewById(R.id.searchViewPager)
         setupViewPager(viewpager);
         tabLayout = myfragment.findViewById(R.id.tablayout_find)
         tabLayout.setupWithViewPager(viewpager)
@@ -40,7 +40,7 @@ class FindFragment : Fragment() {
     }
 
     private fun setupViewPager(viewPager : ViewPager){
-        var adapter : FindTabLayoutAdapter = FindTabLayoutAdapter(childFragmentManager)
+        var adapter = FindTabLayoutAdapter(childFragmentManager)
         adapter.addFragment(FindStation())
         adapter.addFragment(FindMetros())
         adapter.addFragment(FindRER())

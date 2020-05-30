@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.metros.AllMetrosAdapter
+import com.example.subline.find.AllLinesAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_RER
@@ -45,7 +45,13 @@ class FindRER : Fragment() {
 
         allRersRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allRerStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allRersRv.adapter = AllMetrosAdapter(rers, allRerStationsRv, listStationsTextView, TYPE_RER, PICTO_RER)
+        allRersRv.adapter = AllLinesAdapter(
+            rers,
+            allRerStationsRv,
+            listStationsTextView,
+            TYPE_RER,
+            PICTO_RER
+        )
         return view
     }
 

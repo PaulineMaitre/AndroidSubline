@@ -1,4 +1,4 @@
-package com.example.subline.find.metros
+package com.example.subline.find
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
-import com.example.subline.find.AllStationsAdapter
 import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
@@ -24,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllMetrosAdapter (val lineCodes: List<String>, var stations: RecyclerView, val listStationsTextView: TextView, val transportType: String, val pictoLine: List<Int>) : RecyclerView.Adapter<AllMetrosAdapter.LineViewHolder>() {
+class AllLinesAdapter (val lineCodes: List<String>, var stations: RecyclerView, val listStationsTextView: TextView, val transportType: String, val pictoLine: List<Int>) : RecyclerView.Adapter<AllLinesAdapter.LineViewHolder>() {
 
         class LineViewHolder(val lineView: View) : RecyclerView.ViewHolder(lineView)
 
