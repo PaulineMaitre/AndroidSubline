@@ -27,9 +27,9 @@ class FindMetros: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_find_metros, container, false)
-        val allMetrosRv = view.findViewById<RecyclerView>(R.id.allMetrosRv)
-        val allStationsRv = view.findViewById<RecyclerView>(R.id.allMetroStationsRv)
+        val view =  inflater.inflate(R.layout.fragment_find_metro_rer_tram_nocti, container, false)
+        val allLinesRv = view.findViewById<RecyclerView>(R.id.allLinesRv)
+        val allStationsRv = view.findViewById<RecyclerView>(R.id.allStationsRv)
         val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
@@ -41,9 +41,9 @@ class FindMetros: Fragment() {
             }
         }
 
-        allMetrosRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+        allLinesRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allMetrosRv.adapter = AllLinesAdapter(metros, allStationsRv, listStationsTextView, TYPE_METRO, PICTO_METRO)
+        allLinesRv.adapter = AllLinesAdapter(metros, allStationsRv, listStationsTextView, TYPE_METRO, PICTO_METRO)
         return view
     }
 

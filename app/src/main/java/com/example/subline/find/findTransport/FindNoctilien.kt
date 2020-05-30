@@ -28,9 +28,9 @@ class FindNoctilien : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_find_nocti, container, false)
-        val allNoctisRv = view.findViewById<RecyclerView>(R.id.allNoctisRv)
-        val allNoctiStationsRv = view.findViewById<RecyclerView>(R.id.allNoctiStationsRv)
+        val view =  inflater.inflate(R.layout.fragment_find_metro_rer_tram_nocti, container, false)
+        val allLinesRv = view.findViewById<RecyclerView>(R.id.allLinesRv)
+        val allStationsRv = view.findViewById<RecyclerView>(R.id.allStationsRv)
         val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
@@ -44,9 +44,9 @@ class FindNoctilien : Fragment() {
             }
         }
 
-        allNoctisRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-        allNoctiStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allNoctisRv.adapter = AllLinesAdapter(noctiliens, allNoctiStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
+        allLinesRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+        allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        allLinesRv.adapter = AllLinesAdapter(noctiliens, allStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
         return view
     }
 

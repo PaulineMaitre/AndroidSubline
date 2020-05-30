@@ -19,7 +19,7 @@ import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_METRO
 import com.example.subline.utils.retrofit
-import kotlinx.android.synthetic.main.fragment_find_metros.*
+import kotlinx.android.synthetic.main.fragment_find_metro_rer_tram_nocti.*
 import kotlinx.android.synthetic.main.fragment_find_station.*
 import kotlinx.coroutines.runBlocking
 
@@ -34,9 +34,14 @@ class FindStation: Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_find_station, container, false)
-
-
         val searchStation = view.findViewById<AutoCompleteTextView>(R.id.searchStation)
+        val testTV = view.findViewById<TextView>(R.id.testTV)
+
+        val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
+        runBlocking {
+            val results = service.getAllLines()
+            testTV.text = results.toString()
+        }
 
         var listStations = arrayListOf<String>("Chatelet", "Denfert-Rochereau")
 

@@ -28,9 +28,9 @@ class FindTram : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_find_tram, container, false)
-        val allTramsRv = view.findViewById<RecyclerView>(R.id.allTramsRv)
-        val allTramStationsRv = view.findViewById<RecyclerView>(R.id.allTramStationsRv)
+        val view =  inflater.inflate(R.layout.fragment_find_metro_rer_tram_nocti, container, false)
+        val allLinesRv = view.findViewById<RecyclerView>(R.id.allLinesRv)
+        val allStationsRv = view.findViewById<RecyclerView>(R.id.allStationsRv)
         val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
@@ -47,9 +47,9 @@ class FindTram : Fragment() {
             tramways.add(t11)
         }
 
-        allTramsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-        allTramStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allTramsRv.adapter = AllLinesAdapter(tramways, allTramStationsRv, listStationsTextView, TYPE_TRAM, PICTO_TRAM)
+        allLinesRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+        allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        allLinesRv.adapter = AllLinesAdapter(tramways, allStationsRv, listStationsTextView, TYPE_TRAM, PICTO_TRAM)
         return view
     }
 
