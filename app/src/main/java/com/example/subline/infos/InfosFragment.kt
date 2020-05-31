@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 
 import com.example.subline.R
 import com.example.subline.data.TrafficResult
@@ -20,7 +19,6 @@ import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_PICTO
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
-import com.example.tripin.data.AppDatabase
 import com.pixplicity.sharp.Sharp
 import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.coroutines.runBlocking

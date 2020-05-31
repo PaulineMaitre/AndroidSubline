@@ -15,8 +15,7 @@ import com.example.subline.find.Station
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
-import com.example.tripin.data.AppDatabase
-import com.google.android.gms.maps.GoogleMap
+import com.example.subline.data.AppDatabase
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
@@ -55,8 +54,16 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
 
         val transportType = favori.type
 
-        holder.favView.setOnClickListener {
+        holder.favView.bt_delete.setOnClickListener {
+            favoris.removeAt(position)
+            runBlocking {
+                favDao!!.deleteStation(favori)
+            }
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, favoris.size)
+        }
 
+        holder.favView.setOnClickListener {
                 var scheduleList = arrayListOf<String>()
                 var i = 0
                 val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)

@@ -1,9 +1,7 @@
 package com.example.subline.home
 
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.subline.R
 import com.example.subline.find.Station
-import com.example.subline.data.TrafficResult
-import com.example.subline.service.RatpService
-import com.example.subline.utils.BASE_URL_TRANSPORT
-import com.example.subline.utils.retrofit
-import com.example.tripin.data.AppDatabase
+import com.example.subline.data.AppDatabase
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,7 +24,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment() {

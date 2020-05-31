@@ -2,7 +2,6 @@ package com.example.subline.find.findResults
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -17,7 +16,7 @@ import com.example.subline.utils.BASE_URL_PICTO
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
 import com.example.subline.utils.*
-import com.example.tripin.data.AppDatabase
+import com.example.subline.data.AppDatabase
 import kotlinx.android.synthetic.main.activity_schedule.*
 import kotlinx.coroutines.runBlocking
 
