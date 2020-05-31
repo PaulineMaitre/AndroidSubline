@@ -28,4 +28,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="buttonMetroTraffic">Métro</string>
+    <string name="buttonRerTraffic">RER</string>
+    <string name="buttonTramwayTraffic">Tramway</string>
 </resources>

@@ -54,13 +54,15 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
 
         val transportType = favori.type
 
-        holder.favView.bt_delete.setOnClickListener {
+        holder.favView.deleteFavButton.setOnClickListener {
             favoris.removeAt(position)
             runBlocking {
                 favDao!!.deleteStation(favori)
             }
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, favoris.size)
+            val marker = listMarker[position]
+            marker.remove()
         }
 
         holder.favView.setOnClickListener {

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
-    android:layout_height="150dp"
+    android:layout_height="130dp"
     android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -15,12 +15,11 @@
 
         <ImageView
             android:id="@+id/lineIcon"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/logo_metro"
             android:layout_gravity="center_horizontal" />
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,14 +49,7 @@
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/favoris_direction"/>
-
-
         </LinearLayout>
-
-
-
-
-
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -70,9 +62,7 @@
             android:backgroundTint="@color/Blank"
             android:src="@drawable/ic_delete"
             android:layout_gravity="top|end"
-            android:id="@+id/bt_delete"/>
+            android:id="@+id/deleteFavButton"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 
 </androidx.cardview.widget.CardView>

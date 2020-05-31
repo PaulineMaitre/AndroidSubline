@@ -56,8 +56,6 @@
                 android:id="@+id/favScheduleRecyclerView"
                 android:nestedScrollingEnabled="false"/>
 
-
-
       </LinearLayout>
 
     </LinearLayout>
