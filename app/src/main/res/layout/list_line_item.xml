@@ -8,7 +8,7 @@
     android:id="@+id/cardview">
 
    <ImageView
-       android:id="@+id/lineName"
+       android:id="@+id/lineIcon"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:padding="10dp"

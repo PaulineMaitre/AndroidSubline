@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".find.FindStation"
+    tools:context=".find.findTransport.FindStation"
     android:orientation="vertical">
 
       <AutoCompleteTextView
@@ -13,6 +13,11 @@
           android:layout_marginTop="10dp"
           android:inputType="text"
           android:imeOptions="actionSearch"
-          android:hint="Rechercher une station" />
+          android:hint="@string/searchStation" />
+
+      <TextView
+          android:id="@+id/testTV"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
 
 </LinearLayout>

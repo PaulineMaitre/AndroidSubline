@@ -1,7 +1,6 @@
-package com.example.subline.find.nocti
+package com.example.subline.find.findTransport
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
+import com.example.subline.find.findResults.AllLinesAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
+import com.example.subline.utils.PICTO_NOCTI
 import com.example.subline.utils.TYPE_NOCTI
 import com.example.subline.utils.retrofit
 import kotlinx.coroutines.runBlocking
@@ -27,9 +28,9 @@ class FindNoctilien : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_find_nocti, container, false)
-        val allNoctisRv = view.findViewById<RecyclerView>(R.id.allNoctisRv)
-        val allNoctiStationsRv = view.findViewById<RecyclerView>(R.id.allNoctiStationsRv)
+        val view =  inflater.inflate(R.layout.fragment_find_metro_rer_tram_nocti, container, false)
+        val allLinesRv = view.findViewById<RecyclerView>(R.id.allLinesRv)
+        val allStationsRv = view.findViewById<RecyclerView>(R.id.allStationsRv)
         val listStationsTextView = view.findViewById<TextView>(R.id.listStationsTextView)
 
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
@@ -39,16 +40,13 @@ class FindNoctilien : Fragment() {
             results.result.noctiliens.map {
                 if(!noctiliens.contains(it.code)) {
                     noctiliens.add(it.code)
-                //noctiliens.sort()
                 }
             }
-            //noctiliens.sort()
-            //Log.d("EPF", "${noctiliens}")
         }
 
-        allNoctisRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
-        allNoctiStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allNoctisRv.adapter = AllNoctiliensAdapter(noctiliens, allNoctiStationsRv, listStationsTextView)
+        allLinesRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+        allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        allLinesRv.adapter = AllLinesAdapter(noctiliens, allStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
         return view
     }
 

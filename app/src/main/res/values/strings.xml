@@ -1,43 +1,30 @@
 <resources>
-    <string name="app_name">Subline</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name = "app_name">Subline</string>
+    <string name = "title_home">Home</string>
+    <string name = "title_dashboard">Dashboard</string>
+    <string name = "title_notifications">Notifications</string>
 
-    <string name="findLine">Choisissez une ligne</string>
-    <string name="listStations">Liste des stations sur cette ligne :</string>
-    <string name="direction">Direction :</string>
-    <string name="nextDepartures">Prochainement :</string>
-    <string name="stationName">Nom station</string>
+    <string name = "findLine">Choisissez une ligne</string>
+    <string name = "listStations">Liste des stations sur cette ligne :</string>
+    <string name = "direction">Direction :</string>
+    <string name = "nextDepartures">Prochainement :</string>
+    <string name = "stationName">Nom station</string>
+    <string name = "favTitle">Mes favoris</string>
+    <string name = "infoTrafficTitle">Info Trafic</string>
+    <string name = "lineName">Ligne</string>
+    <string name = "trafficStateTitle">Etat : </string>
+    <string name = "detailTrafficTitle">Détail : </string>
+    <string name = "messageTraffic">message</string>
+    <string name = "searchStation">Rechercher une station</string>
 
-    <string name="destinationByDefault">Robinson. St-Rémy-lès-chevreuse</string>
-    <string name="scheduleByDefault">Schedule unavailable</string>
+    <string name = "destinationByDefault">Destination unavailable</string>
+    <string name = "scheduleByDefault">Schedule unavailable</string>
 
-    <string name="toastMetroAddToFav">Le métro a bien été ajouté aux favoris</string>
-    <string name="toastMetroDeleteFromFav">Le métro a bien été supprimé des favoris</string>
+    <string name = "toastAddToFav">La ligne a bien été ajoutée aux favoris</string>
+    <string name = "toastDeleteFromFav">La ligne a bien été supprimée des favoris</string>
 
-    <string name="toastRerAddToFav">Le RER a bien été ajouté aux favoris</string>
-    <string name="toastRerDeleteFromFav">Le RER a bien été supprimé des favoris</string>
-
-    <string name="toastTramAddToFav">Le tram a bien été ajouté aux favoris</string>
-    <string name="toastTramDeleteFromFav">Le tram a bien été supprimé des favoris</string>
-
-    <string name="toastBusAddToFav">Le bus a bien été ajouté aux favoris</string>
-    <string name="toastBusDeleteFromFav">Le bus a bien été supprimé des favoris</string>
-
-    <string name="toastNoctiAddToFav">Le noctilien a bien été ajouté aux favoris</string>
-    <string name="toastNoctiDeleteFromFav">Le noctilien a bien été supprimé des favoris</string>
-
-    <string name="scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
-    <string name="lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
-    <string name="favTitle">Mes favoris</string>
-    <string name="infoTrafifcTitle">Info Trafic</string>
-    <string name="lineName">Ligne</string>
-    <string name="trafficStateTitle">Etat : </string>
-    <string name="detailTrafficTitle">Détail : </string>
-    <string name="messageTraffic">message</string>
-    <string name="find">Find</string>
-    <string name="infos">Infos</string>
+    <string name = "scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
+    <string name = "lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

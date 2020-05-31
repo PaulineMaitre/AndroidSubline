@@ -1,4 +1,4 @@
-package com.example.subline.find.buses
+package com.example.subline.find.findResults
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,27 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import kotlinx.android.synthetic.main.list_horaire_item.view.*
 
-class HoraireBusAdapter(val times: List<String>, var destinations: List<String>): RecyclerView.Adapter<HoraireBusAdapter.BusesViewHolder>() {
+class ScheduleAdapter(val times: List<String>, var destinations: List<String>): RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder>() {
 
-    class BusesViewHolder(val horaireView: View): RecyclerView.ViewHolder(horaireView)
+    class ScheduleViewHolder(val scheduleView: View): RecyclerView.ViewHolder(scheduleView)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
         val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInfater.inflate(R.layout.list_horaire_item, parent, false)
 
-        return BusesViewHolder(view)
+        return ScheduleViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int = times.size
 
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
-    override fun onBindViewHolder(holder: BusesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
         var time = times[position]
         var destination = destinations[position]
 
-        holder.horaireView.horaire_list_time.text = time
-        holder.horaireView.horaire_list_destination.text = destination
+        holder.scheduleView.horaire_list_time.text = time
+        holder.scheduleView.horaire_list_destination.text = destination
        }
 
     }

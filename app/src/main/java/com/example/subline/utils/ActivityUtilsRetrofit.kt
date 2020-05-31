@@ -1,11 +1,5 @@
 package com.example.subline.utils
 
-import android.widget.Adapter
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import com.example.subline.find.metros.AllMetrosAdapter
-import com.example.subline.home.FavorisAdapter
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,4 +1,4 @@
-package com.example.subline.find.buses
+package com.example.subline.find.findTransport
 
 import android.app.Activity
 import android.content.Context
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Toast
 import com.example.subline.R
+import com.example.subline.find.findResults.AllStationsAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.TYPE_BUS
@@ -52,13 +53,13 @@ class FindBus : Fragment() {
         searchBus.threshold = 0
         searchBus.setAdapter(adapter)
         searchBus.setOnItemClickListener { parent, viewSearch, position, id ->
-            hideKeyboardFrom(view.context, view)
+            hideKeyboard(view.context, view)
             val bus = parent.getItemAtPosition(position).toString()
             val listStations = getListOfStations(view, bus)
             var pictoInt = resources.getIdentifier("b$bus", "drawable", "com.example.subline")
             if(pictoInt == 0) pictoInt = R.drawable.logo_bus
             allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-            allStationsRv.adapter = AllBusStationsAdapter(listStations, pictoInt, bus)
+            allStationsRv.adapter = AllStationsAdapter(listStations, pictoInt, bus, TYPE_BUS)
         }
         return view
     }
@@ -78,12 +79,12 @@ class FindBus : Fragment() {
             listStationsTextView.isVisible = true
         } catch (e: retrofit2.HttpException) {
             listStationsTextView.isVisible = false
-            Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_LONG).show()
         }
         return listStations
     }
 
-    private fun hideKeyboardFrom(context: Context, view: View) {
+    private fun hideKeyboard(context: Context, view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }

@@ -1,4 +1,4 @@
-package com.example.subline.find.tram
+package com.example.subline.find.findResults
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -15,7 +15,7 @@ import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.list_metro_item.view.*
+import kotlinx.android.synthetic.main.list_line_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -23,49 +23,47 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView, val listStationsTextView: TextView) : RecyclerView.Adapter<AllTramsAdapter.TramsViewHolder>() {
+class AllLinesAdapter (private val lineCodes: List<String>, private var stations: RecyclerView, val listStationsTextView: TextView, private val transportType: String, private val pictoLine: List<Int>) : RecyclerView.Adapter<AllLinesAdapter.LineViewHolder>() {
 
-        class TramsViewHolder(val tramsView: View) : RecyclerView.ViewHolder(tramsView)
-        var pictoTrams = listOf<Int>(R.drawable.t1,
-            R.drawable.t2,
-            R.drawable.t3a,
-            R.drawable.t3b,
-            R.drawable.t4,
-            R.drawable.t5,
-            R.drawable.t6,
-            R.drawable.t7,
-            R.drawable.t8,
-            R.drawable.t11
+        class LineViewHolder(val lineView: View) : RecyclerView.ViewHolder(lineView)
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
+            val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+            val view: View = layoutInflater.inflate(R.layout.list_line_item, parent,false)
+
+            return LineViewHolder(
+                view
             )
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TramsViewHolder {
-            val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-            val view: View = layoutInfater.inflate(R.layout.list_metro_item, parent,false)
-
-            return TramsViewHolder(view)
         }
 
-        override fun getItemCount(): Int = trams.size
-
+        override fun getItemCount(): Int = lineCodes.size
 
         @SuppressLint("ResourceAsColor")
-        override fun onBindViewHolder(holder: TramsViewHolder, position: Int) {
-            var tram = trams[position]
-            holder.tramsView.lineName.setImageResource(pictoTrams[position])
+        override fun onBindViewHolder(holder: LineViewHolder, position: Int) {
+            var lineCode = lineCodes[position]
+            holder.lineView.lineIcon.setImageResource(pictoLine[position])
 
-            holder.tramsView.setOnClickListener {
-                var listStations = affiche_list_stations(it, tram)
-                stations.adapter = AllTramStationsAdapter(listStations, pictoTrams[position], tram)
+            holder.lineView.setOnClickListener {
+
+                var listStations = if(lineCode == "C" || lineCode == "D") {
+                    if(lineCode == "C"){
+                        STATIONS_RER_C
+                    } else {
+                        STATIONS_RER_D
+                    }
+                } else {
+                    getListOfStations(it, lineCode)
+                }
+                stations.adapter = AllStationsAdapter(listStations, pictoLine[position], lineCode, transportType)
             }
-
         }
 
-        fun affiche_list_stations(view: View, tram: String) : List<String>{
+        private fun getListOfStations(view: View, lineCode: String) : List<String> {
             var listStations = arrayListOf<String>()
             val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
             try {
                 runBlocking {
-                    val results = service.getStations(TYPE_TRAM, tram)
+                    val results = service.getStations(transportType, lineCode)
                     results.result.stations.map {
                         listStations.add(it.name)
                         listStations.sort()
@@ -74,10 +72,12 @@ class AllTramsAdapter (val trams: List<String>, var stations: RecyclerView, val 
                 listStationsTextView.isVisible = true
             } catch (e: retrofit2.HttpException) {
                 listStationsTextView.isVisible = false
-                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_LONG).show()
             }
             return listStations
         }
+
+
 
         private fun getLinePicto(lineId: String, imageview: ImageView) {
 

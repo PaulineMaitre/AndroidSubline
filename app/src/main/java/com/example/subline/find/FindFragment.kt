@@ -8,18 +8,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.subline.R
-import com.example.subline.find.buses.FindBus
-import com.example.subline.find.metros.FindMetros
-import com.example.subline.find.nocti.FindNoctilien
-import com.example.subline.find.rers.FindRER
-import com.example.subline.find.tram.FindTram
+import com.example.subline.find.findTransport.FindBus
+import com.example.subline.find.findTransport.FindMetros
+import com.example.subline.find.findTransport.FindNoctilien
+import com.example.subline.find.findTransport.FindRER
+import com.example.subline.find.findTransport.FindStation
+import com.example.subline.find.findTransport.FindTram
 import com.example.subline.home.QRCode
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 
 class FindFragment : Fragment() {
 
-    private lateinit var viewpager : ViewPager
+    private lateinit var viewPager : ViewPager
     private lateinit var tabLayout: TabLayout
 
 
@@ -32,10 +33,10 @@ class FindFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_find, container, false)
         val fabQRCode : FloatingActionButton = view.findViewById(R.id.fabQRcode)
-        viewpager = view.findViewById(R.id.fragment_rechercheinterne)
-        setupViewPager(viewpager);
+        viewPager = view.findViewById(R.id.searchViewPager)
+        setupViewPager(viewPager);
         tabLayout = view.findViewById(R.id.tablayout_find)
-        tabLayout.setupWithViewPager(viewpager)
+        tabLayout.setupWithViewPager(viewPager)
         setupTabIcons()
 
         fabQRCode.setOnClickListener { view ->
@@ -48,7 +49,7 @@ class FindFragment : Fragment() {
     }
 
     private fun setupViewPager(viewPager : ViewPager){
-        var adapter : FindTabLayoutAdapter = FindTabLayoutAdapter(childFragmentManager)
+        var adapter = FindTabLayoutAdapter(childFragmentManager)
         adapter.addFragment(FindStation())
         adapter.addFragment(FindMetros())
         adapter.addFragment(FindRER())
