@@ -14,7 +14,7 @@ import com.example.subline.utils.BASE_URL_PICTO
 import com.example.subline.utils.retrofit
 import com.pixplicity.sharp.Sharp
 import kotlinx.android.synthetic.main.activity_appel_api.*
-import kotlinx.android.synthetic.main.activity_horaire.view.*
+import kotlinx.android.synthetic.main.activity_schedule.view.*
 import kotlinx.android.synthetic.main.list_traffic_item.view.*
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody

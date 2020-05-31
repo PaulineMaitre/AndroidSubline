@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigationHome">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigationHome"
         android:name="com.example.subline.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/navigationHome"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_find"
+        android:id="@+id/navigationFind"
         android:name="com.example.subline.find.FindFragment"
         android:label="Find"
         tools:layout="@layout/fragment_find" />
 
     <fragment
-        android:id="@+id/navigation_infos"
+        android:id="@+id/navigationInfo"
         android:name="com.example.subline.infos.InfosFragment"
         android:label="Infos"
         tools:layout="@layout/fragment_infos" />

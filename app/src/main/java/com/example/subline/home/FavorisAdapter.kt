@@ -29,8 +29,8 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
     class FavorisViewHolder(val favView : View) : RecyclerView.ViewHolder(favView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):FavorisViewHolder {
-        val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInfater.inflate(R.layout.list_favoris_item, parent, false)
+        val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+        val view: View = layoutInflater.inflate(R.layout.list_favoris_item, parent, false)
 
         val databasesaved =
             Room.databaseBuilder(parent.context, AppDatabase::class.java, "favoris")

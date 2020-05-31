@@ -1,8 +1,8 @@
 <resources>
     <string name = "app_name">Subline</string>
-    <string name = "title_home">Home</string>
-    <string name = "title_dashboard">Dashboard</string>
-    <string name = "title_notifications">Notifications</string>
+    <string name = "navigationHome">Home</string>
+    <string name = "navigationFind">Find</string>
+    <string name = "navigationInfo">Infos</string>
 
     <string name = "findLine">Choisissez une ligne</string>
     <string name = "listStations">Liste des stations sur cette ligne :</string>

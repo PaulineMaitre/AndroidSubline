@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigationHome"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:title="@string/navigationHome" />
 
     <item
-        android:id="@+id/navigation_find"
+        android:id="@+id/navigationFind"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/find" />
+        android:title="@string/navigationFind" />
 
     <item
-        android:id="@+id/navigation_infos"
+        android:id="@+id/navigationInfo"
         android:icon="@drawable/ic_info"
-        android:title="@string/infos" />
+        android:title="@string/navigationInfo" />
 
 
 </menu>
