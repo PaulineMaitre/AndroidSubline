@@ -16,6 +16,7 @@ import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.retrofit
 import com.example.subline.data.AppDatabase
+import com.example.subline.find.findResults.ScheduleAdapter
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.coroutines.runBlocking
@@ -48,7 +49,7 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(holder: FavorisViewHolder, position: Int) {
         val favori = favoris[position]
-        holder.favView.favoris_station.text = favori.name
+        holder.favView.favStation.text = favori.name
         holder.favView.favoris_direction.text = favori.direction_name
         holder.favView.lineIcon.setImageResource(favori.picto_ligne)
 
@@ -66,21 +67,18 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
         }
 
         holder.favView.setOnClickListener {
-                var scheduleList = arrayListOf<String>()
-                var i = 0
-                val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-                runBlocking {
-                    val results = service.getSchedules(transportType, favori.ligne_name, favori.name, favori.way)
-                    results.result.schedules.map {
-                        if(i<2){
-                            scheduleList.add(it.message)
-                            i++
-                        }
-                    }
-                    scheduleTextView.isVisible = true
-                    favScheduleRecyclerView.adapter = HoraireFavAdapter(scheduleList, favori.direction_name)
+            var scheduleList = arrayListOf<String>()
+            var destinations = arrayListOf<String>()
+            val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
+            runBlocking {
+                val results = service.getSchedules(transportType, favori.ligne_name, favori.name, favori.way)
+                results.result.schedules.map {
+                    scheduleList.add(it.message)
+                    destinations.add(it.destination)
                 }
-
+                scheduleTextView.isVisible = true
+                favScheduleRecyclerView.adapter = ScheduleAdapter(scheduleList, destinations)
+            }
        }
 
     }

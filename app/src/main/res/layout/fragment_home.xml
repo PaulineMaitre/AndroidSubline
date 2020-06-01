@@ -19,21 +19,13 @@
             android:layout_width="match_parent"
             android:layout_margin="5dp"
             android:layout_height="200dp"
-            android:layout_marginBottom="30dp"
-
+            android:layout_marginBottom="50dp"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/favTitle"
-                android:layout_margin="10dp"
-                android:textSize="20dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
@@ -45,8 +37,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prochain passage"
-                android:layout_marginTop="20dp"
+                android:text="@string/nextSchedules"
+                android:layout_marginTop="5dp"
                 android:id="@+id/nextScheduleTitle"/>
 
             <androidx.recyclerview.widget.RecyclerView

@@ -60,11 +60,7 @@ class ScheduleActivity: AppCompatActivity() {
             direct2 = destinations[1]
             direction2RadioButton.isVisible = true
         }
-        if(transportType == TYPE_RER) {
-            direct1 = destinations[1]
-            direct2 = destinations[0]
-        }
-        if((transportType == TYPE_METRO && line == "14")
+        if((transportType == TYPE_METRO && line == "14") || (transportType == TYPE_RER)
             || (transportType == TYPE_TRAM && (line == "2" || line == "5" || line == "7"))
             || (transportType == TYPE_NOCTI) && (line == "11" || line == "12" || line == "14" || line == "21"
                     || line == "23" || line == "24" || line == "35" || line == "41" || line == "45"
@@ -84,7 +80,7 @@ class ScheduleActivity: AppCompatActivity() {
         getLineSchedule(service, transportType, stationName, line, way)
 
 
-        directionRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+        directionRadioGroup.setOnCheckedChangeListener { _, _ ->
 
             if(direction1RadioButton.isChecked) {
                 way = "A"
@@ -94,7 +90,7 @@ class ScheduleActivity: AppCompatActivity() {
                 way = "R"
                 favDirection = direct2
             }
-            if((transportType == TYPE_METRO && line == "14")
+            if((transportType == TYPE_METRO && line == "14") || (transportType == TYPE_RER)
                 || (transportType == TYPE_TRAM && (line == "2" || line == "5" || line == "7"))
                 || (transportType == TYPE_NOCTI) && (line == "11" || line == "12" || line == "14" || line == "21"
                         || line == "23" || line == "24" || line == "35" || line == "41" || line == "45"
@@ -138,14 +134,14 @@ class ScheduleActivity: AppCompatActivity() {
 
         if(!favoris) {
             favButton.setImageResource(R.drawable.ic_favorite_black_24dp)
-            Toast.makeText(this, R.string.toastAddToFav, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastAddToFav, Toast.LENGTH_LONG).show()
             favoris = true
             runBlocking {
                 favorisDao?.addStation(stat)
             }
         } else {
             favButton.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            Toast.makeText(this, R.string.toastDeleteFromFav, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.toastDeleteFromFav, Toast.LENGTH_LONG).show()
             favoris = false
             runBlocking {
                 favorisDao?.deleteStation(favorisDao?.getStation(stationName, direction, transportType)!!)
@@ -176,11 +172,7 @@ class ScheduleActivity: AppCompatActivity() {
             results.result.schedules.map {
                 time.add(it.message)
                 destinations.add(it.destination)
-                scheduleRecyclerView.adapter =
-                    ScheduleAdapter(
-                        time,
-                        destinations
-                    )
+                scheduleRecyclerView.adapter = ScheduleAdapter(time, destinations)
             }
         }
     }

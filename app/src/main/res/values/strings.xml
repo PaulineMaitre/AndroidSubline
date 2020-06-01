@@ -1,13 +1,12 @@
 <resources>
     <string name = "app_name">Subline</string>
-    <string name = "navigationHome">Home</string>
+    <string name = "navigationFav">Favoris</string>
     <string name = "navigationFind">Find</string>
     <string name = "navigationInfo">Infos</string>
 
     <string name = "findLine">Choisissez une ligne</string>
     <string name = "listStations">Liste des stations sur cette ligne :</string>
     <string name = "direction">Direction :</string>
-    <string name = "nextDepartures">Prochainement :</string>
     <string name = "stationName">Nom station</string>
     <string name = "favTitle">Mes favoris</string>
     <string name = "infoTrafficTitle">Info Trafic</string>
@@ -26,9 +25,8 @@
     <string name = "scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
     <string name = "lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="buttonMetroTraffic">Métro</string>
     <string name="buttonRerTraffic">RER</string>
     <string name="buttonTramwayTraffic">Tramway</string>
+    <string name="nextSchedules">Prochains passages :</string>
 </resources>
