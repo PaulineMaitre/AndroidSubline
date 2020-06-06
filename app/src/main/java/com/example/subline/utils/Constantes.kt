@@ -15,7 +15,7 @@ val PICTO_METRO = listOf(R.drawable.m1, R.drawable.m2, R.drawable.m3, R.drawable
     R.drawable.m6, R.drawable.m7, R.drawable.m7b, R.drawable.m8, R.drawable.m9, R.drawable.m10, R.drawable.m11,
     R.drawable.m12, R.drawable.m13, R.drawable.m14, R.drawable.mfun, R.drawable.orlyval)
 
-val PICTO_RER = listOf(R.drawable.rera, R.drawable.rerb, R.drawable.rerc, R.drawable.rerd, R.drawable.rere)
+val PICTO_RER = listOf(R.drawable.ra, R.drawable.rb, R.drawable.rc, R.drawable.rd, R.drawable.re)
 
 var PICTO_TRAM = listOf(R.drawable.t1, R.drawable.t2, R.drawable.t3a, R.drawable.t3b, R.drawable.t4,
     R.drawable.t5, R.drawable.t6, R.drawable.t7, R.drawable.t8, R.drawable.t11)

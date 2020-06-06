@@ -1,12 +1,16 @@
 package com.example.subline
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.subline.find.FindFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +20,22 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
 
-        val navController = findNavController(R.id.nav_host_fragment)
+
+        var navController = findNavController(R.id.nav_host_fragment)
+        /*if(intent.getStringExtra("stationName") != null) {
+            Log.d("EPF", "TEST 1")
+            finish()
+            val fragment = FindFragment(intent.getStringExtra("stationName"))
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.nav_host_fragment, fragment)
+            ft.commit()
+        }
+        else {
+            Log.d("EPF", "TEST 2")
+
+        }*/
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -24,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigationFav, R.id.navigationFind,R.id.navigationInfo
             )
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

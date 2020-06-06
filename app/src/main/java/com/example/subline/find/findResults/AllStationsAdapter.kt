@@ -16,22 +16,19 @@ import kotlinx.android.synthetic.main.list_station_item.view.*
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-class AllStationsAdapter (val listStations: List<String>, val pictoLine: Int, val lineCode: String, val transportType: String): RecyclerView.Adapter<AllStationsAdapter.StationsViewHolder>() {
+class AllStationsAdapter (private val listStations: List<String>, private val pictoLine: Int, private val lineCode: String, private val transportType: String): RecyclerView.Adapter<AllStationsAdapter.StationsViewHolder>() {
 
     class StationsViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StationsViewHolder {
-        val layoutInfater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInfater.inflate(R.layout.list_station_item, parent,false)
+        val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
+        val view: View = layoutInflater.inflate(R.layout.list_station_item, parent,false)
 
-        return StationsViewHolder(
-            view
-        )
+        return StationsViewHolder(view)
     }
 
     override fun getItemCount(): Int = listStations.size
-
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: StationsViewHolder, position: Int) {

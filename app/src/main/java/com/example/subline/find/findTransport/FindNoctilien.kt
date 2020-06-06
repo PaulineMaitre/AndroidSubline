@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
-import com.example.subline.find.findResults.AllLinesAdapter
+import com.example.subline.find.findResults.AllLinesByTypeAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_NOCTI
@@ -46,7 +46,7 @@ class FindNoctilien : Fragment() {
 
         allLinesRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allLinesRv.adapter = AllLinesAdapter(noctiliens, allStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
+        allLinesRv.adapter = AllLinesByTypeAdapter(noctiliens, allStationsRv, listStationsTextView, TYPE_NOCTI, PICTO_NOCTI)
         return view
     }
 

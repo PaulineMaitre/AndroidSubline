@@ -23,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.InputStream
 
-class AllLinesAdapter (private val lineCodes: List<String>, private var stations: RecyclerView, val listStationsTextView: TextView, private val transportType: String, private val pictoLine: List<Int>) : RecyclerView.Adapter<AllLinesAdapter.LineViewHolder>() {
+class AllLinesByTypeAdapter (private val lineCodes: List<String>, private var stations: RecyclerView, private val listStationsTextView: TextView, private val transportType: String, private val pictoLine: List<Int>) : RecyclerView.Adapter<AllLinesByTypeAdapter.LineViewHolder>() {
 
         class LineViewHolder(val lineView: View) : RecyclerView.ViewHolder(lineView)
 

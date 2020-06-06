@@ -46,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/favScheduleRecyclerView"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="?attr/actionBarSize"/>
 
       </LinearLayout>
 

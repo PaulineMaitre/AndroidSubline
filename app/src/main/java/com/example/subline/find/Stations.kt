@@ -2,7 +2,6 @@ package com.example.subline.find
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.subline.R
 
 @Entity(tableName = "favoris")
 data class Station (@PrimaryKey(autoGenerate = true) val id: Int,

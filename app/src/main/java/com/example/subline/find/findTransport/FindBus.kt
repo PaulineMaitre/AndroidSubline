@@ -47,12 +47,11 @@ class FindBus : Fragment() {
                     buses.add(it.code)
                 }
             }
-            Log.d("EPF", "bus: ${buses.size} - ${buses}")
         }
         val adapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1, buses)
         searchBus.threshold = 0
         searchBus.setAdapter(adapter)
-        searchBus.setOnItemClickListener { parent, viewSearch, position, id ->
+        searchBus.setOnItemClickListener { parent, _, position, _ ->
             hideKeyboard(view.context, view)
             val bus = parent.getItemAtPosition(position).toString()
             val listStations = getListOfStations(view, bus)

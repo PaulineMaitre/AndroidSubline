@@ -39,6 +39,8 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
+
+
          val root = inflater.inflate(R.layout.fragment_home, container, false)
          val favListRecyclerView : RecyclerView = root.findViewById(R.id.favHomeRecyclerView)
          val scheduleTextView : TextView = root.findViewById(R.id.nextScheduleTitle)

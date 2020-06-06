@@ -1,29 +1,31 @@
 <resources>
-    <string name = "app_name">Subline</string>
-    <string name = "navigationFav">Favoris</string>
-    <string name = "navigationFind">Find</string>
-    <string name = "navigationInfo">Infos</string>
+    <string name="app_name">Subline</string>
+    <string name="navigationFav">Favoris</string>
+    <string name="navigationFind">Find</string>
+    <string name="navigationInfo">Infos</string>
 
-    <string name = "findLine">Choisissez une ligne</string>
-    <string name = "listStations">Liste des stations sur cette ligne :</string>
-    <string name = "direction">Direction :</string>
-    <string name = "stationName">Nom station</string>
-    <string name = "favTitle">Mes favoris</string>
-    <string name = "infoTrafficTitle">Info Trafic</string>
-    <string name = "lineName">Ligne</string>
-    <string name = "trafficStateTitle">Etat : </string>
-    <string name = "detailTrafficTitle">Détail : </string>
-    <string name = "messageTraffic">message</string>
-    <string name = "searchStation">Rechercher une station</string>
+    <string name="findLine">Choisissez une ligne</string>
+    <string name="listStations">Liste des stations sur cette ligne :</string>
+    <string name="listLines">Liste des lignes dans cette station :</string>
+    <string name="listLinesToComplete">Liste des lignes à </string>
+    <string name="direction">Direction :</string>
+    <string name="stationName">Nom station</string>
+    <string name="favTitle">Mes favoris</string>
+    <string name="infoTrafficTitle">Info Trafic</string>
+    <string name="lineName">Ligne</string>
+    <string name="trafficStateTitle">Etat : </string>
+    <string name="detailTrafficTitle">Détail : </string>
+    <string name="messageTraffic">message</string>
+    <string name="searchStation">Rechercher une station</string>
 
-    <string name = "destinationByDefault">Destination unavailable</string>
-    <string name = "scheduleByDefault">Schedule unavailable</string>
+    <string name="destinationByDefault">Destination unavailable</string>
+    <string name="scheduleByDefault">Schedule unavailable</string>
 
-    <string name = "toastAddToFav">La ligne a bien été ajoutée aux favoris</string>
-    <string name = "toastDeleteFromFav">La ligne a bien été supprimée des favoris</string>
+    <string name="toastAddToFav">La ligne a bien été ajoutée aux favoris</string>
+    <string name="toastDeleteFromFav">La ligne a bien été supprimée des favoris</string>
 
-    <string name = "scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
-    <string name = "lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
+    <string name="scheduleError">Les informations de cette station ne sont pas disponibles actuellement</string>
+    <string name="lineError">Les informations de cette ligne ne sont pas disponibles actuellement</string>
 
     <string name="buttonMetroTraffic">Métro</string>
     <string name="buttonRerTraffic">RER</string>

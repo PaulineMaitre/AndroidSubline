@@ -16,8 +16,23 @@
           android:hint="@string/searchStation" />
 
       <TextView
-          android:id="@+id/testTV"
+          android:id="@+id/listLinesTextView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/listLines"
+          android:textSize="18dp"
+          android:visibility="gone"
+          android:layout_marginLeft="10dp"
+          android:layout_marginTop="10dp"/>
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/allLinesInStationRv"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_marginTop="12dp"
+          android:layout_marginLeft="5dp"
+          android:layout_marginRight="5dp"
+          android:layout_marginBottom="?attr/actionBarSize"/>
 
 </LinearLayout>

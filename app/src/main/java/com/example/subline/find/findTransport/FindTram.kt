@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
-import com.example.subline.find.findResults.AllLinesAdapter
+import com.example.subline.find.findResults.AllLinesByTypeAdapter
 import com.example.subline.service.RatpService
 import com.example.subline.utils.BASE_URL_TRANSPORT
 import com.example.subline.utils.PICTO_TRAM
@@ -49,7 +49,7 @@ class FindTram : Fragment() {
 
         allLinesRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
         allStationsRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allLinesRv.adapter = AllLinesAdapter(tramways, allStationsRv, listStationsTextView, TYPE_TRAM, PICTO_TRAM)
+        allLinesRv.adapter = AllLinesByTypeAdapter(tramways, allStationsRv, listStationsTextView, TYPE_TRAM, PICTO_TRAM)
         return view
     }
 

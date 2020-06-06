@@ -20,12 +20,12 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
-    <ImageView
-        android:id="@+id/logoTrafficImageView"
-        android:layout_marginStart="10dp"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/logo_metro"/>
+        <ImageView
+            android:id="@+id/logoTrafficImageView"
+            android:layout_marginStart="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/logo_metro"/>
 
 </LinearLayout>
 

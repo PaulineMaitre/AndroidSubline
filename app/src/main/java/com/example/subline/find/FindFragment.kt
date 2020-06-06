@@ -2,6 +2,7 @@ package com.example.subline.find
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +15,13 @@ import com.example.subline.find.findTransport.FindNoctilien
 import com.example.subline.find.findTransport.FindRER
 import com.example.subline.find.findTransport.FindStation
 import com.example.subline.find.findTransport.FindTram
-import com.example.subline.home.QRCode
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 
-class FindFragment : Fragment() {
+class FindFragment(private val stationName: String = "") : Fragment() {
 
     private lateinit var viewPager : ViewPager
     private lateinit var tabLayout: TabLayout
-
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -50,7 +48,7 @@ class FindFragment : Fragment() {
 
     private fun setupViewPager(viewPager : ViewPager){
         var adapter = FindTabLayoutAdapter(childFragmentManager)
-        adapter.addFragment(FindStation())
+        adapter.addFragment(FindStation(stationName))
         adapter.addFragment(FindMetros())
         adapter.addFragment(FindRER())
         adapter.addFragment(FindTram())
@@ -66,6 +64,6 @@ class FindFragment : Fragment() {
         tabLayout.getTabAt(2)!!.setIcon(R.drawable.logo_rer)
         tabLayout.getTabAt(3)!!.setIcon(R.drawable.logo_tram)
         tabLayout.getTabAt(4)!!.setIcon(R.drawable.logo_bus)
-        tabLayout.getTabAt(5)!!.setIcon(R.drawable.logo_noctilien)
+        tabLayout.getTabAt(5)!!.setIcon(R.drawable.logo_nocti)
     }
 }
