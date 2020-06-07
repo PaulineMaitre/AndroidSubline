@@ -17,7 +17,7 @@ import com.example.subline.find.findTransport.FindTram
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 
-class FindFragment(private val stationName: String = "") : Fragment() {
+class FindFragment : Fragment() {
 
     private lateinit var viewPager : ViewPager
     private lateinit var tabLayout: TabLayout
@@ -46,7 +46,7 @@ class FindFragment(private val stationName: String = "") : Fragment() {
 
     private fun setupViewPager(viewPager : ViewPager){
         var adapter = FindTabLayoutAdapter(childFragmentManager)
-        adapter.addFragment(FindStation(stationName))
+        adapter.addFragment(FindStation())
         adapter.addFragment(FindMetros())
         adapter.addFragment(FindRER())
         adapter.addFragment(FindTram())
