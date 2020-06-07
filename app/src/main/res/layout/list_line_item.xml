@@ -5,7 +5,14 @@
     android:layout_height="60dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    android:id="@+id/cardview">
+    android:backgroundTint="@color/Blank">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_margin="2dp"
+       android:background="@color/Blank"
+       android:id="@+id/cardview">
 
    <ImageView
        android:id="@+id/lineIcon"
@@ -13,8 +20,8 @@
        android:layout_height="match_parent"
        android:padding="10dp"
        android:src="@drawable/logo_metro"
-       android:layout_gravity="center_horizontal"
+       android:layout_gravity="center"
        android:baselineAlignBottom="true"/>
 
-
+</LinearLayout>
 </androidx.cardview.widget.CardView>

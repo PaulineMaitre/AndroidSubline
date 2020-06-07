@@ -4,16 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".find.findTransport.FindStation"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="20dp">
 
-      <AutoCompleteTextView
-          android:id="@+id/searchStation"
+      <androidx.cardview.widget.CardView
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="10dp"
-          android:inputType="text"
-          android:imeOptions="actionSearch"
-          android:hint="@string/searchStation" />
+          android:layout_height="50dp"
+          android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                  <ImageView
+                      android:layout_width="30dp"
+                      android:layout_margin="5dp"
+                      android:layout_height="30dp"
+                      android:layout_gravity="center_vertical"
+                      android:src="@drawable/ic_search_black_24dp" />
+
+                  <AutoCompleteTextView
+                      android:background="@android:color/transparent"
+                      android:id="@+id/searchStation"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:inputType="text"
+                      android:imeOptions="actionSearch"
+                      android:hint="@string/searchStation" />
+            </LinearLayout>
+
+
+
+      </androidx.cardview.widget.CardView>
+
+
 
       <TextView
           android:id="@+id/listLinesTextView"

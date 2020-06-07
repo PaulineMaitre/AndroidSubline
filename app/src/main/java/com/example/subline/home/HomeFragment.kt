@@ -91,11 +91,9 @@ class HomeFragment : Fragment() {
             if(favList.isEmpty()){
                 layout_nofavoris.visibility = View.VISIBLE
                 layout_favoris.visibility = View.GONE
-                Log.d("RRLMM","VI $favList")
             }else{
                 layout_nofavoris.visibility = View.GONE
                 layout_favoris.visibility = View.VISIBLE
-                Log.d("RRLMM","PO $favList")
                 favListRecyclerView.adapter = FavorisAdapter(favList.toMutableList(), favScheduleRecyclerView, scheduleTextView,listMarker,layout_nofavoris)
             }
         }
