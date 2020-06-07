@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.list_favoris_item.view.favoris_direction
 import kotlinx.android.synthetic.main.list_favoris_item.view.lineIcon
 import kotlinx.coroutines.runBlocking
 
-class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView, val listMarker : ArrayList<Marker>,val layout_nofavoris : RelativeLayout) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
+class FavorisAdapter (private val favoris : MutableList<Station>, private val favScheduleRecyclerView : RecyclerView, private val scheduleTextView : TextView, private val listMarker : ArrayList<Marker>, private val layout_nofavoris : RelativeLayout) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
 
     private var favDao : FavorisDao? = null
     private lateinit var context: Context
@@ -64,14 +64,14 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
         val transportType = favori.type
 
         if(checkedposition == position){
-            holder.favView.carview_fav.backgroundTintList = context.resources!!.getColorStateList(R.color.butn_pressed)
+            holder.favView.carview_fav.backgroundTintList = context.resources!!.getColorStateList(R.color.buttonPressed)
         }else{
             holder.favView.carview_fav.backgroundTintList = context.resources!!.getColorStateList(R.color.Blank)
         }
 
         holder.favView.deleteFavButton.setOnClickListener {
             AlertDialog.Builder(context).apply {
-                setTitle("Supression")
+                setTitle(context.getString(R.string.titleDeleteAlert))
                 setMessage("Etes-vous sur de vouloir supprimer ${favori.name} ?")
                 setNegativeButton(android.R.string.no){_,_ -> }
                 setPositiveButton(android.R.string.yes){_,_ ->
@@ -86,9 +86,8 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
                     if(favoris.isEmpty()){
                         layout_nofavoris.visibility = View.VISIBLE
                     }
-                    }
+                }
                 show()
-
             }
         }
 
@@ -96,8 +95,6 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
             notifyItemChanged(checkedposition)
             checkedposition = position
             notifyItemChanged(checkedposition)
-
-
 
             var scheduleList = arrayListOf<String>()
             var destinations = arrayListOf<String>()
@@ -112,9 +109,7 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
                 favScheduleRecyclerView.adapter = ScheduleAdapter(scheduleList, destinations)
             }
        }
-
     }
-
 }
 
 

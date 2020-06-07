@@ -44,5 +44,4 @@
           android:layout_marginRight="5dp"
           android:layout_marginBottom="?attr/actionBarSize"/>
 
-
 </LinearLayout>

@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">Subline</string>
+    <string name="appName">Subline</string>
     <string name="navigationFav">Favoris</string>
     <string name="navigationFind">Rechercher</string>
     <string name="navigationInfo">Info trafic</string>
+
+    <string name="activityQRCodeScan">Scanner le QRCode de la station</string>
+    <string name="activityQRCodeResult">Resultat du QR Code</string>
+    <string name="activitySchedule">Horaires</string>
 
     <string name="findLine">Choisissez une ligne</string>
     <string name="listStations">Liste des stations sur cette ligne :</string>
@@ -32,8 +36,8 @@
     <string name="buttonTramwayTraffic">Tramway</string>
     <string name="nextSchedules">Prochains passages :</string>
     <string name="station">Station</string>
-    <string name="directions_direction">Directions direction</string>
     <string name="noFav">Aucun favori</string>
     <string name="addFav">Cliquez sur l\'image pour en ajouter</string>
-    <string name="num_ro_de_bus">Numéro de bus</string>
+    <string name="busLineNumberHint">Numéro de bus</string>
+    <string name="titleDeleteAlert">Supression</string>
 </resources>

@@ -3,7 +3,6 @@ package com.example.subline.find.findTransport
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_find_bus.*
 import kotlinx.coroutines.runBlocking
 
 /**
- * A simple [Fragment] subclass.
+ * A simple Find subclass.
  */
 class FindBus : Fragment() {
 
@@ -73,7 +72,6 @@ class FindBus : Fragment() {
                     listStations.add(it.name)
                     listStations.sort()
                 }
-                Log.d("EPF", "statBus $listStations")
             }
             listStationsTextView.isVisible = true
         } catch (e: retrofit2.HttpException) {

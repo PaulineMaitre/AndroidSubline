@@ -17,7 +17,7 @@
             android:layout_height="90dp"
             android:orientation="horizontal"
             android:background="@color/colorPrimary"
-             android:id="@+id/horaire_linear">
+                android:id="@+id/horaire_linear">
 
 
             <ImageView

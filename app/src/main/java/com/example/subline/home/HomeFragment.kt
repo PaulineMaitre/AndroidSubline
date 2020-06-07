@@ -35,14 +35,14 @@ import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment() {
 
-        lateinit var mapFragment: SupportMapFragment
+        private lateinit var mapFragment: SupportMapFragment
         lateinit var map: GoogleMap
-        lateinit var fusedLocationClient: FusedLocationProviderClient
-        lateinit var lastLocation: LatLng
-        lateinit var favList : List<Station>
-        lateinit var favListRecyclerView : RecyclerView
-        lateinit var scheduleTextView : TextView
-        lateinit var layout_nofavoris : RelativeLayout
+        private lateinit var fusedLocationClient: FusedLocationProviderClient
+        private lateinit var lastLocation: LatLng
+        private lateinit var favList : List<Station>
+        private lateinit var favListRecyclerView : RecyclerView
+        private lateinit var scheduleTextView : TextView
+        private lateinit var layout_nofavoris : RelativeLayout
         lateinit var listMarker: ArrayList<Marker>
 
     override fun onCreateView(
@@ -51,18 +51,15 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-
-
          val root = inflater.inflate(R.layout.fragment_home, container, false)
 
          scheduleTextView  = root.findViewById(R.id.nextScheduleTitle)
          layout_nofavoris = root.findViewById(R.id.layout_nofavoris)
          val layout_favoris = root.findViewById<LinearLayout>(R.id.layout_favoris)
-        val Imageview_nofav = root.findViewById<ImageView>(R.id.noFavImage)
+         val Imageview_nofav = root.findViewById<ImageView>(R.id.noFavImage)
          favListRecyclerView = root.findViewById(R.id.favHomeRecyclerView)
          scheduleTextView.isVisible = false
          val favScheduleRecyclerView = root.findViewById<RecyclerView>(R.id.favScheduleRecyclerView)
-
 
          val database =
              Room.databaseBuilder(activity!!.baseContext, AppDatabase::class.java, "favoris")
@@ -97,10 +94,8 @@ class HomeFragment : Fragment() {
                 favListRecyclerView.adapter = FavorisAdapter(favList.toMutableList(), favScheduleRecyclerView, scheduleTextView,listMarker,layout_nofavoris)
             }
         }
-
          return root
     }
-
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -123,7 +118,6 @@ class HomeFragment : Fragment() {
                             .position(lastLocation)
                             .title("Vous êtes ici"))
                             .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-
                 }
 
                 favList.map {

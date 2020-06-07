@@ -2,10 +2,8 @@ package com.example.subline.utils
 
 import android.content.Context
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,7 +54,6 @@ fun getLinesByStation(context: Context, listLinesTV: TextView, lines: AllLines.L
                 if(!linesByStation.contains(line))
                 {
                     linesByStation.add(line)
-                    Log.d("EPF", "match line $line")//.transportType} - ${line.lineCode}")
                 }
             }
         }
@@ -100,7 +97,6 @@ fun setAdapterStation(activity: FragmentActivity?, allLinesInStationRv: Recycler
 }
 
 fun setAdapterQRCodeResult(context: Context, allLinesInStationRv: RecyclerView, stationName: String, linesByStation: ArrayList<AllLines.Line>, listPicto: List<Int>) {
-    //allLinesInStationRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
     allLinesInStationRv.layoutManager = LinearLayoutManager(context)
     allLinesInStationRv.adapter = AllLinesByStationAdapter(stationName, linesByStation, listPicto)
 }

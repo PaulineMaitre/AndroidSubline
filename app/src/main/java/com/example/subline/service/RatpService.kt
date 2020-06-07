@@ -5,33 +5,33 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RatpService {
-    //REQ1 get all metro lines
+    // get all metro lines
     @GET("/v4/lines/{type}")
     suspend fun getLinesByType(@Path("type") type: String) : GetLinesByTypeResult
 
-    //REQ2 get infos for one metro line
+    // get infos for one metro line
     @GET("/v4/lines/{type}/{code}")
     suspend fun getLineInfo(@Path("type") type: String, @Path ("code") code: String) : GetLineInfoResult
 
-    //REQ2 get infos for one metro line
+    // get destinations of one line
     @GET("/v4/destinations/{type}/{code}")
     suspend fun getDestinations(@Path("type") type: String, @Path ("code") code: String) : GetDestinationsResult
 
-    //REQ3 get schedules for one line in a given station
+    // get schedules for one line in a given station
     @GET("/v4/schedules/{type}/{code}/{station}/{way}")
     suspend fun getSchedules(@Path("type") type: String, @Path("code") code: String, @Path("station") station: String, @Path("way") way: String) : GetSchedulesResult
 
-    //REQ4 get list of stations for one metro line
+    // get list of stations for one metro line
     @GET("/v4/stations/{type}/{code}")
     suspend fun getStations(@Path("type") type: String, @Path ("code") code: String) : GetStationsResult
 
-    //REQ5 get traffic info for one metro line
+    // get traffic info for one metro line
     @GET("/v4/traffic/{type}/{code}")
     suspend fun getTrafficInfo(@Path("type") type: String, @Path ("code") code: String) : GetTrafficInfoResult
     @GET("/v4/traffic")
     suspend fun getTrafficInfoC() : TrafficResult.Traffic
 
-    //REQ6 get all transport lines
+    // get all transport lines
     @GET("/v4/lines")
     suspend fun getAllLines() : GetLinesResult
 }

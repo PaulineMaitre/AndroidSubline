@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.subline.R
 import com.example.subline.find.findResults.AllLinesByTypeAdapter
 import com.example.subline.service.RatpService
@@ -19,7 +18,7 @@ import com.example.subline.utils.retrofit
 import kotlinx.coroutines.runBlocking
 
 /**
- * A simple [Fragment] subclass.
+ * A simple Find subclass.
  */
 class FindNoctilien : Fragment() {
 

@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.io.*
 
-
 class DatabaseJSON {
 
     fun save(context: Context?, fileName: String, objectSave: Any?){
@@ -16,7 +15,7 @@ class DatabaseJSON {
         val objectSaveConvert = objectSave
 
         val objectSaveJson = gson.toJson(objectSaveConvert)
-        val myExternalFile: File = File(context?.getFilesDir(),fileName)
+        val myExternalFile: File = File(context?.filesDir,fileName)
         try {
             val fileOutPutStream = FileOutputStream(myExternalFile)
             fileOutPutStream.write(objectSaveJson.toByteArray())
@@ -28,11 +27,11 @@ class DatabaseJSON {
 
     fun <T> load(context: Context?, fileName : String, classOfT: Class<T>?): T {
         val gson = Gson()
-        var myExternalFile: File = File(context?.getFilesDir(),fileName)
+        var myExternalFile = File(context?.filesDir,fileName)
 
         val fileInputStream = FileInputStream(myExternalFile)
-        val inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
-        val bufferedReader: BufferedReader = BufferedReader(inputStreamReader)
+        val inputStreamReader = InputStreamReader(fileInputStream)
+        val bufferedReader = BufferedReader(inputStreamReader)
         val stringBuilder: StringBuilder = StringBuilder()
         var text: String? = null
         while ({ text = bufferedReader.readLine(); text }() != null) {
@@ -41,8 +40,6 @@ class DatabaseJSON {
         fileInputStream.close()
 
         return gson.fromJson(stringBuilder.toString(), classOfT)
-
-
     }
 
 }

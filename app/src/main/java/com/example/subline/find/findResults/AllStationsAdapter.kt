@@ -20,7 +20,6 @@ class AllStationsAdapter (private val listStations: List<String>, private val pi
 
     class StationsViewHolder(val statView: View) : RecyclerView.ViewHolder(statView)
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StationsViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.list_station_item, parent,false)

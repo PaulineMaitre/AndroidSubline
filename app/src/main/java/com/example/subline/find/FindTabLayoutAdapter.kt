@@ -7,8 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class FindTabLayoutAdapter (fm : FragmentManager): FragmentPagerAdapter(fm) {
 
-    val fragmentList = arrayListOf<Fragment>()
-    val fragmentTitle = arrayListOf<String>()
+    private val fragmentList = arrayListOf<Fragment>()
 
     override fun getItem(position: Int): Fragment {
         return fragmentList[position]

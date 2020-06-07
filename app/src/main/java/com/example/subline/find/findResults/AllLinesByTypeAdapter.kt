@@ -16,7 +16,6 @@ import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.android.synthetic.main.list_line_item.view.*
 import kotlinx.android.synthetic.main.list_line_item.view.lineIcon
 import kotlinx.coroutines.runBlocking
@@ -49,9 +48,9 @@ class AllLinesByTypeAdapter (private val lineCodes: List<String>, private var st
         override fun onBindViewHolder(holder: LineViewHolder, position: Int) {
 
             if(checkedposition == position){
-                holder.lineView.cardview.backgroundTintList = context.resources!!.getColorStateList(R.color.colorPrimary)
+                holder.lineView.cardView.backgroundTintList = context.resources!!.getColorStateList(R.color.colorPrimary)
             }else{
-                holder.lineView.cardview.backgroundTintList = context.resources!!.getColorStateList(R.color.Blank)
+                holder.lineView.cardView.backgroundTintList = context.resources!!.getColorStateList(R.color.Blank)
             }
 
             var lineCode = lineCodes[position]
@@ -95,9 +94,7 @@ class AllLinesByTypeAdapter (private val lineCodes: List<String>, private var st
             return listStations
         }
 
-
-
-        private fun getLinePicto(lineId: String, imageview: ImageView) {
+        /*private fun getLinePicto(lineId: String, imageview: ImageView) {
 
             val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
             runBlocking {
@@ -120,7 +117,5 @@ class AllLinesByTypeAdapter (private val lineCodes: List<String>, private var st
                     }
                 })
             }
-        }
-
-
+        }*/
     }

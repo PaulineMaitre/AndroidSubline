@@ -7,7 +7,6 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,8 +20,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="@string/buttonMetroTraffic"
                 android:textAllCaps="false"
-                android:backgroundTint="@color/Blank"
-                />
+                android:backgroundTint="@color/Blank" />
 
             <Button
                 android:id="@+id/rerTrafficButton"
@@ -46,7 +44,6 @@
                 android:textAllCaps="false" />
 
         </LinearLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

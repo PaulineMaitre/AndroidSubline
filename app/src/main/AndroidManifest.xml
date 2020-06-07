@@ -11,16 +11,16 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_subline"
-        android:label="@string/app_name"
+        android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_subline_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".find.findResults.ResultQRCode"
-            android:label="Resultat du QR Code" />
+            android:label="@string/activityQRCodeResult" />
         <activity
             android:name=".find.QRCode"
-            android:label="Scanner le QRCode de la station" />
+            android:label="@string/activityQRCodeScan" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SlashTheme">
@@ -31,10 +31,10 @@
         </activity>
         <activity
             android:name=".find.findResults.ScheduleActivity"
-            android:label="Horaires" />
+            android:label="@string/activitySchedule" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" />
+            android:label="@string/appName" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

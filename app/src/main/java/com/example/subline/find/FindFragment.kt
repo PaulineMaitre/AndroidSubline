@@ -2,7 +2,6 @@ package com.example.subline.find
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,12 +36,11 @@ class FindFragment(private val stationName: String = "") : Fragment() {
         tabLayout.setupWithViewPager(viewPager)
         setupTabIcons()
 
-        fabQRCode.setOnClickListener { view ->
+        fabQRCode.setOnClickListener { _ ->
             val intent = Intent(this.context, QRCode::class.java)
             startActivity(intent)
             true
         }
-
         return view
     }
 
@@ -55,7 +53,6 @@ class FindFragment(private val stationName: String = "") : Fragment() {
         adapter.addFragment(FindBus())
         adapter.addFragment(FindNoctilien())
         viewPager.adapter = adapter
-
     }
 
     private fun setupTabIcons(){

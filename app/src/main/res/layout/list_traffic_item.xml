@@ -51,7 +51,7 @@
             android:textSize="17sp" />
 
         <ImageView
-            android:id="@+id/iv_etattraffic"
+            android:id="@+id/trafficStateImageView"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/tick"

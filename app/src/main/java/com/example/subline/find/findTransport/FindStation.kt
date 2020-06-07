@@ -16,13 +16,12 @@ import com.example.subline.R
 import com.example.subline.data.AllLines
 import com.example.subline.data.DatabaseJSON
 import com.example.subline.utils.*
-import kotlinx.coroutines.runBlocking
 import java.io.File
 
 /**
- * A simple [Fragment] subclass.
+ * A simple Find subclass.
  */
-class FindStation(val stationName: String = ""): Fragment() {
+class FindStation(): Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +37,6 @@ class FindStation(val stationName: String = ""): Fragment() {
         val lines = DatabaseJSON().load(this.context,"TransportLines.json", AllLines.Lines::class.java)
 
         extractListStations(view, lines)
-
         return view
     }
 
@@ -54,9 +52,7 @@ class FindStation(val stationName: String = ""): Fragment() {
     }
 
     private fun selectStation(stationName: String, view: View, lines: AllLines.Lines, listStationsSort: ArrayList<AllLines.Station>) {
-
         val listLinesTV = view.findViewById<TextView>(R.id.listLinesTextView)
-
         val slugStation = getSlugFromStationName(listStationsSort, stationName)
         val linesByStation: ArrayList<AllLines.Line> = getLinesByStation(view.context, listLinesTV, lines, slugStation)
         val listPicto = getListPicto(view.context, linesByStation)

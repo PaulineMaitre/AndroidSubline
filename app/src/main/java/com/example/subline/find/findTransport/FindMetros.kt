@@ -18,7 +18,7 @@ import com.example.subline.utils.retrofit
 import kotlinx.coroutines.runBlocking
 
 /**
- * A simple [Fragment] subclass.
+ * A simple Find subclass.
  */
 class FindMetros: Fragment() {
 
