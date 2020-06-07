@@ -2,9 +2,6 @@ package com.example.subline.home
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,8 +25,6 @@ import kotlinx.android.synthetic.main.list_favoris_item.view.deleteFavButton
 import kotlinx.android.synthetic.main.list_favoris_item.view.favStation
 import kotlinx.android.synthetic.main.list_favoris_item.view.favoris_direction
 import kotlinx.android.synthetic.main.list_favoris_item.view.lineIcon
-import kotlinx.android.synthetic.main.list_favoris_item2.view.*
-import kotlinx.android.synthetic.main.list_horaire_item.view.*
 import kotlinx.coroutines.runBlocking
 
 class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecyclerView : RecyclerView, val scheduleTextView : TextView, val listMarker : ArrayList<Marker>,val layout_nofavoris : RelativeLayout) : RecyclerView.Adapter<FavorisAdapter.FavorisViewHolder>() {
@@ -42,7 +37,7 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):FavorisViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInflater.inflate(R.layout.list_favoris_item2, parent, false)
+        val view: View = layoutInflater.inflate(R.layout.list_favoris_item, parent, false)
 
         val databasesaved =
             Room.databaseBuilder(parent.context, AppDatabase::class.java, "favoris")
@@ -69,11 +64,9 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
         val transportType = favori.type
 
         if(checkedposition == position){
-            holder.favView.carview_fav.backgroundTintList = context.resources!!.getColorStateList(R.color.colorPrimary)
-            Log.d("RRLM","CHECKED")
+            holder.favView.carview_fav.backgroundTintList = context.resources!!.getColorStateList(R.color.butn_pressed)
         }else{
             holder.favView.carview_fav.backgroundTintList = context.resources!!.getColorStateList(R.color.Blank)
-            Log.d("RRLM","NONCHECKED")
         }
 
         holder.favView.deleteFavButton.setOnClickListener {
@@ -90,6 +83,9 @@ class FavorisAdapter (val favoris : MutableList<Station>, val favScheduleRecycle
                     notifyItemRangeChanged(position, favoris.size)
                     val marker = listMarker[position]
                     marker.remove()
+                    if(favoris.isEmpty()){
+                        layout_nofavoris.visibility = View.VISIBLE
+                    }
                     }
                 show()
 

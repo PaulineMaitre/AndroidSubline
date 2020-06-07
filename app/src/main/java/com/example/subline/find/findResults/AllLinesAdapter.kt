@@ -1,6 +1,7 @@
 package com.example.subline.find.findResults
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,9 @@ import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
 import com.pixplicity.sharp.Sharp
+import kotlinx.android.synthetic.main.list_favoris_item.view.*
 import kotlinx.android.synthetic.main.list_line_item.view.*
+import kotlinx.android.synthetic.main.list_line_item.view.lineIcon
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -25,11 +28,15 @@ import java.io.InputStream
 
 class AllLinesAdapter (private val lineCodes: List<String>, private var stations: RecyclerView, val listStationsTextView: TextView, private val transportType: String, private val pictoLine: List<Int>) : RecyclerView.Adapter<AllLinesAdapter.LineViewHolder>() {
 
+    private var checkedposition : Int = -1
+    private lateinit var context: Context
+
         class LineViewHolder(val lineView: View) : RecyclerView.ViewHolder(lineView)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineViewHolder {
             val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
             val view: View = layoutInflater.inflate(R.layout.list_line_item, parent,false)
+            context = parent.context
 
             return LineViewHolder(
                 view
@@ -40,10 +47,21 @@ class AllLinesAdapter (private val lineCodes: List<String>, private var stations
 
         @SuppressLint("ResourceAsColor")
         override fun onBindViewHolder(holder: LineViewHolder, position: Int) {
+
+            if(checkedposition == position){
+                holder.lineView.cardview.backgroundTintList = context.resources!!.getColorStateList(R.color.colorPrimary)
+            }else{
+                holder.lineView.cardview.backgroundTintList = context.resources!!.getColorStateList(R.color.Blank)
+            }
+
             var lineCode = lineCodes[position]
             holder.lineView.lineIcon.setImageResource(pictoLine[position])
 
             holder.lineView.setOnClickListener {
+
+                notifyItemChanged(checkedposition)
+                checkedposition = position
+                notifyItemChanged(checkedposition)
 
                 var listStations = if(lineCode == "C" || lineCode == "D") {
                     if(lineCode == "C"){

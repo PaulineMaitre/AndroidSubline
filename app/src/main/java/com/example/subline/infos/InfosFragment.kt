@@ -3,28 +3,21 @@ package com.example.subline.infos
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.Adapter
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.subline.R
 import com.example.subline.data.TrafficResult
-import com.example.subline.home.TrafficAdapter
-import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
-import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.activity_appel_api.*
+import kotlinx.android.synthetic.main.fragment_find_station.*
 import kotlinx.coroutines.runBlocking
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.InputStream
 
 class InfosFragment : Fragment() {
 
@@ -35,12 +28,18 @@ class InfosFragment : Fragment() {
     private val listMetro = arrayListOf<TrafficResult.Transport>()
     private val listRer = arrayListOf<TrafficResult.Transport>()
     private val listTram = arrayListOf<TrafficResult.Transport>()
+    private var display_list = ArrayList<String>()
+    private val list_all = ArrayList<String>()
+    private lateinit var adapter : TrafficAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_infos, container, false)
         val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
 
@@ -49,32 +48,39 @@ class InfosFragment : Fragment() {
         rerTrafficButton = view.findViewById(R.id.rerTrafficButton)
         tramTrafficButton = view.findViewById(R.id.tramTrafficButton)
 
+
         runBlocking {
             val results = service.getTrafficInfoC()
             var i = 0
             results.result.metros.map {
                 val metro = TrafficResult.Transport("Metro", it.line, it.slug, it.title, it.message, PICTO_METRO[i])
                 listMetro.add(metro)
+                display_list.add("Métro ${it.line}")
                 i++
             }
             i = 0
             results.result.rers.map {
                 val rer = TrafficResult.Transport("RER", it.line, it.slug, it.title, it.message, PICTO_RER[i])
                 listRer.add(rer)
+                display_list.add("RER ${it.line}")
                 i++
             }
             i = 0
             results.result.tramways.map {
                 val tram = TrafficResult.Transport("Tramway", it.line, it.slug, it.title, it.message, PICTO_TRAM[i])
                 listTram.add(tram)
+                display_list.add("Tram ${it.line}")
                 i++
             }
         }
         var listTraffic = listMetro + listRer + listTram
+        adapter = TrafficAdapter(listTraffic.toMutableList())
+
 
         trafficRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        trafficRecyclerView.adapter = TrafficAdapter(listTraffic)
+        trafficRecyclerView.adapter =
+            TrafficAdapter(listTraffic.toMutableList())
 
         buttonListener(metroTrafficButton, requireContext())
         buttonListener(rerTrafficButton, requireContext())
@@ -111,33 +117,9 @@ class InfosFragment : Fragment() {
                 }
             }
 
-            trafficRecyclerView.adapter = TrafficAdapter(listTrafficChanged)
+            trafficRecyclerView.adapter =
+                TrafficAdapter(listTrafficChanged.toMutableList())
         }
     }
-
-        private fun getLinePicto(lineId: String) {
-        val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
-        runBlocking {
-            val pictoResult = pictoService.getPictoInfo("M1")
-            Log.d("EPF", "test $pictoResult")
-            val id = pictoResult.records[0].fields.noms_des_fichiers.id
-            val result = pictoService.getImage(id)
-            result.enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    val stream: InputStream = response.body()!!.byteStream()
-                    Sharp.loadInputStream(stream).into(imageView)
-                    stream.close()
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-            })
-        }
-    }
-
 
 }
