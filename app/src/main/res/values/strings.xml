@@ -7,7 +7,7 @@
     <string name="findLine">Choisissez une ligne</string>
     <string name="listStations">Liste des stations sur cette ligne :</string>
     <string name="listLines">Liste des lignes dans cette station :</string>
-    <string name="listLinesToComplete">Liste des lignes à </string>
+    <string name="listLinesToComplete">Lignes passant à </string>
     <string name="direction">Direction :</string>
     <string name="stationName">Nom station</string>
     <string name="favTitle">Mes favoris</string>
