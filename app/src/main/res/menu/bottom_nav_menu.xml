@@ -9,12 +9,12 @@
     <item
         android:id="@+id/navigationFind"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/navigationFind" />
+        android:title="Rechercher" />
 
     <item
         android:id="@+id/navigationInfo"
         android:icon="@drawable/ic_info"
-        android:title="@string/navigationInfo" />
+        android:title="Infos Traffic" />
 
 
 </menu>
