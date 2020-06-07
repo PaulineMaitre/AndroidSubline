@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subline.R
 import com.example.subline.data.TrafficResult
-import com.example.subline.home.TrafficAdapter
-import com.example.subline.service.RatpService
+import com.example.subline.infos.TrafficAdapter
 import com.example.subline.utils.*
 import com.example.subline.service.RatpService
-import com.example.subline.utils.*
 import kotlinx.android.synthetic.main.fragment_find_station.*
 import kotlinx.coroutines.runBlocking
 

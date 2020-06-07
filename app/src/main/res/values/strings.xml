@@ -35,4 +35,5 @@
     <string name="directions_direction">Directions direction</string>
     <string name="noFav">Aucun favori</string>
     <string name="addFav">Cliquez sur l\'image pour en ajouter</string>
+    <string name="num_ro_de_bus">Numéro de bus</string>
 </resources>

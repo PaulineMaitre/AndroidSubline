@@ -6,15 +6,37 @@
     tools:context=".find.findTransport.FindBus"
     android:orientation="vertical">
 
-
-    <AutoCompleteTextView
-        android:id="@+id/searchBus"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:inputType="number"
-        android:imeOptions="actionSearch"
-        android:hint="Numéro de bus" />
+        android:layout_height="50dp"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_margin="5dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_search_black_24dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/searchBus"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:inputType="number"
+                android:imeOptions="actionSearch"
+                android:hint="@string/num_ro_de_bus" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <TextView
         android:id="@+id/listStationsTextView"
@@ -23,7 +45,7 @@
         android:text="@string/listStations"
         android:textSize="18dp"
         android:visibility="gone"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
