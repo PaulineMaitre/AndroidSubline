@@ -45,36 +45,8 @@ class QRCode : AppCompatActivity(), ZXingScannerView.ResultHandler {
         stationSlug = p0?.text.toString()
         val intent = Intent(this, ResultQRCode::class.java)
         intent.putExtra("stationSlug", stationSlug)
-        Log.d("EPF", "$stationSlug")
         finish()
         startActivity(intent)
-        //val findStation = FindStation()
-        //findStation.resultQRCode()
-
-        //val linesByStation: ArrayList<AllLines.Line> = getLinesByStation(view, lines, stationSlug)
-        //val listPicto = getListPicto(view.context, linesByStation)
-        //val stationName = getNameFromSlug(stationSlug, lines)
-        //setAdapter(view, activity, stationName, linesByStation, listPicto)
-
-
-        //startActivity(intent)
-        /*val builder = AlertDialog.Builder(this)
-        builder.setTitle("Result")
-        builder.setPositiveButton("OK") {dialog, which ->
-            var stationSlug = info?.get(0) + info?.get(1)
-            Log.d("EPF", "$stationSlug")
-            val intent= Intent(this, ScheduleActivity::class.java)
-            intent.putExtra("station", stationSlug)
-            //intent.putExtra("pictoline", pictoLine)
-            //intent.putExtra("line", line)
-
-            onRestart()
-        }
-        builder.setMessage(result)
-
-        val alert = builder.create()
-        alert.show()*/
-
     }
 
     private fun checkPermission() : Boolean{

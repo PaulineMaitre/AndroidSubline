@@ -64,34 +64,6 @@ class FindStation(val stationName: String = ""): Fragment() {
         setAdapterStation(activity, allLinesInStationRv, stationName, linesByStation, listPicto)
     }
 
-    /*private fun setAdapter(view: View, stationName: String, linesByStation: ArrayList<AllLines.Line>, listPicto: List<Int>) {
-        val allLinesInStationRv = view.findViewById<RecyclerView>(R.id.allLinesInStationRv)
-        allLinesInStationRv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        allLinesInStationRv.adapter = AllLinesByStationAdapter(stationName, linesByStation, listPicto)
-    }*/
-
-    /*private fun getListPicto(lines: ArrayList<AllLines.Line>): List<Int> {
-        var listPicto: ArrayList<Int> = ArrayList()
-
-        lines.map {
-            val type = it.transportType[0]
-            val code = it.lineCode.toLowerCase()
-            var pictoInt = resources.getIdentifier("$type$code", "drawable", "com.example.subline")
-
-            if(pictoInt == 0) {
-                when(it.transportType) {
-                    TYPE_METRO -> pictoInt = R.drawable.logo_bus
-                    TYPE_RER -> pictoInt = R.drawable.logo_rer
-                    TYPE_TRAM -> pictoInt = R.drawable.logo_tram
-                    TYPE_BUS -> pictoInt = R.drawable.logo_bus
-                    TYPE_NOCTI -> pictoInt = R.drawable.logo_noctilien
-                }
-            }
-            listPicto.add(pictoInt)
-        }
-        return listPicto
-    }*/
-
     private fun extractListStations(view: View, lines: AllLines.Lines) {
         var listStations = arrayListOf<AllLines.Station>()
         lines.allLines.map {
@@ -126,41 +98,10 @@ class FindStation(val stationName: String = ""): Fragment() {
         return listStationsSort
     }
 
-    /*private fun requestAllLines(): AllLines.Lines {
-        val service = retrofit(BASE_URL_TRANSPORT).create(RatpService::class.java)
-        var lines = AllLines.Lines()
-        runBlocking {
-            val results = service.getAllLines()
-            results.result.metros.map {lines.addLine(AllLines.Line(it.code, it.name, it.directions, getListOfStations(service, TYPE_METRO, it.code), TYPE_METRO))}
-            results.result.rers.map {lines.addLine(AllLines.Line(it.code, it.name, it.directions, getListOfStations(service, TYPE_RER, it.code), TYPE_RER))}
-            results.result.tramways.map {lines.addLine(AllLines.Line(it.code, it.name, it.directions, getListOfStations(service, TYPE_TRAM, it.code), TYPE_TRAM))}
-            results.result.buses.map {lines.addLine(AllLines.Line(it.code, it.name, it.directions, getListOfStations(service, TYPE_BUS, it.code), TYPE_BUS))}
-            results.result.noctiliens.map {lines.addLine(AllLines.Line(it.code, it.name, it.directions, getListOfStations(service, TYPE_NOCTI, it.code), TYPE_NOCTI))}
-        }
-        return lines
-    }*/
-
-
     private fun hideKeyboard(context: Context, view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-    /*private fun getListOfStations(service: RatpService, type: String, code: String): MutableList<AllLines.Station> {
-        var listStations = arrayListOf<AllLines.Station>()
-        try {
-            runBlocking {
-                val results = service.getStations(type, code)
-                results.result.stations.map {
-                    val station = AllLines.Station(it.name, it.slug)
-                    listStations.add(station)
-                }
-            }
-        } catch(e: retrofit2.HttpException) {
-            Log.e("Subline", "Bad request $e")
-        }
-        return listStations
-    }*/
 
     private fun getSlugFromStationName(listStationsSort: ArrayList<AllLines.Station>, stationName: String): String {
         var slugStation = ""
@@ -171,27 +112,5 @@ class FindStation(val stationName: String = ""): Fragment() {
         }
         return slugStation
     }
-
-    /*private fun getLinesByStation(view: View, lines: AllLines.Lines, slugStation: String): ArrayList<AllLines.Line> {
-        val linesByStation: ArrayList<AllLines.Line> = ArrayList()
-
-        lines.allLines.map { line ->
-            line.listStations.map {
-                if(it.slug == slugStation) {
-                    if(!linesByStation.contains(line))
-                    {
-                        linesByStation.add(line)
-                        Log.d("EPF", "match line ${line}")//.transportType} - ${line.lineCode}")
-                    }
-                }
-            }
-        }
-        if(linesByStation.size > 0) listLinesTextView.isVisible = true
-        else {
-            listLinesTextView.isVisible = false
-            Toast.makeText(view.context, R.string.lineError, Toast.LENGTH_LONG).show()
-        }
-        return linesByStation
-    }*/
 }
 

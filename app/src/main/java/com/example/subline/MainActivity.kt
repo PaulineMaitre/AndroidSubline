@@ -23,19 +23,6 @@ class MainActivity : AppCompatActivity() {
 
 
         var navController = findNavController(R.id.nav_host_fragment)
-        /*if(intent.getStringExtra("stationName") != null) {
-            Log.d("EPF", "TEST 1")
-            finish()
-            val fragment = FindFragment(intent.getStringExtra("stationName"))
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.nav_host_fragment, fragment)
-            ft.commit()
-        }
-        else {
-            Log.d("EPF", "TEST 2")
-
-        }*/
-
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

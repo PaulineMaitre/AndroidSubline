@@ -14,13 +14,13 @@
     <fragment
         android:id="@+id/navigationFind"
         android:name="com.example.subline.find.FindFragment"
-        android:label="Rechercher"
+        android:label="@string/navigationFind"
         tools:layout="@layout/fragment_find" />
 
     <fragment
         android:id="@+id/navigationInfo"
         android:name="com.example.subline.infos.InfosFragment"
-        android:label="Infos Traffic"
+        android:label="@string/navigationInfo"
         tools:layout="@layout/fragment_infos" />
 
 

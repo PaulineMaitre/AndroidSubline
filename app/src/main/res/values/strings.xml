@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Subline</string>
     <string name="navigationFav">Favoris</string>
-    <string name="navigationFind">Find</string>
-    <string name="navigationInfo">Infos</string>
+    <string name="navigationFind">Rechercher</string>
+    <string name="navigationInfo">Info trafic</string>
 
     <string name="findLine">Choisissez une ligne</string>
     <string name="listStations">Liste des stations sur cette ligne :</string>
@@ -33,5 +33,6 @@
     <string name="nextSchedules">Prochains passages :</string>
     <string name="station">Station</string>
     <string name="directions_direction">Directions direction</string>
-    <string name="aucun_favoris">Aucun favoris</string>
+    <string name="noFav">Aucun favori</string>
+    <string name="addFav">Cliquez sur l\'image pour en ajouter</string>
 </resources>

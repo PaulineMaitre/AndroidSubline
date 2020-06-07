@@ -2,7 +2,6 @@ package com.example.subline.infos
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,21 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.subline.R
 import com.example.subline.data.TrafficResult
 import com.example.subline.home.TrafficAdapter
-import com.example.subline.service.RatpPictoService
 import com.example.subline.service.RatpService
 import com.example.subline.utils.*
-import com.pixplicity.sharp.Sharp
-import kotlinx.android.synthetic.main.activity_appel_api.*
 import kotlinx.coroutines.runBlocking
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.InputStream
 
 class InfosFragment : Fragment() {
 
@@ -114,30 +104,4 @@ class InfosFragment : Fragment() {
             trafficRecyclerView.adapter = TrafficAdapter(listTrafficChanged)
         }
     }
-
-        private fun getLinePicto(lineId: String) {
-        val pictoService = retrofit(BASE_URL_PICTO).create(RatpPictoService::class.java)
-        runBlocking {
-            val pictoResult = pictoService.getPictoInfo("M1")
-            Log.d("EPF", "test $pictoResult")
-            val id = pictoResult.records[0].fields.noms_des_fichiers.id
-            val result = pictoService.getImage(id)
-            result.enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                    val stream: InputStream = response.body()!!.byteStream()
-                    Sharp.loadInputStream(stream).into(imageView)
-                    stream.close()
-                }
-
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-            })
-        }
-    }
-
-
 }
