@@ -31,4 +31,7 @@
     <string name="buttonRerTraffic">RER</string>
     <string name="buttonTramwayTraffic">Tramway</string>
     <string name="nextSchedules">Prochains passages :</string>
+    <string name="station">Station</string>
+    <string name="directions_direction">Directions direction</string>
+    <string name="aucun_favoris">Aucun favoris</string>
 </resources>

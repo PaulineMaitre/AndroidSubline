@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -46,6 +47,13 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val switchView = intent.getIntExtra("switchView", 0)
+
+        if (switchView == 1 || switchView == 2 || switchView == 3) {
+            val bundle = bundleOf("switchView" to switchView)
+            navController.navigate(R.id.navigationFind, bundle)
+        }
     }
 
 }

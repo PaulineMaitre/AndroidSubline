@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"
@@ -24,14 +25,64 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/layout_nofavoris"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:layout_marginBottom="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/noFavorisAvailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@string/aucun_favoris"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/noSavedActivityDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_below="@id/noFavorisAvailable"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
+                    android:text="Cliquez sur l'image pour en ajouter"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/noFavImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_below="@id/noSavedActivityDetail"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:src="@drawable/nofavoris" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/layout_favoris">
+
+           <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/favHomeRecyclerView"
+                android:clickable="true"
+                android:focusable="true"
                 android:nestedScrollingEnabled="false"/>
 
             <TextView
@@ -48,6 +99,8 @@
                 android:id="@+id/favScheduleRecyclerView"
                 android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="?attr/actionBarSize"/>
+            
+            </LinearLayout>
 
       </LinearLayout>
 
